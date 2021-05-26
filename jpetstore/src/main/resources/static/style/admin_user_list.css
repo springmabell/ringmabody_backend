@@ -1,0 +1,199 @@
+#header{
+    height: 100px;
+    background-color: rgb(123, 227, 251);
+}
+.header_nav{
+    width: 1100px;
+    height: 100px;
+    margin: auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.header_nav_logo{
+    font-size: 40px;
+    font-family: 'Comic Neue', cursive;
+    color: rgb(51, 51, 51);
+}
+.header_nav_login{
+    font-size: 18px;
+    font-weight: 600;
+}
+.header_nav_logo_right{
+    width: 200px;
+    display: flex;
+    align-items: center;
+    justify-content:flex-end;
+}
+.my_page_logo{
+    color: white;
+}
+
+.content_wrap{
+    width: 1100px;
+    height: 800px;
+    margin: auto;
+    padding-top: 20px;
+    display: flex;
+    justify-content: space-evenly;
+}
+.content {
+    width: 80%;
+    height: 500px;
+    /* border: solid 1px #999999; */
+}
+select {
+    width: 200px;
+    padding: .8em .5em;
+    border: 1px solid #999;
+    font-family: inherit;
+    background: url('../img/arrow.jpeg') no-repeat 95% 50%;
+    border-radius: 0px;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+}
+select::-ms-expand {
+    display: none;
+}
+.manage-name {
+    text-align: justify;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-left:7%; 
+}
+.total-num {
+    font-size: 20px;
+}
+
+a{
+    text-decoration: none;
+    outline: none;
+}
+.menu_list a {
+    display: block;
+    width: 180px;
+    height: 40px;
+    margin-bottom: 4px;
+    padding-left: 6px;
+    border: solid 1px #999999;
+    border-radius: 2px;
+    line-height: 40px;
+    color: #222222;
+}
+.menu_list li:nth-child(1) a {
+    border: solid 1px rgb(123, 227, 251);
+    background-color: rgb(123, 227, 251);
+    color: white;
+}
+.menu_list a:hover {
+    border: solid 1px deepskyblue;
+}
+.info_wrap {
+    width: 100%;
+    height: 500px;
+}
+.info_list {
+    width: 100%;
+    height: 700px;
+    border: solid 1px #999999;
+}
+.profile_title {
+    width: 780px;
+    height: 50px;
+    margin-left: 30px;
+    padding-top: 36px;
+    display: flex;
+    font-size: 30px;
+    font-weight: bold;
+}
+.profile_item {
+    width: 780px;
+    height: 80px;
+    margin-left: 30px;
+    display: flex;
+}
+.picture_item {
+    height: 240px;
+    position: relative;
+}
+.picture img{
+    display: block;
+    width: 200px;
+    height: 200px;
+    border: solid 1px #999999;
+    border-radius: 50%;
+    cursor: pointer;
+    position: absolute;
+    background-size: cover;
+}
+.info_item {
+    width: 780px;
+    height: 30px;
+    margin-left: 30px;
+    padding-top: 20px;
+    display: flex;
+}
+.info_item:nth-last-child(1) {
+    border-bottom: none;
+}
+.info_item > div:nth-child(1) {
+    width: 140px;
+    height: 100px;
+    font-size: 25px;
+    font-weight: bold;
+}
+.info_item > div:nth-child(2) {
+    width: 350px;
+    font-size: 18px;
+}
+.info_item input {
+    width: 350px;
+    height: 25px;
+    padding-left: 6px;
+    border: solid 1px #999999;
+    outline: none;
+}
+.info_item input:focus {
+    outline: 0;
+    border: skyblue solid 1px;
+    border-radius: 2px;
+}
+
+/* 페이지 넘버 css */
+
+div#page-num > ul {
+	list-style:none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+div#page-num > ul li {
+	float:left;
+}
+div#page-num > ul li a {
+	float:left;
+	padding:4px;
+	margin-right:3px;
+	width:20px;
+	color:#000;
+	font:bold 12px tahoma;
+	border:1px solid #eee;
+	text-align:center;
+	text-decoration:none;
+}
+div#page-num > ul li a:hover, ul li a:focus {
+	color:#fff;
+	border:1px solid rgb(123, 227, 251);
+	background-color:rgb(123, 227, 251);
+}
+
+
+/* validation */
+
+.valid {
+    display: none;
+    font-size: 12px;
+    color: deepskyblue;
+}

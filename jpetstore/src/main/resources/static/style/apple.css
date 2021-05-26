@@ -1,0 +1,33 @@
+@charset "UTF-8";
+
+@font-face {
+    font-family: "SF Pro Display";
+    font-style: normal;
+    font-weight: 400;
+    src: local("☺︎"),
+    url("../webfonts/sf-pro-display_regular.woff2") format("woff2");
+}
+@font-face {
+    font-family: "SF Pro Display";
+    font-style: normal;
+    font-weight: 600;
+    src: local("☺︎"),
+    url("../webfonts/sf-pro-display_semibold.woff2") format("woff2");
+}
+
+
+@font-face {
+    font-family: "SF Pro KR";
+    font-style: normal;
+    font-weight: 600;
+    src: local("☺︎"),
+    url("../webfonts/SFProKR_semibold.woff2") format("woff2");
+}
+
+@font-face {
+    font-family: "SF Pro KR";
+    font-style: normal;
+    font-weight: 400;
+    src: local("☺︎"),
+    url("../webfonts/SFProKR_regular.woff2") format("woff2");
+}
