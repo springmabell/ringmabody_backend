@@ -27,5 +27,4 @@ public class WebMvcConfig implements WebMvcConfigurer {
 				.addPathPatterns("/shop/editAccount.do", "/shop/listOrders.do",
 					"/shop/viewOrder.do", "/shop/newOrder.do");		
 	}
-	
 }
