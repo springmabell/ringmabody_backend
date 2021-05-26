@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>관리자 페이지</title>
+    <link rel="stylesheet" href="../css/reset.css">
+    <link rel="stylesheet" href="../css/all.min.css">
+    <link rel="stylesheet" href="../css/admin_user_list.css">
+    <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+</head>
+<body>
+
+<div id="wrap">
+
+    <div id="header">
+        <div class="header_nav">
+            <div class="header_nav_logo">
+                <a href="">RingMaBody</a>
+                <span class="my_page_logo">MY PAGE</span>
+            </div>
+            <div class="header_nav_logo_right">
+                <div class="header_nav_login">
+                    <a href="">관리자</a>
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+            </div>
+        </div><!--end header_nav-->
+    </div><!--end header-->
+
+    <div id="container">
+        <div class="content_wrap">
+            <div class="menu">
+                <ul class="menu_list">
+                    <li><a href="#">고객 관리</a></li>
+                    <li><a href="#">강사 관리</a></li>
+                    <li><a href="#">예약 관리</a></li>
+                    <li><a href="#">결제 관리</a></li>
+                    <li><a href="#">게시판 관리</a></li>
+                </ul>
+            </div>
+            <div class="content">
+                <div class="manage-name">
+                    <select name="sort">
+                        <option value="등록일순" selected="selected">등록일순</option>
+                        <option value="이름순">이름순</option>
+                        <option value="번호순">번호순</option>
+                    </select>
+                    <div class="total-num">
+                        <b class="total-num">총 14명</b>
+                    </div>
+                </div>
+                <form>
+                    <div class="info_wrap">
+                        <table>
+                        <thead>
+                            <tr>
+                            <th class="jb-th-1">번호</th><th>이름</th><th>등록일</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                            <td class="jb-td-1">1</td><td>김원희</td><td>2021-04-04</td>
+                            </tr>
+                            <tr>
+                            <td class="jb-td-1">2</td><td>천서진</td><td>2021-04-04</td>
+                            </tr>
+                            <tr>
+                            <td class="jb-td-1">3</td><td>심수련</td><td>2021-04-04</td>
+                            </tr>
+                            <tr>
+                            <td class="jb-td-1">4</td><td>주단테</td><td>2021-04-04</td>
+                            </tr>
+                            <tr>
+                            <td class="jb-td-1">5</td><td>강마리</td><td>2021-04-04</td>
+                            </tr>
+                            <tr>
+                            <td class="jb-td-1">6</td><td>김원희</td><td>2021-04-04</td>
+                            </tr>
+                            <tr>
+                            <td class="jb-td-1">7</td><td>천서진</td><td>2021-04-04</td>
+                            </tr>
+                            <tr>
+                            <td class="jb-td-1">8</td><td>심수련</td><td>2021-04-04</td>
+                            </tr>
+                            <tr>
+                            <td class="jb-td-1">9</td><td>주단테</td><td>2021-04-04</td>
+                            </tr>
+                            <tr>
+                            <td class="jb-td-1">10</td><td>강마리</td><td>2021-04-04</td>
+                            </tr>
+                        </tbody>
+                        </table>
+                    </div>
+                </form>
+                <div id="page-num">
+                    <ul>  
+                        <li><a href="#">1</a></li>  
+                        <li><a href="#">2</a></li>  
+                        <li><a href="#">3</a></li>  
+                        <li><a href="#">4</a></li>  
+                        <li><a href="#">5</a></li>  
+                        <li><a href="#">6</a></li>  
+                        <li><a href="#">7</a></li>  
+                        <li><a href="#">8</a></li>  
+                        <li><a href="#">9</a></li>  
+                        <li><a href="#">10</a></li>  
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div><!--end container-->
+
+    <div id="footer"></div><!--end footer-->
+
+</div><!--end wrap-->
+
+
+
+</body>
+</html>

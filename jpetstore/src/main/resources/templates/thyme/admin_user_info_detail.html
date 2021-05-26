@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>관리자 페이지</title>
+    <link rel="stylesheet" href="../css/reset.css">
+    <link rel="stylesheet" href="../css/all.min.css">
+    <link rel="stylesheet" href="../css/admin_user_info_detail.css">
+    <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+</head>
+<body>
+
+<div id="wrap">
+
+    <div id="header">
+        <div class="header_nav">
+            <div class="header_nav_logo">
+                <a href="">RingMaBody</a>
+                <span class="my_page_logo">MY PAGE</span>
+            </div>
+            <div class="header_nav_logo_right">
+                <div class="header_nav_login">
+                    <a href="">관리자</a>
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+            </div>
+        </div><!--end header_nav-->
+    </div><!--end header-->
+
+    <div id="container">
+        <div class="content_wrap">
+            <div class="menu">
+                <ul class="menu_list">
+                    <li><a href="#">고객 관리</a></li>
+                    <li><a href="#">강사 관리</a></li>
+                    <li><a href="#">예약 관리</a></li>
+                    <li><a href="#">결제 관리</a></li>
+                    <li><a href="#">게시판 관리</a></li>
+                </ul>
+            </div>
+            <div class="content">
+                <form>
+                    <div class="info_wrap">
+                        <ul class="info_list">
+                            <li class="profile_title">
+                                <div>고객 정보</div>
+                            </li>
+                            <li class="profile_item picture_item">
+                                <div class="picture_update_wrap">
+                                    <div>
+                                        <label class="picture" for="pictureInput">
+                                            <img src="../img/prof.jpg"/>
+                                        </label>
+                                        <input type="file" id="pictureInput" class="picture_input" accept="image/jpg, image/jpeg, image/png" multiple="" style="display:none" onchange="setThumbnail(event);">
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="info_item">
+                                <div>이름</div>
+                                <div>오윤희</div>
+                            </li>
+                            <li class="info_item">
+                                <div>아이디</div>
+                                <div>ohwoonhee0101</div>
+                            </li>
+                            <li class="info_item">
+                                <div>휴대전화</div>
+                                <div>010-1111-2222</div>
+                            </li>
+                            <li class="info_item">
+                                <div>이메일</div>
+                                <div>ohwoonhee0101@naver.com</div>
+                            </li>
+                            <li class="info_item">
+                                <div>성별</div>
+                                <div>여성</div>
+                            </li>
+                            <li class="info_item">
+                                <div>등록일</div>
+                                <div>2021-04-01</div>
+                            </li>
+                        </ul>
+                        <ul class="info_list">
+                            <li class="profile_title">
+                                <div>고객이 결제한 수업</div>
+                            </li>
+                        </ul>
+                        <ul class="info_btn">
+                            <li>
+                                <div class="btn_area double">
+                                    <span><!-- tg-text=terms_button_cancel --><a href="#" id="btnCancel" class="btn_type btn_default" role="button">삭제하기</a></span>
+                                    <span><!-- tg-text=terms_button_agree --><a href="#" id="btnAgree" class="btn_type btn_primary" role="button">돌아가기</a></span>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div><!--end container-->
+
+    <div id="footer"></div><!--end footer-->
+
+</div><!--end wrap-->
+
+
+
+</body>
+</html>
