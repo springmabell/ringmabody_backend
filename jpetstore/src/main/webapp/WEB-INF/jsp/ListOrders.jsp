@@ -6,19 +6,22 @@
   </p>
   <table class="n23">
     <tr bgcolor="#CCCCCC">
-      <td><b>Order ID</b></td> <td><b>Date</b></td> <td><b>Total Price</b></td>
+      <td><b>ID</b></td> <td><b>name</b></td> <td><b>register date</b></td> 
     </tr>
-    <c:forEach var="order" items="${orderList}">
+    <c:forEach var="order" items="${teacherList}">
       <tr bgcolor="#FFFF88">
         <td>
           <b><a href='<c:url value="/shop/viewOrder.do">
-              <c:param name="orderId" value="${order.orderId}"/></c:url>'>
-              <font color="black"><c:out value="${order.orderId}" /></font>
+              <c:param name="orderId" value="${order.teacher_id}"/></c:url>'>
+              <font color="black"><c:out value="${order.teacher_id}" /></font>
             </a></b></td>
-        <td><fmt:formatDate value="${order.orderDate}"
+        <td>
+          <b><a href='<c:url value="/shop/viewOrder.do">
+              <c:param name="orderId" value="${order.teacher_name}"/></c:url>'>
+              <font color="black"><c:out value="${order.teacher_name}" /></font>
+            </a></b></td>
+        <td><fmt:formatDate value="${order.register_date}"
             pattern="yyyy/MM/dd hh:mm:ss" /></td>
-        <td><fmt:formatNumber value="${order.totalPrice}"
-            pattern="$#,##0.00" /></td>
       </tr>
     </c:forEach>
   </table>

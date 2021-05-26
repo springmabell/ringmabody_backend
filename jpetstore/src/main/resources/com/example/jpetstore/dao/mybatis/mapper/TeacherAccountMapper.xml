@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.example.jpetstore.dao.mybatis.mapper.TeacherAccountMapper">
+  <cache />
+
+  <select id="getAllTeacherAccount" resultType="TeacherAccount">
+    SELECT TEACHERACCOUNT.TEACHER_ID,
+    	   TEACHERACCOUNT.TEACHER_PWD,
+    	   TEACHERACCOUNT.TEACHER_NAME,
+    	   TEACHERACCOUNT.TEACHER_IMG,
+    	   TEACHERACCOUNT.EMAIL,
+    	   TEACHERACCOUNT.PHONENUM,
+    	   TEACHERACCOUNT.USER_TYPE,
+    	   TEACHERACCOUNT.BELONG,
+    	   TEACHERACCOUNT.CAREER,
+    	   TEACHERACCOUNT.WEBSITE,
+    	   TEACHERACCOUNT.TEACHER_DESC,
+    	   TEACHERACCOUNT.REGISTER_DATE
+    FROM TEACHERACCOUNT
+  </select>
+
+</mapper>

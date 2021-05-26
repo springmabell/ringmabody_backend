@@ -9,11 +9,13 @@ import com.example.jpetstore.dao.CategoryDao;
 import com.example.jpetstore.dao.ItemDao;
 import com.example.jpetstore.dao.OrderDao;
 import com.example.jpetstore.dao.ProductDao;
+import com.example.jpetstore.dao.TeacherAccountDao;
 import com.example.jpetstore.domain.Account;
 import com.example.jpetstore.domain.Category;
 import com.example.jpetstore.domain.Item;
 import com.example.jpetstore.domain.Order;
 import com.example.jpetstore.domain.Product;
+import com.example.jpetstore.domain.TeacherAccount;
 
 /**
  * JPetStore primary business object.
@@ -64,6 +66,8 @@ public class PetStoreImpl implements PetStoreFacade {
 	private ItemDao itemDao;
 	@Autowired
 	private OrderDao orderDao;
+	@Autowired
+	private TeacherAccountDao teacherAccountDao;
 
 	//-------------------------------------------------------------------------
 	// Operation methods, implementing the PetStoreFacade interface
@@ -133,4 +137,9 @@ public class PetStoreImpl implements PetStoreFacade {
 	public List<Order> getOrdersByUsername(String username) {
 		return orderDao.getOrdersByUsername(username);
 	}
+	
+
+	public List<TeacherAccount> getAllTeacherAccount() {
+		return teacherAccountDao.getAllTeacherAccount();
+	};
 }

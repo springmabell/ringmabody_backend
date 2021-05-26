@@ -5,6 +5,7 @@ import org.springframework.beans.support.PagedListHolder;
 
 import com.example.jpetstore.domain.Account;
 import com.example.jpetstore.domain.Product;
+import com.example.jpetstore.domain.TeacherAccount;
 
 /**
  * @author Juergen Hoeller
@@ -16,6 +17,7 @@ public class UserSession implements Serializable {
 	private Account account;
 
 	private PagedListHolder<Product> myList;
+	
 
 	public UserSession(Account account) {
 		this.account = account;
