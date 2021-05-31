@@ -3,13 +3,17 @@ package com.example.jpetstore.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.support.PagedListHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.example.jpetstore.domain.Category;
+import com.example.jpetstore.domain.Product;
 import com.example.jpetstore.domain.TeacherAccount;
 import com.example.jpetstore.service.PetStoreFacade;
 
@@ -20,7 +24,7 @@ import com.example.jpetstore.service.PetStoreFacade;
  */
 @Controller
 @SessionAttributes("userSession")
-public class ListOrdersController {
+public class ListTeacherPaymentsController {
 
 	private PetStoreFacade petStore;
 
@@ -29,16 +33,7 @@ public class ListOrdersController {
 		this.petStore = petStore;
 	}
 
-	@RequestMapping("/shop/listOrders.do")
-	public ModelAndView handleRequest(
-		@ModelAttribute("userSession") UserSession userSession
-		) throws Exception {
-		String username = userSession.getAccount().getUsername();
-		return new ModelAndView("ListOrders", "orderList", 
-				petStore.getOrdersByUsername(username));
-	}
-	
-	@RequestMapping("/admin/listOrders.do")
+	@RequestMapping("/admin/listTeacherPayments.do")
 	public String handleRequest(ModelMap model) throws Exception {
 		List<TeacherAccount> teacherList = this.petStore.getAllTeacherAccount();
 		int size_of_list = teacherList.size();
@@ -47,7 +42,7 @@ public class ListOrdersController {
 		model.put("size", size_of_list);
 		
 		
-		return "thyme/admin_reservation";
+		return "thyme/admin_payment";
 	}
 
 

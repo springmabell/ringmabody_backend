@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>관리자 페이지</title>
@@ -31,11 +31,11 @@
         <div class="content_wrap">
             <div class="menu">
                 <ul class="menu_list">
-                    <li><a href="#">고객 관리</a></li>
-                    <li><a href="#">강사 관리</a></li>
-                    <li><a href="#">예약 관리</a></li>
-                    <li><a href="#">결제 관리</a></li>
-                    <li><a href="#">게시판 관리</a></li>
+                    <li><a href="" th:href="@{/admin/listUsers.do}">고객 관리</a></li>
+                    <li><a href="" th:href="@{/admin/listTeachers.do}">강사 관리</a></li>
+                    <li><a href="" th:href="@{/admin/listOrders.do}">예약 관리</a></li>
+                    <li><a href="" th:href="@{/admin/listTeacherPayments.do}">결제 관리</a></li>
+                    <li><a href="" th:href="@{/admin/listClasses.do}">게시판 관리</a></li>
                 </ul>
             </div>
             <div class="content">
