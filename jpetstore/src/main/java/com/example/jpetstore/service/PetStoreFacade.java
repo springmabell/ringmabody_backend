@@ -8,6 +8,7 @@ import com.example.jpetstore.domain.Item;
 import com.example.jpetstore.domain.Order;
 import com.example.jpetstore.domain.Product;
 import com.example.jpetstore.domain.TeacherAccount;
+import com.example.jpetstore.domain.UserAccount;
 
 /**
  * JPetStore's central business interface.
@@ -54,5 +55,7 @@ public interface PetStoreFacade {
 	List<Order> getOrdersByUsername(String username);
 	
 	List<TeacherAccount> getAllTeacherAccount();
-
+	
+	List<UserAccount> getAllUserAccount();
+	
 }

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.example.jpetstore.dao.mybatis.mapper.UserAccountMapper">
+  <cache />
+
+  <select id="getAllUserAccount" resultType="UserAccount">
+    SELECT USERACCOUNT.USER_ID,
+    	   USERACCOUNT.USER_PWD,
+    	   USERACCOUNT.USER_NAME,
+    	   USERACCOUNT.USER_IMG,
+    	   USERACCOUNT.EMAIL,
+    	   USERACCOUNT.PHONE,
+    	   USERACCOUNT.GENDER,
+    	   USERACCOUNT.BIRTHDATE,
+    	   USERACCOUNT.ADDRESS,
+    	   USERACCOUNT.USER_TYPE,
+    	   USERACCOUNT.REGISTER_DATE
+    FROM USERACCOUNT
+  </select>
+
+</mapper>
