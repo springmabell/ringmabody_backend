@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>회원가입</title>
-    <link rel="stylesheet" href="../css/signup.member.css">
+    <link rel="stylesheet" href="/style/signup.member.css">
 </head>
 <body>
     <!-- header -->
@@ -18,6 +18,9 @@
 
         <!-- content-->
         <div id="content">
+        
+        	<form action="" th:action="@{/user/join.do}" th:modelAttribute="userAccountForm" method="post">
+        		
 
             <!-- ID -->
             <div>
@@ -25,7 +28,7 @@
                     <label for="id">아이디</label>
                 </h3>
                 <span class="box int_id">
-                    <input type="text" id="id" class="int" maxlength="20">
+                    <input placeholder="아이디" type="text" class="int" name="account.user_id" value="user333" maxlength="30">
                     <span class="step_url"></span>
                 </span>
                 <span class="error_next_box"></span>
@@ -35,43 +38,47 @@
             <div>
                 <h3 class="join_title"><label for="pswd1">비밀번호</label></h3>
                 <span class="box int_pass">
-                    <input type="text" id="pswd1" class="int" maxlength="20">
+                    <input placeholder="비밀번호" type="password" class="int" name="account.user_pwd" value="pwd333" maxlength="30">
                     <span id="alertTxt">사용불가</span>
                 </span>
                 <span class="error_next_box"></span>
             </div>
 
-            <!-- PW2 -->
-            <div>
+           <!-- PW2 -->
+<!--             <div>
                 <h3 class="join_title"><label for="pswd2">비밀번호 재확인</label></h3>
                 <span class="box int_pass_check">
                     <input type="text" id="pswd2" class="int" maxlength="20">
                 </span>
                 <span class="error_next_box"></span>
             </div>
+ -->
+
 
             <!-- NAME -->
+
             <div>
                 <h3 class="join_title"><label for="name">이름</label></h3>
                 <span class="box int_name">
-                    <input type="text" id="name" class="int" maxlength="20">
+                    <input type="text" id="name" class="int" name="account.user_name" value="홍길동" maxlength="30">
                 </span>
                 <span class="error_next_box"></span>
             </div>
+            
 
             <!-- BIRTH -->
-            <div>
+<!--             <div>
                 <h3 class="join_title"><label for="yy">생년월일</label></h3>
 
                 <div id="bir_wrap">
-                    <!-- BIRTH_YY -->
+                    BIRTH_YY
                     <div id="bir_yy">
                         <span class="box">
                             <input type="text" id="yy" class="int" maxlength="4" placeholder="년(4자)">
                         </span>
                     </div>
 
-                    <!-- BIRTH_MM -->
+                    BIRTH_MM
                     <div id="bir_mm">
                         <span class="box">
                             <select id="mm" class="sel">
@@ -92,7 +99,7 @@
                         </span>
                     </div>
 
-                    <!-- BIRTH_DD -->
+                    BIRTH_DD
                     <div id="bir_dd">
                         <span class="box">
                             <input type="text" id="dd" class="int" maxlength="2" placeholder="일">
@@ -102,8 +109,9 @@
                 </div>
                 <span class="error_next_box"></span>    
             </div>
-
-            <!-- GENDER -->
+ -->
+<!-- 
+            GENDER
             <div>
                 <h3 class="join_title"><label for="gender">성별</label></h3>
                 <span class="box gender_code">
@@ -116,7 +124,7 @@
                 <span class="error_next_box">필수 정보입니다.</span>
             </div>
 
-            <!-- EMAIL -->
+            EMAIL
             <div>
                 <h3 class="join_title"><label for="email">본인확인 이메일<span class="optional">(선택)</span></label></h3>
                 <span class="box int_email">
@@ -125,7 +133,7 @@
                 <span class="error_next_box">이메일 주소를 다시 확인해주세요.</span>    
             </div>
 
-            <!-- MOBILE -->
+            MOBILE
             <div>
                 <h3 class="join_title"><label for="phoneNo">휴대전화</label></h3>
                 <span class="box int_mobile">
@@ -134,7 +142,7 @@
                 <span class="error_next_box"></span>    
             </div>
 
-            <!-- USERTYPE -->
+            USERTYPE
             <div>
                 <h3 class="join_title"><label for="userType">사용자 유형</label></h3>
                 <form class="select">
@@ -142,8 +150,9 @@
                     <input type="radio" id="select2" name="shop"><label for="select2">강사</label>
                 </form>  
             </div>
-
-            <!-- 사진 업로드(수정필요)-->
+ -->
+<!-- 
+            사진 업로드
             <div>
                 <h3 class="join_title"><label for="phoneNo">사진</label></h3>
                 <form method="post" action="#" ENCTYPE="multipart/form-data">
@@ -151,13 +160,16 @@
                     <input type="file" style="display:none" id="inputfile3" name="IFILE" ></input>
                 </form>
             </div>
-
+            
+            
+             -->
             <!-- JOIN BTN-->
             <div class="btn_area">
-                <button type="button" id="btnJoin">
-                    <span>가입하기</span>
-                </button>
+            	<input type="submit" id="btnJoin" value="가입하기">
             </div>
+            
+            
+        	</form>
         </div> 
         <!-- content-->
 

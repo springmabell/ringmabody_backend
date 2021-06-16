@@ -3,7 +3,7 @@
 <head>
 	<meta charset="UTF-8">
 	<title>로그인</title>
-	<link rel="stylesheet" href="../css/login.css">
+  	<link rel="stylesheet" href="/style/login.css" type="text/css" />
 </head>
 <body>
 	<div class="main-container">
@@ -13,24 +13,26 @@
                     <b>SpringMaBell</b>
                 </div>
             </header>
-            <section class="login-input-section-wrap">
-                <div class="login-input-wrap">	
-                    <input placeholder="아이디" type="text"></input>
-                </div>
-                <div class="login-input-wrap password-wrap">	
-                    <input placeholder="비밀번호" type="password"></input>
-                </div>
-                <div class="login-button-wrap">
-                    <a href="#"><button>로그인</button></a>
-                </div>
+            <section class="login-input-section-wrap" >
+            	<form action="" th:action="@{/user/login.do}" method="post">
+            	    <!-- signonForwardAction 설정 해줘야함 -->
+            	    
+	                <div class="login-input-wrap">	
+	                    <input placeholder="아이디" type="text" name="username" size="30" value="user001"></input>
+	                </div>
+	                <div class="login-input-wrap password-wrap">	
+	                    <input placeholder="비밀번호" type="password" name="password" size="30" value="pwd001001"></input>
+	                </div>
+	                <div class="login-button-wrap">
+	                    <a href="#"><button>로그인</button></a>
+	                </div>
+                </form>
             </section>
             <section class="Easy-sgin-in-wrap">
                 <div class="find_info">
-					<a target="_blank" class="forget-msg" href="#">아이디 찾기</a> 
-                    <span class="bar" aria-hidden="true">|</span> 
-                    <a target="_blank" class="forget-msg" href="#">비밀번호 찾기</a> 
-                    <span class="bar" aria-hidden="true">|</span> 
-                    <a target="_blank" class="forget-msg" href="#">회원가입</a>
+                    <a class="forget-msg" href="" th:href="@{/user/joinUserAgreeForm.do}">일반 회원가입</a>
+                    <span class="bar" aria-hidden="true">|</span>
+                    <a class="forget-msg" href="" th:href="@{/user/joinTeacherAgreeForm.do}">강사 회원가입</a>
 				</div>
             </section>
             <footer>

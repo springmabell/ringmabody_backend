@@ -32,7 +32,7 @@ public class ViewOrderController {
 			@RequestParam("orderId") int orderId
 			) throws Exception {
 		Order order = this.petStore.getOrder(orderId);
-		if (userSession.getAccount().getUsername().equals(order.getUsername())) {
+		if (userSession.getAccount().getUser_id().equals(order.getUsername())) {
 			return new ModelAndView("ViewOrder", "order", order);
 		}
 		else {

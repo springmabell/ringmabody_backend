@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.util.WebUtils;
 import com.example.jpetstore.domain.Category;
 import com.example.jpetstore.domain.Product;
-import com.example.jpetstore.service.AccountFormValidator;
 import com.example.jpetstore.service.PetStoreFacade;
 
 /**
@@ -24,14 +23,13 @@ import com.example.jpetstore.service.PetStoreFacade;
  * @modified by Changsup Park
  */
 @Controller
-@RequestMapping({"/shop/newAccount.do","/shop/editAccount.do"})
-public class AccountFormController { 
+@RequestMapping({"/user/join.do","/user/updateUser.do"})
+public class RegisterUserController { 
 
 	@Value("EditAccountForm")
 	private String formViewName;
 	@Value("index")
 	private String successViewName;
-	private static final String[] LANGUAGES = {"english", "japanese"};
 	
 	@Autowired
 	private PetStoreFacade petStore;
@@ -39,35 +37,31 @@ public class AccountFormController {
 		this.petStore = petStore;
 	}
 
-	@Autowired
-	private AccountFormValidator validator;
-	public void setValidator(AccountFormValidator validator) {
-		this.validator = validator;
-	}
+//	@Autowired
+//	private AccountFormValidator validator;
+//	public void setValidator(AccountFormValidator validator) {
+//		this.validator = validator;
+//	}
 		
-	@ModelAttribute("accountForm")
-	public AccountForm formBackingObject(HttpServletRequest request) 
+	@ModelAttribute("userAccountForm")
+	public UserAccountForm formBackingObject(HttpServletRequest request) 
 			throws Exception {
 		UserSession userSession = 
 			(UserSession) WebUtils.getSessionAttribute(request, "userSession");
-		if (userSession != null) {	// edit an existing account
-			return new AccountForm(
-				petStore.getAccount(userSession.getAccount().getUsername()));
-		}
-		else {	// create a new account
-			return new AccountForm();
-		}
+//		if (userSession != null) {	// edit an existing accoun
+//			System.out.println("pass 1");
+//			
+//			System.out.println(userSession.getAccount().getUser_id());
+//			return new UserAccountForm(
+//				petStore.getUserAccount(userSession.getAccount().getUser_id()));
+//		}
+//		else {	// create a new account
+			System.out.println("pass 2");
+			return new UserAccountForm();
+//		}
 	}
 
-	@ModelAttribute("languages")
-	public String[] getLanguages() {
-		return LANGUAGES;
-	}
 
-	@ModelAttribute("categories")
-	public List<Category> getCategoryList() {
-		return petStore.getCategoryList();
-	}
 	
 	@RequestMapping(method = RequestMethod.GET)
 	public String showForm() {
@@ -77,25 +71,25 @@ public class AccountFormController {
 	@RequestMapping(method = RequestMethod.POST)
 	public String onSubmit(
 			HttpServletRequest request, HttpSession session,
-			@ModelAttribute("accountForm") AccountForm accountForm,
+			@ModelAttribute("userAccountForm") UserAccountForm userAccountForm,
 			BindingResult result) throws Exception {
 
-		if (request.getParameter("account.listOption") == null) {
-			accountForm.getAccount().setListOption(false);
-		}
-		if (request.getParameter("account.bannerOption") == null) {
-			accountForm.getAccount().setBannerOption(false);
-		}
-		
-		validator.validate(accountForm, result);
+//		if (request.getParameter("account.listOption") == null) {
+//			userAccountForm.getAccount().setListOption(false);
+//		}
+//		if (request.getParameter("account.bannerOption") == null) {
+//			userAccountForm.getAccount().setBannerOption(false);
+//		}
+
+//		validator.validate(userAccountForm, result);
 		
 		if (result.hasErrors()) return formViewName;
 		try {
-			if (accountForm.isNewAccount()) {
-				petStore.insertAccount(accountForm.getAccount());
+			if (userAccountForm.isNewAccount()) {
+				petStore.insertUserAccount(userAccountForm.getAccount());
 			}
 			else {
-				petStore.updateAccount(accountForm.getAccount());
+				petStore.updateUserAccount(userAccountForm.getAccount());
 			}
 		}
 		catch (DataIntegrityViolationException ex) {
@@ -105,11 +99,13 @@ public class AccountFormController {
 		}
 		
 		UserSession userSession = new UserSession(
-			petStore.getAccount(accountForm.getAccount().getUsername()));
-		PagedListHolder<Product> myList = new PagedListHolder<Product>(
-			petStore.getProductListByCategory(accountForm.getAccount().getFavouriteCategoryId()));
-		myList.setPageSize(4);
-		userSession.setMyList(myList);
+			petStore.getUserAccount(userAccountForm.getAccount().getUser_id()));
+		
+//		PagedListHolder<Product> myList = new PagedListHolder<Product>(
+//			petStore.getProductListByCategory(accountForm.getAccount().getFavouriteCategoryId()));
+//		myList.setPageSize(4);
+//		userSession.setMyList(myList);
+		
 		session.setAttribute("userSession", userSession);
 		return successViewName;  
 	}

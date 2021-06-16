@@ -33,7 +33,7 @@ public class ListOrdersController {
 	public ModelAndView handleRequest(
 		@ModelAttribute("userSession") UserSession userSession
 		) throws Exception {
-		String username = userSession.getAccount().getUsername();
+		String username = userSession.getAccount().getUser_id();
 		return new ModelAndView("ListOrders", "orderList", 
 				petStore.getOrdersByUsername(username));
 	}

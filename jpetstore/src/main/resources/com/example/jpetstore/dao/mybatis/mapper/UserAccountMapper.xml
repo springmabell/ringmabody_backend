@@ -3,6 +3,39 @@
 
 <mapper namespace="com.example.jpetstore.dao.mybatis.mapper.UserAccountMapper">
   <cache />
+  
+  <select id="getUserAccountByUsername" resultType="UserAccount">
+    SELECT USERACCOUNT.USER_ID,
+    	   USERACCOUNT.USER_PWD,
+    	   USERACCOUNT.USER_NAME,
+    	   USERACCOUNT.USER_IMG,
+    	   USERACCOUNT.EMAIL,
+    	   USERACCOUNT.PHONE,
+    	   USERACCOUNT.GENDER,
+    	   USERACCOUNT.BIRTHDATE,
+    	   USERACCOUNT.ADDRESS,
+    	   USERACCOUNT.USER_TYPE,
+    	   USERACCOUNT.REGISTER_DATE
+    FROM USERACCOUNT
+    WHERE USERACCOUNT.USER_ID = #{username}
+  </select>
+
+  <select id="getUserAccountByUsernameAndPassword" resultType="UserAccount">
+    SELECT USERACCOUNT.USER_ID,
+    	   USERACCOUNT.USER_PWD,
+    	   USERACCOUNT.USER_NAME,
+    	   USERACCOUNT.USER_IMG,
+    	   USERACCOUNT.EMAIL,
+    	   USERACCOUNT.PHONE,
+    	   USERACCOUNT.GENDER,
+    	   USERACCOUNT.BIRTHDATE,
+    	   USERACCOUNT.ADDRESS,
+    	   USERACCOUNT.USER_TYPE,
+    	   USERACCOUNT.REGISTER_DATE
+    FROM USERACCOUNT
+    WHERE USERACCOUNT.USER_ID = #{param1}
+      AND USERACCOUNT.USER_PWD = #{param2}
+  </select>
 
   <select id="getAllUserAccount" resultType="UserAccount">
     SELECT USERACCOUNT.USER_ID,
@@ -18,5 +51,30 @@
     	   USERACCOUNT.REGISTER_DATE
     FROM USERACCOUNT
   </select>
+  
+  
+  <insert id="insertUserAccount" parameterType="UserAccount">
+    INSERT INTO USERACCOUNT
+      (USER_ID, USER_PWD, USER_NAME)
+    VALUES
+      (#{user_id}, #{user_pwd}, #{user_name})
+  </insert>
+  
+  
+  <update id="updateUserAccount" parameterType="UserAccount">
+    UPDATE USERACCOUNT SET
+      USER_ID = #{user_id},
+      USER_PWD = #{user_pwd},
+      USER_NAME = #{user_name},
+      USER_IMG = #{user_img},
+      EMAIL = #{email},
+      PHONE = #{phone},
+      GENDER = #{gender},
+      BIRTHDATE = #{birthdate},
+      ADDRESS = #{address},
+      USER_TYPE = #{user_type},
+      REGISTER_DATE = #{register_date}
+    WHERE USER_ID = #{user_id}
+  </update>
 
 </mapper>

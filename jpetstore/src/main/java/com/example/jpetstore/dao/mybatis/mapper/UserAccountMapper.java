@@ -31,6 +31,15 @@ import com.example.jpetstore.domain.UserAccount;
 @Mapper
 public interface UserAccountMapper {
 
+
+  UserAccount getUserAccountByUsername(String username);
+
+  UserAccount getUserAccountByUsernameAndPassword(String username, String password);
+
+  void insertUserAccount(UserAccount account);
+  
+  void updateUserAccount(UserAccount account);
+
   List<UserAccount> getAllUserAccount();
   
 

@@ -10,9 +10,9 @@
             <table id="index">
               <tr>
                 <td>
-                <c:if test="${!empty userSession.account}">
+                <%-- <c:if test="${!empty userSession.account}">
 			       <b><i><font size="4" color="RED">Welcome ${userSession.account.firstName}!</font></i></b>
-                </c:if>&nbsp;
+                </c:if>&nbsp; --%>
                 </td>
               </tr>
               <tr>
@@ -64,7 +64,7 @@
     </td>
   </tr>
 </table>
-
+<%-- 
 <%@ include file="IncludeBanner.jsp" %>
 
-<%@ include file="IncludeBottom.jsp" %>
+<%@ include file="IncludeBottom.jsp" %> --%>

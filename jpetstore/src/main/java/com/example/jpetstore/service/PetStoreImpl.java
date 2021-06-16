@@ -107,6 +107,7 @@ public class PetStoreImpl implements PetStoreFacade {
 		return orderDao.getOrdersByUsername(username);
 	}
 	
+	// 여기서부터 저희가 쓴 코드 
 
 	public List<TeacherAccount> getAllTeacherAccount() {
 		return teacherAccountDao.getAllTeacherAccount();
@@ -115,4 +116,20 @@ public class PetStoreImpl implements PetStoreFacade {
 	public List<UserAccount> getAllUserAccount() {
 		return userAccountDao.getAllUserAccount();
 	};
+	
+	public UserAccount getUserAccount(String username) {
+		return userAccountDao.getUserAccount(username);
+	}
+
+	public UserAccount getUserAccount(String username, String password) {
+		return userAccountDao.getUserAccount(username, password);
+	}
+	
+	public void insertUserAccount(UserAccount account) {
+		userAccountDao.insertUserAccount(account);
+	}
+
+	public void updateUserAccount(UserAccount account) {
+		userAccountDao.updateUserAccount(account);
+	}
 }

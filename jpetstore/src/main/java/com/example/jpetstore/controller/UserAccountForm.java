@@ -3,31 +3,32 @@ package com.example.jpetstore.controller;
 import java.io.Serializable;
 
 import com.example.jpetstore.domain.Account;
+import com.example.jpetstore.domain.UserAccount;
 
 /**
  * @author Juergen Hoeller
  * @since 01.12.2003
  */
 @SuppressWarnings("serial")
-public class AccountForm implements Serializable {
+public class UserAccountForm implements Serializable {
 
-	private Account account;
+	private UserAccount account;
 
 	private boolean newAccount;
 
 	private String repeatedPassword;
 
-	public AccountForm(Account account) {
+	public UserAccountForm(UserAccount account) {
 		this.account = account;
 		this.newAccount = false;
 	}
 
-	public AccountForm() {
-		this.account = new Account();
+	public UserAccountForm() {
+		this.account = new UserAccount();
 		this.newAccount = true;
 	}
 
-	public Account getAccount() {
+	public UserAccount getAccount() {
 		return account;
 	}
 

@@ -54,8 +54,21 @@ public interface PetStoreFacade {
 
 	List<Order> getOrdersByUsername(String username);
 	
+	
+	// 여기서부터 저희가 만든 것 
+	
 	List<TeacherAccount> getAllTeacherAccount();
 	
 	List<UserAccount> getAllUserAccount();
+	
+	UserAccount getUserAccount(String username);
+	
+	UserAccount getUserAccount(String username, String password);
+	
+
+	void insertUserAccount(UserAccount account);
+
+	void updateUserAccount(UserAccount account);
+	
 	
 }
