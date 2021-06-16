@@ -1,0 +1,129 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>강사 개인정보</title>
+    <link rel="stylesheet" href="../css/reset.css">
+    <link rel="stylesheet" href="../css/all.min.css">
+    <link rel="stylesheet" href="../css/teacher.info.css">
+    <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+</head>
+<body>
+
+<div id="wrap">
+
+    <div id="header">
+		<div class="header_nav">
+            <div class="header_nav_logo">
+                <b>SpringMaBell MYPAGE</b>
+            </div>
+         
+            <div data-obj-id="3KCV6" data-obj-type="element" data-text-editable="true" class="" style="float:right;">
+            <div data-text-content="true" style="font-weight:bold;font-size:25px" class="">김원희 강사님  
+            	<IMG SRC="teacher_profile.PNG" ALIGN="right" style="width:70px; height:70px; display:inline-block">
+            </div>
+            <select class="form-select" id="select" name="select" style="float:right;">
+                                    <option value="1">프로필 관리</option>
+                                    <option value="2">개인정보 관리</option>
+                                    <option value="3">수업 등록</option>
+                                    <option value="4">수업 관리</option>
+                                    <option value="5">정산 내역</option>
+           </select>
+           </div>
+		</div>
+	</div>
+
+    <div id="container">
+        <div class="content_wrap">
+            <div class="menu">
+                <ul class="menu_list">
+                    <li><a href="teacher_profile.html">프로필 관리</a></li>
+                    <li><a href="teacher_info.html">개인정보 관리</a></li>
+                    <li><a href="teacher_register.html">수업 등록</a></li>
+                    <li><a href="teacher_classList.html">수업 관리</a></li>
+                    <li><a href="teacher_payment.html">정산 내역</a></li>
+                </ul>
+            </div>
+            <div class="content">
+                <form>
+                    <div class="info_wrap">
+                    
+                        <ul class="info_list">
+                            <li class="info_item">
+                                <div>아이디</div>
+                                <div>tprud1544</div>
+                            </li>
+                            <li class="info_item pwd_item">
+                                <div>비밀번호</div>
+                                <div>
+                                    <input id="pwdInput" type="text">
+                                    <div class="valid pwd_valid">8~16자 영문 대 소문자, 숫자, 특수문자를 사용하세요.</div>
+                                </div>
+                            </li>
+                            <li class="info_item pwd_check_item">
+                                <div>비밀번호 확인</div>
+                                <div class="pwd_update_wrap">
+                                    <div>
+                                        <input id="pwdCheckInput" type="text">
+                                        <div class="valid pwd_check_valid">비밀번호가 일치하지 않습니다.</div>
+                                    </div>
+                                    <button type="button" class="btn pwdUpdateBtn">변경</button>
+                                </div>
+                            </li>
+                            <li class="info_item">
+                                <div>이름</div>
+                                <div>김원희</div>
+                            </li>
+                            <li class="info_item phone_item">
+                                <div>휴대전화</div>
+                                <div class="phone_update_wrap">
+                                    <div>
+                                        <input id="phoneInput" type="text">
+                                        <div class="valid phone_check_valid">유효한 휴대전화 번호를 입력해주세요.</div>
+                                    </div>
+                                    <button type="button" class="btn phoneUpdateBtn">변경</button>
+                                </div>
+                            </li>
+                            <li class="info_item email_item">
+                                <div>이메일</div>
+                                <div class="email_update_wrap">
+                                    <div>
+                                        <input id="emailInput" type="text">
+                                        <div class="valid email_check_valid">유효한 이메일을 입력해주세요.</div>
+                                    </div>
+                                    <button type="button" class="btn emailUpdateBtn">변경</button>
+                                </div>
+                            </li>
+                            <li class="info_item">
+                                <div>성별</div>
+                                <div>여성</div>
+                            </li>
+                            <li class="info_item">
+                                <div>생년월일</div>
+                                <div>1995-07-05</div>
+                            </li>
+                            <li class="info_item">
+                                <div>회원 탈퇴</div>
+                                <center>
+                                <span><a href="#" id="btn" class="btn" role="button">탈퇴 하기</a></span>
+                                </center>
+                             </li>
+                           </ul>
+                        </div>
+                            </li>
+                        </ul>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div><!--end container-->
+
+    <div id="footer"></div><!--end footer-->
+
+</div><!--end wrap-->
+
+
+
+</body>
+</html>

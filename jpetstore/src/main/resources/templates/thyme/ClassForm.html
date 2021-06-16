@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>Insert title here</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous">
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js" integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf" crossorigin="anonymous"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.7.1/css/bootstrap-datepicker.min.css" rel="stylesheet"/>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.7.1/js/bootstrap-datepicker.min.js"></script>
+    <script src="https://ssl.daumcdn.net/dmaps/map_js_init/postcode.v2.js"></script>
+
+</head>
+<body>
+
+<div>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="mb-5">
+                    <h2>클래스 등록</h2>
+                </div>
+              <!--  <form:form modelAttribute="" action="post">-->
+                <form>
+                    <div class="row mb-3">
+                        <div class="col-md-6 form-group">
+                            <label for="boardTitle">제목</label>
+                            <input path="boardTitle" class="form-control form-control-lg" />
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label for="category">카테고리</label><br/>
+                            <select class="form-select" id="category" name="category">
+                                <option value="health" selected="selected">헬스</option>
+                                <option value="pilates">필라테스</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6 form-group mb-3">
+                            <label for="minNum">최소인원</label>
+                            <input path="minNum" class="form-control form-control-lg"/>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6 form-group mb-3">
+                            <label for="maxNum">최대인원</label>
+                            <input id="maxNum" class="form-control form-control-lg" placeholder="최소 1명 이상 입력하세요"/>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6 form-group mb-3">
+                            <label>마감일</label><br/>
+                            <input data-date-format="dd/mm/yyyy" id="datepicker">
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6 form-group mb-3">
+                            <label for="price">가격</label>
+                            <input id="price" class="form-control form-control-lg" />
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6 form-group mb-3">
+                            <label>장소</label>
+                            <button type="button" class="btn mb-2" style="color:white;background-color: rgb(123, 227, 251);border:none;" onclick="openZipSearch()">검색</button><br>
+                            <input id="addr1" class="form-control form-control-lg" type="text" name="addr1" readonly /><br>
+                            상세장소<input id="addr2" class="form-control form-control-lg" type="text" name="addr2" />
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6 form-group mb-3">
+                            <label for="img">이미지</label>
+                            <input type="file" id="img" class="form-control form-control-lg" />
+                        </div>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="content" class="form-label">상세설명</label>
+                        <textarea class="form-control" id="content" rows="6"></textarea>
+                    </div>
+
+            
+     <!--         
+                                <form>
+                                    <button type="submit" id="btn" class="btn" style="color:white;background-color: rgb(123, 227, 251);border:none;">수정</button>
+                                </form>
+                           -->
+
+                     <div class="row" align="right">
+                     	<div class="col-12">
+                        	<input type="submit" value="등록"  id="btn" class="btn" style="color:white;background-color: rgb(123, 227, 251);border:none;">
+                        </div>
+                     </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    function openZipSearch() {
+        new daum.Postcode({
+            oncomplete: function(data) {
+                $('[name=addr1]').val(data.address);
+                $('[name=addr2]').val(data.buildingName);
+            }
+        }).open();
+    }
+
+    $('#datepicker').datepicker({
+        weekStart: 1,
+        daysOfWeekHighlighted: "6,0",
+        autoclose: true,
+        title: "마감일",
+        todayHighlight: true,
+    });
+</script>
+</body>
+</html>

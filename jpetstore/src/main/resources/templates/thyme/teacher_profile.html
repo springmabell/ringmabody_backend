@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>강사 프로필</title>
+    <link rel="stylesheet" href="../css/reset.css">
+    <link rel="stylesheet" href="../css/all.min.css">
+    <link rel="stylesheet" href="../css/teacher.profile.css">
+    <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+</head>
+<body>
+
+<div id="wrap">
+
+    <div id="header">
+		<div class="header_nav">
+            <div class="header_nav_logo">
+                <b>SpringMaBell MYPAGE</b>
+            </div>
+         
+            <div data-obj-id="3KCV6" data-obj-type="element" data-text-editable="true" class="" style="float:right;">
+            <div data-text-content="true" style="font-weight:bold;font-size:25px" class="">김원희 강사님  
+            	<IMG SRC="teacher_profile.PNG" ALIGN="right" style="width:70px; height:70px; display:inline-block">
+            </div>
+            <select class="form-select" id="select" name="select" style="float:right;">
+                                    <option value="1">프로필 관리</option>
+                                    <option value="2">개인정보 관리</option>
+                                    <option value="3">수업 등록</option>
+                                    <option value="4">수업 관리</option>
+                                    <option value="5">정산 내역</option>
+           </select>
+           </div>
+		</div>
+	</div>
+
+    <div id="container">
+        <div class="content_wrap">
+            <div class="menu">
+                <ul class="menu_list">
+                    <li><a href="teacher_profile.html">프로필 관리</a></li>
+                    <li><a href="teacher_info.html">개인정보 관리</a></li>
+                    <li><a href="teacher_register.html">수업 등록</a></li>
+                    <li><a href="teacher_classList.html">수업 관리</a></li>
+                    <li><a href="teacher_payment.html">정산 내역</a></li>
+                </ul>
+            </div>
+            <div class="content">
+                <form>
+                    <div class="info_wrap">
+                        <ul class="info_list">
+                            <li class="profile_item picture_item">
+                                <div class="picture_update_wrap">
+                                    <div>
+                                        <label class="picture" for="pictureInput">
+                                            <img src="teacher_profile.PNG"/>
+                                        </label>
+                                        <input type="file" id="pictureInput" class="picture_input" accept="image/jpg, image/jpeg, image/png" multiple="" style="display:none" onchange="setThumbnail(event);">
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="info_item">
+                                <div>이름</div>
+                                <input placeholder="김원희" type="text"></input>
+                                <button type="button" class="btn">변경</button>
+                            </li>
+                            <li class="info_item">
+                                 <div>소속</div>
+                                <input placeholder="내용을 입력해주세요" type="text"></input>
+                                <button type="button" class="btn">변경</button>
+                            </li>
+                             <li class="info_item">
+                                 <div>경력</div>
+                                <input placeholder="3년" type="text"></input>
+                                <button type="button" class="btn">변경</button>
+                            </li>
+                             <li class="info_item">
+                                 <div>웹사이트</div>
+                                <input placeholder="내용을 입력해주세요" type="text"></input>
+                                <button type="button" class="btn">변경</button>
+                            </li>
+                             <li class="info_item">
+                                 <div>소개</div>
+                                <textarea name="memo" rows="100" cols="50">내용을 입력해주세요</textarea>
+                                
+                            </li>
+                            
+                        </ul>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div><!--end container-->
+
+    <div id="footer"></div><!--end footer-->
+
+</div><!--end wrap-->
+
+
+
+</body>
+</html>
