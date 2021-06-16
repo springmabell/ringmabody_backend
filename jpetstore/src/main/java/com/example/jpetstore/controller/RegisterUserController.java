@@ -56,7 +56,6 @@ public class RegisterUserController {
 //				petStore.getUserAccount(userSession.getAccount().getUser_id()));
 //		}
 //		else {	// create a new account
-			System.out.println("pass 2");
 			return new UserAccountForm();
 //		}
 	}

@@ -55,9 +55,9 @@
   
   <insert id="insertUserAccount" parameterType="UserAccount">
     INSERT INTO USERACCOUNT
-      (USER_ID, USER_PWD, USER_NAME)
+      (USER_ID, USER_PWD, USER_NAME, EMAIL, PHONE, GENDER, USER_TYPE, ADDRESS)
     VALUES
-      (#{user_id}, #{user_pwd}, #{user_name})
+      (#{user_id}, #{user_pwd}, #{user_name}, #{email}, #{phone}, #{gender}, #{user_type}, #{address})
   </insert>
   
   
