@@ -1,0 +1,87 @@
+<!-- thymeleaf 바꾸기 전 sql join해서 데이터 가져와야함-->
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Insert title here</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous">
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js" integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="http://cdn.jsdelivr.net/npm/xeicon@2.3.3/xeicon.min.css">
+</head>
+<style>
+.btn{
+background-color: rgb(123, 227, 251);
+color:white;
+border:none;
+}
+</style>
+<body>
+<div align="center" class="mb-5">
+        <h2 class="font-weight-bold">기구필라테스 - 내 몸의 균형 찾아가기</h2>
+</div>
+
+<div class="container">
+    <div class="row align-items-center">
+        <div class="col-md-6 mb-5">
+            <img src="swimming1.jpg" alt="Image" class="img-fluid">
+        </div>
+
+        <div class="col-md-5 ml-auto">
+            <div align="right">
+                <p>
+                    작성자 : 송카은<br/>
+                    작성일 : 2021-2-2<br/>
+                    조회수 : 4
+                </p>
+            </div><br/>
+
+            <h5>카테고리 :  헬스</h5>
+            <h5><i class="xi-calendar"></i> : ~2021-06-02</h5>
+            <h5><i class="xi-maker"></i> : 경기도 성남시 분당구 수내2동 63-2</h5>
+            <h5><i class="xi-user"></i> :  7명 ~ 20명</h5>
+            <h5>현재 참여자 수 :  8명</h5>
+            <h5>남은 시간 :  마감되었습니다.</h5><br/>
+            <h4><i class="xi-credit-card"></i>&nbsp;20000원</h4>
+            <br />
+
+            <form name="form" action="" method="GET">
+                <button class="btn"><span class="xi-minus-thin"></span></button>
+                <input style="text-align:center;" value=0 type="text" name="count"/>
+                <button class="btn"><span class="xi-plus-thin"></span></button>
+                <button class="btn"><span class="xi-cart-o"></span></button>
+                <input class="btn" type="button" onclick="" value="신청하기" disabled />
+                <!-- if문 이용해서 마감일 지나면 신청하기는 disabled로 -->
+            </form>
+            <br/><br/>
+
+        </div>
+    </div>
+
+    <br/><br/>
+    <div>
+        <h5>수업 소개</h5><br/>
+        <p>dddddddddddddddddddddd4dddddddddddddddddddddddddddddddddddddddddddd</p><br/><br/>
+        <h5>강사 정보</h5><br/>
+        <div>
+            <img src="teacher1.jpg" class="rounded-circle" style="width:200px;height:200px;float:left;margin-right:20px;">
+            <span>이름 : 송카은</span><br/><br/>
+            <p>안녕하세요, 필라테스 강사 송카은입니다.</p>
+        </div>
+    </div>
+
+    <br/><br/><br/>
+
+    <div style="clear:left;" class="form-group" align="right">
+
+        <a class="btn btn-dark py-2 px-4" href="">수정</a>
+        <a class="btn btn-dark py-2 px-4" href=""
+           onClick="">삭제</a>
+
+        <a class="btn btn-dark py-2 px-4" href="<c:url value=''></c:url>">목록</a>
+    </div>
+
+</div>
+
+</body>
+</html>
