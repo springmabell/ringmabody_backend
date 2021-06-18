@@ -58,7 +58,7 @@ public class ClassController {
 	private ClassFacade classFacade;
 
 	@Autowired
-	private SchedulerFacade schedulerFacade; // ½ºÄÉÁÙ·¯ ¼­ºñ½º ÀÎÅÍÆäÀÌ½º
+	private SchedulerFacade schedulerFacade; // ï¿½ï¿½ï¿½ï¿½ï¿½Ù·ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ì½ï¿½
 
 	@ModelAttribute("newClass")
 	public Class newClass() {
@@ -75,8 +75,8 @@ public class ClassController {
 	@ModelAttribute("localList")
 	public String[] getLocalList() {
 
-		return new String[] { "¼­¿ï", "°æ±â", "°­¿ø", "Ãæ³²", "ÃæºÏ", "Àü³²", "ÀüºÏ", "°æ³²", "°æºÏ", "ºÎ»ê", "´ë±¸", "ÀÎÃµ", "±¤ÁÖ", "¼¼Á¾", "´ëÀü",
-				"¿ï»ê", "Á¦ÁÖ" };
+		return new String[] { "ï¿½ï¿½ï¿½ï¿½", "ï¿½ï¿½ï¿½", "ï¿½ï¿½ï¿½ï¿½", "ï¿½æ³²", "ï¿½ï¿½ï¿½", "ï¿½ï¿½ï¿½ï¿½", "ï¿½ï¿½ï¿½ï¿½", "ï¿½æ³²", "ï¿½ï¿½ï¿½", "ï¿½Î»ï¿½", "ï¿½ë±¸", "ï¿½ï¿½Ãµ", "ï¿½ï¿½ï¿½ï¿½", "ï¿½ï¿½ï¿½ï¿½", "ï¿½ï¿½ï¿½ï¿½",
+				"ï¿½ï¿½ï¿½", "ï¿½ï¿½ï¿½ï¿½" };
 
 	}
 
@@ -99,7 +99,7 @@ public class ClassController {
 		return "thyme/viewList";
 	}
 
-	// Å¬·¡½º °Ô½ÃÆÇ ¸ñ·Ï
+	// Å¬ï¿½ï¿½ï¿½ï¿½ ï¿½Ô½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½
 	@GetMapping("/viewList")
 	public String viewClassList(Model model, @RequestParam(required = false) String keyword,
 			@RequestParam(required = false) String nowPage, HttpServletResponse response) {
@@ -147,7 +147,7 @@ public class ClassController {
 		return "thyme/viewList";
 	}
 
-	// viewList¿¡¼­ ÀÌ¹ÌÁö Å¬¸¯ ½Ã ±×¿¡ ÇØ´çÇÏ´Â detail view·Î ÀÌµ¿
+	// viewListï¿½ï¿½ï¿½ï¿½ ï¿½Ì¹ï¿½ï¿½ï¿½ Å¬ï¿½ï¿½ ï¿½ï¿½ ï¿½×¿ï¿½ ï¿½Ø´ï¿½ï¿½Ï´ï¿½ detail viewï¿½ï¿½ ï¿½Ìµï¿½
 	@GetMapping("/viewClass/{class_id}")
 	public String viewClass(@PathVariable("class_id") int class_id, Model model) {
 		Class findClass = classFacade.findClass(class_id);
@@ -156,20 +156,20 @@ public class ClassController {
 		return "thyme/detail";
 	}
 
-	//Å¬·¡½º »èÁ¦
+	//Å¬ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 	@GetMapping("/deleteClass")
 	public String deleteClass(@RequestParam("class_id") int class_id) {
 		classFacade.deleteClass(class_id);
 		return "redirect:/class/viewList";
 	}
 	
-	// Å¬·¡½º Æû ÀÛ¼º get
+	// Å¬ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½Û¼ï¿½ get
 	@GetMapping("/writeClass")
 	public String writeClass() {
 		return "thyme/ClassForm";
 	}
 
-	// Å¬·¡½º Æû ÀÛ¼º post
+	// Å¬ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½Û¼ï¿½ post
 	@PostMapping("/writeClass")
 	public String insertClass(@Valid Class newClass, BindingResult result, SessionStatus status, HttpServletRequest request) {
 		if (result.hasErrors()) {
@@ -185,7 +185,7 @@ public class ClassController {
 		DateFormat format = new SimpleDateFormat("yyyy/MM/dd");
 		String edate = format.format(newClass.getEdate());
 
-		// ¼±ÅÃÇÑ ¸¶°¨ÀÏ±îÁö ½ÅÃ»°¡´ÉÇÏ°í ÇÏ·ç µÚºÎÅÍ ½ÅÃ»¹öÆ° ºñÈ°¼ºÈ­·Î º¯°æÇÏ±â À§ÇÑ ÄÚµå
+		// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï±ï¿½ï¿½ï¿½ ï¿½ï¿½Ã»ï¿½ï¿½ï¿½ï¿½ï¿½Ï°ï¿½ ï¿½Ï·ï¿½ ï¿½Úºï¿½ï¿½ï¿½ ï¿½ï¿½Ã»ï¿½ï¿½Æ° ï¿½ï¿½È°ï¿½ï¿½È­ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï±ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Úµï¿½
 		try {
 			Date eDate = format.parse(edate);
 			Calendar c = Calendar.getInstance();
@@ -207,16 +207,16 @@ public class ClassController {
 	}
 
 	private String uploadFile(MultipartFile report, HttpServletRequest request) {
-//		uuid »ý¼º(Universal Unique IDentifier, ¹ü¿ë °íÀ¯ ½Äº°ÀÚ)
+//		uuid ï¿½ï¿½ï¿½ï¿½(Universal Unique IDentifier, ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Äºï¿½ï¿½ï¿½)
 		UUID uuid = UUID.randomUUID();
-//		·£´ý»ý¼º + ÆÄÀÏÀÌ¸§ ÀúÀå
+//		ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ + ï¿½ï¿½ï¿½ï¿½ï¿½Ì¸ï¿½ ï¿½ï¿½ï¿½ï¿½
 		String savedName = uuid.toString() + "_" + report.getOriginalFilename();
 		/*
 		 * String storagePath =
-		 * "C:\\Users\\Á¤ÈÄ\\Documents\\sosigae\\springmabell\\src\\main\\resources\\static\\images\\";
+		 * "C:\\Users\\ï¿½ï¿½ï¿½ï¿½\\Documents\\sosigae\\springmabell\\src\\main\\resources\\static\\images\\";
 		 */
 		String storagePath = request.getServletContext().getRealPath("resources/images/" + savedName);
-//		ÀÓ½Ãµð·ºÅä¸®¿¡ ÀúÀåµÈ ¾÷·ÎµåµÈ ÆÄÀÏÀ» ÁöÁ¤µÈ µð·ºÅä¸®·Î º¹»ç
+//		ï¿½Ó½Ãµï¿½ï¿½ä¸®ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Îµï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ä¸®ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 		File file = new File(storagePath);
 		try {
 			report.transferTo(file);
