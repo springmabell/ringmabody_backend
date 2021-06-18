@@ -1,0 +1,236 @@
+<!-- 페이징, 필터, teacher 아니거나 로그인 안 되어 있으면 클래스등록 버튼 클릭 시 alert 띄우기 -->
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous">
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js" integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="http://cdn.jsdelivr.net/npm/xeicon@2.3.3/xeicon.min.css">
+	<style>
+	.thum{
+		overflow:hidden;	
+		position:relative;
+	}
+	.thum:hover img{
+			cursor:pointer;
+		transform:scale(1.1);
+	}
+	.thum img{
+	 transition: .3s;
+	 width:1000px;
+	 height:330px;
+	}
+	.heart{
+	position: absolute;
+    color:#fff;
+    right:3px;
+    top:3px;
+    font-size: 30px;
+    padding: 0 8px;
+    z-index:1;
+	}
+	.heart:hover{
+		background-color:white;
+		opacity:0.7;
+		border-radius:50px;
+	}
+	.pagination > li > a
+	{
+		color: rgb(123, 227, 251);
+	}
+		.badge{
+	    position: absolute;
+	    color:#fff;
+	    left:0;
+	    top:0;
+	    font-size: 20px;
+	    padding: 10px;
+	    background-color: rgb(123, 227, 251);
+	    border-radius:0px;
+	}
+	.badge.best{
+	   background-color: rgb(123, 227, 251);;
+	}
+	.badge.endingSoon{
+	   background-color: red;
+	}
+	</style>
+</head>
+<body>
+<div>
+    <div class="container" style="margin-bottom:100px;">
+        <form th:action="@{/class/viewList}" th:object="${filtering}" method="post"><!-- th:action="@{/class/viewList}"  -->
+            <table class="table mb-4">
+                <tbody>
+                      <tr>
+                            <td align="center"><span style="font-weight:bold;">종류</span></td>
+                            <!-- category 테이블에서 불러오기 -->
+                            <td align="center">
+                                <div class="form-check form-check-inline" th:each="category : ${categoryList}">
+                                    <input class="form-check-input" type="checkbox" th:field="*{checkedCategory}" th:value="${category.category_id}">
+                                    <label class="form-check-label" th:for="${category.name}" th:text="${category.name}">스</label>
+                                </div>
+                            </td>
+                      </tr>
+                      <tr>
+                    	    <!-- controller에서 list 만들어서 반복문으로 출력하기 -->
+	                     <td align="center"><span style="font-weight:bold;">지역</span></td>
+	                            <td align="center">
+									<div class="form-check form-check-inline" th:each="local : ${localList}">
+									  <input class="form-check-input" type="radio" th:field="*{checkedLocal}" th:value="${local}"/> 
+									  <label class="form-check-label" th:for="${local}" th:text="${local}">서울</label>
+									</div>
+	                            </td>
+                      </tr>
+                </tbody>
+            </table>
+            <div class="col" style="text-align:center;">
+<!--                 <a th:href="@{/class/viewList}" class="btn btn-block" style="color:white;background-color: rgb(123, 227, 251);border:none;">검색</a> -->
+                <input type="submit" value="검색" class="btn btn-block" style="color:white;background-color: rgb(123, 227, 251);border:none;"/>
+            </div>
+        </form>
+
+	</div>
+
+	<div>
+	    <div class="container">	
+			<nav class="navbar">
+			  <div class="container-fluid">
+		<!-- 	     <a class="nav-link dropdown-toggle" href="#" id="navbarScrollingDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false" style="color:black">
+			            정렬
+			          </a>
+			          <ul class="dropdown-menu" aria-labelledby="navbarScrollingDropdown">
+			            <li><span class="dropdown-item"  >조회순</span></li>
+			            <li><a class="dropdown-item" href="#">마감임박순</a></li>
+			          </ul> -->
+			    <form class="d-flex">
+			    	<input class="form-control me-2" id="keyword" name="keyword" type="search" placeholder="제목을 입력하세요" aria-label="Search">
+			    	<button class="btn" id="btnSearch" name="btnSearch"  style="color:white;background-color: rgb(123, 227, 251);border:none;"><span class="xi-search"></span></button>
+			      <!-- th:onclick="|javascript:sortBy('dd')|" -->
+			    </form>
+			  </div>
+			</nav>
+
+	        <div class="row">
+	            <div th:each="classes : ${classList}" class="p-4 col-lg-4 mb-5">
+	                <div>
+	                	<div class="thum">
+	                        <img th:src="@{/resources/images/} + ${classes.img}" alt="Image" id="image" class="img-fluid img-responsive" th:onclick="'location.href=\'' + @{/class/viewClass/{class_id}(class_id=${classes.class_id})} + '\''" >
+	                        <span th:if="${classes.date} <= 7 and ${classes.date} >= 0">
+	                        	<span class="badge endingSoon">마감임박</span>
+	                        </span> 
+	                        <span class="heart" style="color:gray;"><i class="xi-heart-o"></i></span>
+	                    </div>
+	                    
+	                    <div>
+	                        <div>
+	                        	<!-- state가 마감일 때 빨강으로 바꾸기 -->
+	                        	<span th:if="${classes.state} eq '마감'">
+	                        		<span th:text="|[${classes.state}]|" style="font-size:25px;color:red;">마감</span>
+	                        	</span>
+	                        	<span th:unless="${classes.state} eq '마감'">
+	                        		<span th:text="|[${classes.state}]|" style="font-size:25px;">마감</span>
+	                        	</span>	
+	                        	<span th:text="${classes.title}" style="font-size:20px;"></span>
+	                        </div>
+							<div th:text="${classes.categoryName}" style="color:gray;margin:2px 0px;">&nbsp;헬스</div>		
+	                        <span class="mx-2"><i class="xi-calendar"></i> </span>
+	                        <span th:text="${#dates.format(classes.edate, 'yyyy-MM-dd')}"></span>
+	                        <br/>
+	                        <span class="mx-2"><i class="xi-credit-card"></i></span>
+	                        <span th:text="|${classes.price}원|" ></span>  <br/>
+	                        <span class="mx-2"><i class="xi-user"></i></span>
+	                        <span th:text="${classes.minNum}" style="color:red;">2</span>명 / <span th:text="${classes.maxNum}" style="color:red;">10</span>명   현재 : <span th:text="${classes.participant}" style="color:red;">3</span>명
+	
+	                        <br/>
+	                        <span th:text="${classes.place}" class="mx-2"> <i class="xi-maker"></i>주소</span>
+	                        <br/><br/>
+						    <div class="progress" style="height: 5px;">
+								<div class="progress-bar bg-info" role="progressbar" th:style="'width: ' + ${classes.participant} / ${classes.maxNum} * 100 + '%'" aria-valuemin="0" aria-valuemax="100"></div>
+								
+							</div>
+							<span th:text="${classes.participant} / ${classes.maxNum} * 100 + '%'" style="color:gray">30%</span>
+							
+							<span style="float:right;"><i class="xi-time-o"></i>&nbsp;
+							<span th:if="${classes.date} == -1">
+								<span>마감</span> 
+							</span>	
+							<span th:unless="${classes.date} == -1">
+								<span th:text="|${classes.date}일|"></span> 
+							</span>	
+							</span>
+							
+	                    </div>
+	                </div>
+	            </div>
+	        </div>
+	        <a class="btn" href="#" th:href="@{/class/writeClass}" style="float:right;color:white;background-color: rgb(123, 227, 251);border:none;">클래스 등록</a>
+	    	<br/><br/>
+	    	<div style="display: block; text-align: center;">		
+	</div>
+	    	<nav>
+			  <ul class="pagination  justify-content-center">
+			    <li class="page-item">
+				<span th:if="${paging.startPage != 1}">
+			      <a class="page-link" th:href="@{/class/viewList(nowPage=${paging.startPage - 1})}" aria-label="Previous">
+			        <span aria-hidden="true">&laquo;</span>
+			      </a>
+			    </span>
+			    </li>
+			    <li class="page-item" th:each="p: ${#numbers.sequence(paging.startPage, paging.endPage)}">
+			    	<span th:if="${p == paging.nowPage}">
+			    		<a class="page-link" th:text="${paging.nowPage}"></a>
+			    	</span>
+			    	<span th:if="${p != paging.nowPage}">
+			    		<a th:href="@{/class/viewList(nowPage=${p})}" class="page-link" th:text="${p}"></a>
+			    	</span>
+			    </li>
+			    <li class="page-item">
+			    <span th:if="${paging.endPage != paging.lastPage}">
+			      <a class="page-link" href="#" aria-label="Next">
+			        <span aria-hidden="true">&raquo;</span>
+			      </a>
+			     </span>
+			    </li>
+			  </ul>
+			</nav>
+	    </div>
+	</div>
+</div>
+<script>
+    //조회순, 마감임박순으로 조회하는 ajax
+
+/*     function del(boardNum) {
+    	var chk = confirm("정말 삭제하시겠습니까?");
+    	var json = {"id" : "아이디", "pw" : "1234"};
+    	if (chk) {
+    		$.ajax({
+    			url : '/class/sortBy',
+    			type : 'post',
+    			 data: JSON.stringify(json),
+    		        contentType: "application/json",
+    			success : function(e) {
+    					alert(e);
+    				
+    			},
+    			error: function(request,status,error){
+    		        alert("eeeee");
+    		    }
+    		});
+    	}
+    }  */
+    
+	$('#btnSearch').on('click', function(e) {
+		e.preventDefault();
+		var url = "/class/viewList";
+		url = url + "?keyword=" + $('#keyword').val();
+
+		location.href = url;
+	});
+
+
+</script>
+</body>
+</html>

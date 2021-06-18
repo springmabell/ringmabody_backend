@@ -24,7 +24,15 @@
                             <td>
                                 <img src="swimming1.jpg" style="width:100px;height:100px" />
                             </td>
-                            <td>헬스</td>
+                            <td th:text="${newClass.edate}">헬스</td>
+<!--                             <td th:text="${newClass.category_id}">헬스</td>
+                            <td th:text="${newClass.minNum}">헬스</td>
+                            <td th:text="${newClass.maxNum}">헬스</td>
+                            <td th:text="${newClass.edate}">헬스</td>
+                            <td th:text="${newClass.price}">헬스</td>
+                            <td th:text="${newClass.place}">헬스</td>
+                            <td th:text="${newClass.local}">헬스</td>
+                            <td th:text="${newClass.content}">헬스</td> -->
                             <td>2000원</td>
                         </tr>
                     </table>
@@ -33,10 +41,7 @@
 
                 <h5>결제 정보</h5><br />
                 <div id="od">
-                    <form:form modelAttribute="" action="">
-
-                        <!--form 형식 모두 jsp 사용 시 form:form으로 변경해준다. -->
-
+                    <form>
                         <div class="row">
                             <div class="col-md-6 form-group">
                                 <label for="bank">은행명</label> &nbsp; &nbsp;
@@ -60,7 +65,6 @@
                                                  placeholder="****-****-****-****" />     -->
                                 <input path="cardNum" class="form-control form-control-lg" style="width:80%;"
                                                  placeholder="****-****-****-****" />
-                                <form:errors path="cardNum" />
                             </div>
                         </div>
 
@@ -68,7 +72,6 @@
                             <div class="col-md-6 mb-3 form-group">
                                 <label for="cvc">CVC 번호</label>
                                 <input id="maxNum" class="form-control form-control-lg" style="width:80%;" placeholder="카드 뒷면 3자리 숫자를 입력하세요"/>
-                                <form:errors path="cvc" />
                             </div>
                         </div>
 
@@ -77,10 +80,9 @@
                                 <label for="expireDate">유효기간</label>
                                 <input path="expireDate" class="form-control form-control-lg" style="width:80%;"
                                                  placeholder="MM/YY"/>
-                                <form:errors path="expireDate" />
                             </div>
                         </div>
-                    </form:form>
+                    </form>
                 </div>
 
                 <br />
@@ -91,7 +93,8 @@
                 </div>
                 <div class="row">
                     <div class="col-12">
-                        <input type="submit" value="결제" class="btn" style="color: white;background-color: rgb(123, 227, 251);">
+                    <a  class="btn" th:href="@{/class/viewList}"></a>
+                        <input value="결제" class="btn" style="color: white;background-color: rgb(123, 227, 251);">
                     </div>
                 </div>
             </div>
