@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Insert title here</title>
@@ -21,75 +21,85 @@
                 <div class="mb-5">
                     <h2>클래스 등록</h2>
                 </div>
-              <!--  <form:form modelAttribute="" action="post">-->
-                <form>
-                    <div class="row mb-3">
-                        <div class="col-md-6 form-group">
-                            <label for="boardTitle">제목</label>
-                            <input path="boardTitle" class="form-control form-control-lg" />
+                <form th:object="${newClass}" th:action="@{/class/writeClass}"  method="post" enctype="multipart/form-data">
+                	<div class="row">
+                		<div class="col mb-4">
+                			<span style="color:red;">*&nbsp;</span>는 필수항목입니다.
+                		</div>
+                	</div>
+                	
+                    <div class="row">
+                        <div class=" mb-4 col-md-6 form-group">
+                            <label class="mb-2" for="boardTitle"><span class="required" style="color:red;">*&nbsp;</span>제목</label>
+                            <input th:field="*{title}" class="form-control form-control-lg" />
+							<p th:if="${#fields.hasErrors('title')}" th:errors="*{title}"></p>
                         </div>
                     </div>
+                   
 
                     <div class="row">
-                        <div class="col-md-6 mb-3">
-                            <label for="category">카테고리</label><br/>
-                            <select class="form-select" id="category" name="category">
-                                <option value="health" selected="selected">헬스</option>
-                                <option value="pilates">필라테스</option>
+                        <div class="col-md-6 mb-4">
+                            <label class="mb-2" for="category"><span class="required" style="color:red;">*&nbsp;</span>카테고리</label><br/>
+                            <select th:field="*{category_id}" class="form-select">
+                                <option th:each="categoryList,iterStat : ${categoryList}" 
+                                th:value="${categoryList.category_id}" th:text="${categoryList.name}">헬스</option>
                             </select>
                         </div>
                     </div>
 
                     <div class="row">
-                        <div class="col-md-6 form-group mb-3">
-                            <label for="minNum">최소인원</label>
-                            <input path="minNum" class="form-control form-control-lg"/>
+                        <div class="col-md-6 form-group mb-4">
+                            <label class="mb-2" for="minNum"><span class="required" style="color:red;">*&nbsp;</span>최소인원</label>
+                            <input th:field="*{minNum}" class="form-control form-control-lg"/>
                         </div>
                     </div>
 
                     <div class="row">
-                        <div class="col-md-6 form-group mb-3">
-                            <label for="maxNum">최대인원</label>
-                            <input id="maxNum" class="form-control form-control-lg" placeholder="최소 1명 이상 입력하세요"/>
+                        <div class="col-md-6 form-group mb-4">
+                            <label class="mb-2" for="maxNum"><span class="required" style="color:red;">*&nbsp;</span>최대인원</label>
+                            <input th:field="*{maxNum}" class="form-control form-control-lg" placeholder="최소 2명 이상 입력하세요"/>
                         </div>
                     </div>
 
                     <div class="row">
-                        <div class="col-md-6 form-group mb-3">
-                            <label>마감일</label><br/>
-                            <input data-date-format="dd/mm/yyyy" id="datepicker">
+                        <div class="col-md-6 form-group mb-4">
+                            <label class="mb-2"><span class="required" style="color:red;">*&nbsp;</span>마감일</label><br/>
+                            <input data-date-format="yyyy/mm/dd" id="datepicker">
+                            <input type="hidden" id="edate" name="edate" />
                         </div>
                     </div>
 
                     <div class="row">
-                        <div class="col-md-6 form-group mb-3">
-                            <label for="price">가격</label>
-                            <input id="price" class="form-control form-control-lg" />
+                        <div class="col-md-6 form-group mb-4">
+                            <label class="mb-2" for="price"><span class="required" style="color:red;">*&nbsp;</span>가격</label>
+                            <input th:field="*{price}"  class="form-control form-control-lg" />
                         </div>
                     </div>
 
                     <div class="row">
-                        <div class="col-md-6 form-group mb-3">
-                            <label>장소</label>
+                        <div class="col-md-6 form-group mb-4">
+                            <label class="mb-2" ><span class="required" style="color:red;">*&nbsp;</span>장소</label>
                             <button type="button" class="btn mb-2" style="color:white;background-color: rgb(123, 227, 251);border:none;" onclick="openZipSearch()">검색</button><br>
                             <input id="addr1" class="form-control form-control-lg" type="text" name="addr1" readonly /><br>
-                            상세장소<input id="addr2" class="form-control form-control-lg" type="text" name="addr2" />
+                            <label class="mb-2">상세장소</label><input id="addr2" class="form-control form-control-lg" type="text" name="addr2" />
+                        	<input type="hidden" id="address" name="address"  th:field="*{place}" />
+                        	<input type="hidden" id="local" name="local"  th:field="*{local}" />
                         </div>
                     </div>
-
+						
+						
                     <div class="row">
-                        <div class="col-md-6 form-group mb-3">
-                            <label for="img">이미지</label>
-                            <input type="file" id="img" class="form-control form-control-lg" />
+                        <div class="col-md-6 form-group mb-4">
+                            <label class="mb-2" for="img">이미지</label>
+                            <input type="file" th:field="*{report}" class="form-control form-control-lg" />
                         </div>
                     </div>
 
-                    <div class="mb-3">
-                        <label for="content" class="form-label">상세설명</label>
-                        <textarea class="form-control" id="content" rows="6"></textarea>
+                    <div class="mb-4">
+                        <label for="content" class="form-label mb-2"><span class="required" style="color:red;">*&nbsp;</span>상세설명</label>
+                        <textarea th:field="*{content}" class="form-control" rows="6"></textarea>
+                            <p th:if="${#fields.hasErrors('content')}" th:errors="*{content}"></p>
                     </div>
-
-            
      <!--         
                                 <form>
                                     <button type="submit" id="btn" class="btn" style="color:white;background-color: rgb(123, 227, 251);border:none;">수정</button>
@@ -98,7 +108,7 @@
 
                      <div class="row" align="right">
                      	<div class="col-12">
-                        	<input type="submit" value="등록"  id="btn" class="btn" style="color:white;background-color: rgb(123, 227, 251);border:none;">
+                        	<input type="submit" onclick="addAddress();makeEdate();constraint();" id="btn" class="btn py-2 px-4" style="color:white;background-color: rgb(123, 227, 251);border:none;" value="등록"/>
                         </div>
                      </div>
                 </form>
@@ -108,6 +118,26 @@
 </div>
 
 <script>
+	//input 제약조건
+/* 	function constraint(){
+		//최대 >= 최소
+		var minNum = document.getElementById("minNum").value;
+		var maxNum = document.getElementById("maxNum").value;
+		if(minNum > maxNum){
+			alert("최대 인원수는 최소 인원수보다 많아야 합니다.");
+			return;
+		}
+			
+		//title
+		//content
+		//price
+		//minnum maxnum notnull & >=2
+		//address
+	}
+	 */
+	
+	 
+	//daum 위치 찾기
     function openZipSearch() {
         new daum.Postcode({
             oncomplete: function(data) {
@@ -117,13 +147,33 @@
         }).open();
     }
 
+    //bootstrap datepicker
     $('#datepicker').datepicker({
-        weekStart: 1,
+        weekStart: 0,
         daysOfWeekHighlighted: "6,0",
         autoclose: true,
         title: "마감일",
         todayHighlight: true,
+        startDate: '+1d'
     });
+    
+    //마감일 
+    function makeEdate(){ 
+    	var e = $('#datepicker').val().split("/")
+    	var edate = new Date(e[0], e[1] -1 , e[2]);
+     	document.getElementById("edate").setAttribute("value", edate);  
+    }
+    
+    //place와 local hidden 타입 input에 삽입
+    function addAddress(){
+    	var addr1 = document.getElementById("addr1").value;
+    	var addr2 = document.getElementById("addr2").value;
+    	var address = addr1.concat(" ", addr2);
+    	document.getElementById("address").setAttribute("value", address);
+    	var local = address.slice(0,2);
+    	document.getElementById("local").setAttribute("value",local);
+    }
+
 </script>
 </body>
 </html>

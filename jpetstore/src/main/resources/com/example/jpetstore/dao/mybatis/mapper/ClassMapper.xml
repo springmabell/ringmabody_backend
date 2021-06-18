@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.example.jpetstore.dao.mybatis.mapper.ClassMapper">
+  <cache />
+  <sql id="BaseColumns">
+  		CLASS_ID, TEACHER_ID, CATEGORY_ID, TITLE, CONTENT, PRICE, EDATE, PARTICIPANT, IMG, PLACE, LOCAL, MINNUM, MAXNUM
+  </sql>
+  
+  	<!-- class모든 컬럼과 category의 name 필드 join해서 가져오기 -->
+	<select id="viewClassList" parameterType="hello.spring.domain.PagingVO" resultType="hello.spring.domain.Class">
+		SELECT * FROM
+			(SELECT ROWNUM AS NUM, C.* FROM 
+				(SELECT C.*, CAT.NAME AS categoryName
+			 	FROM CLASS C, CATEGORY CAT
+			 	<where>
+			 		
+			 		C.CATEGORY_ID = CAT.CATEGORY_ID
+			 		
+			 		<if test="keyword != null and keyword != ''">
+			 		AND C.TITLE LIKE '%' || #{keyword} || '%'
+			 		</if>
+			 	</where>
+			 	ORDER BY CLASS_ID)C)
+		WHERE NUM BETWEEN #{start} AND #{end}
+	</select>
+	
+	<!-- 카테고리 테이블에서 카테고리 리스트 가져오기 -->
+	<select id="getCategoryList" resultType="hello.spring.domain.Category">
+		SELECT *
+		FROM CATEGORY
+	</select>
+	
+	<!-- 필터링 : 클래스 리스트 반환과 합쳐야 하는가? -->
+	<select id="filteringClass" parameterType="hello.spring.domain.Filtering" resultType="hello.spring.domain.Class">
+		SELECT F.* FROM
+		(SELECT C.*, CAT.NAME AS categoryName
+		 FROM CLASS C, CATEGORY CAT
+		 WHERE C.CATEGORY_ID = CAT.CATEGORY_ID
+		 ORDER BY CLASS_ID)F
+		 WHERE LOCAL = #{checkedLocal} AND
+		 CATEGORY_ID IN 
+		 <foreach collection="checkedCategory" item="item" index="index" open="(" close=")" separator=",">
+			#{item}		 
+		 </foreach>
+	</select>
+	
+	<!-- 마감일 시 클래스 state 상태 close로 변경 -->
+	<update id="closeEvent" parameterType="Date">
+	    <![CDATA[
+      	 UPDATE CLASS SET STATE = '마감'
+    	 WHERE EDATE <= #{today}
+    	]]>
+	</update> 
+<!-- 	<update id="closeEvent" parameterType="hello.spring.domain.Class">
+      	 UPDATE CLASS SET STATE = #{state}
+    	 WHERE CLASS_ID = #{class_id}
+	</update>	 -->
+	
+	
+	<!-- class_id 이용해서 class 객체 반환하기 -->
+	<select id="findClass"  parameterType="int" resultType="hello.spring.domain.Class">
+		SELECT C.*, CAT.NAME AS categoryName
+	 	FROM CLASS C, CATEGORY CAT
+	 	WHERE C.CLASS_ID = #{class_id} AND C.CATEGORY_ID = CAT.CATEGORY_ID
+	</select>
+	
+	<!-- 작성한 클래스 class 테이블에 삽입하기 -->
+	<insert id="writeClass" parameterType="hello.spring.domain.Class">
+		<selectKey keyProperty="class_id" resultType="int" order="BEFORE">
+			SELECT CLASS_ID_SEQ.NEXTVAL AS class_id FROM DUAL
+		</selectKey>
+		INSERT INTO CLASS ( <include refid="BaseColumns" /> )
+		VALUES(#{class_id}, #{teacher_id, jdbcType=VARCHAR}, #{category_id, jdbcType=INTEGER}, #{title, jdbcType=VARCHAR}, #{content, jdbcType=VARCHAR},
+		#{price, jdbcType=INTEGER}, #{edate, jdbcType=DATE}, #{participant, jdbcType=INTEGER}, #{img, jdbcType=VARCHAR}, #{place,jdbcType=VARCHAR},
+		#{local,jdbcType=VARCHAR}, #{minNum}, #{maxNum} )
+	</insert>
+	
+	<!-- 클래스 update -->
+	<update id="updateClass" parameterType="hello.spring.domain.Class">
+		UPDATE CLASS SET
+		TITLE = #{title},
+		CATEGORY_ID = #{category_id, jdbcType=INTEGER},
+		CONTENT = #{content, jdbcType=VARCHAR},
+		PRICE = #{price, jdbcType=INTEGER},
+		MINNUM = #{minNum},
+		MAXNUM = #{maxNum},
+		EDATE = #{edate, jdbcType=DATE},
+		PLACE = #{place, jdbcType=VARCHAR},
+		LOCAL = #{local, jdbcType=VARCHAR},
+		IMG = #{img, jdbcType=VARCHAR}
+		WHERE CLASS_ID = #{class_id} 
+	</update>
+	
+	<!-- 클래스 delete -->
+	<delete id="deleteClass" parameterType="int">
+		DELETE FROM CLASS
+		WHERE CLASS_ID = #{class_id}
+	</delete>
+	
+	<!-- 클래스 전체 개수 가져오기 -->
+	<select id="countClass" resultType="int">
+		SELECT COUNT(*)
+		FROM CLASS
+	</select>
+	
+	<update id="plusHit" parameterType="int">
+		UPDATE CLASS SET HIT = HIT + 1
+		WHERE CLASS_ID = #{class_id}
+	</update>
+</mapper>
