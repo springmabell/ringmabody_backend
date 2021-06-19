@@ -9,6 +9,7 @@ import com.example.jpetstore.dao.CategoryDao;
 import com.example.jpetstore.dao.ItemDao;
 import com.example.jpetstore.dao.OrderDao;
 import com.example.jpetstore.dao.ProductDao;
+import com.example.jpetstore.dao.ReviewDao;
 import com.example.jpetstore.dao.TeacherAccountDao;
 import com.example.jpetstore.dao.UserAccountDao;
 import com.example.jpetstore.domain.Account;
@@ -16,6 +17,7 @@ import com.example.jpetstore.domain.Category;
 import com.example.jpetstore.domain.Item;
 import com.example.jpetstore.domain.Order;
 import com.example.jpetstore.domain.Product;
+import com.example.jpetstore.domain.Review;
 import com.example.jpetstore.domain.TeacherAccount;
 import com.example.jpetstore.domain.UserAccount;
 
