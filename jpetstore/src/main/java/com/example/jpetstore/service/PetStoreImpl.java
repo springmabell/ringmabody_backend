@@ -36,7 +36,8 @@ public class PetStoreImpl implements PetStoreFacade {
 	private TeacherAccountDao teacherAccountDao;
 	@Autowired
 	private UserAccountDao userAccountDao;
-	
+	@Autowired
+	private ReviewDao reviewDao;
 	
 
 	//-------------------------------------------------------------------------
@@ -161,6 +162,18 @@ public class PetStoreImpl implements PetStoreFacade {
 	public void updateTeacherAccount(TeacherAccount account) {
 		// TODO Auto-generated method stub
 		teacherAccountDao.updateTeacherAccount(account);
+	}
+	
+	@Override
+	public List<Review> getReviews(String user_id) {
+		// TODO Auto-generated method stub
+		return reviewDao.getReviews(user_id);
+	}
+
+	@Override
+	public List<Review> getAllReviews() {
+		// TODO Auto-generated method stub
+		return reviewDao.getAllReviews();
 	}
 
 }
