@@ -9,12 +9,16 @@
   	<link rel="stylesheet" href="/style/admin_teacher_list.css" type="text/css" />
   	
     <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+    
+	<div th:replace="thyme/layout_admin :: style"></div>
 </head>
 <body>
 
 <div id="wrap">
 
-    <div id="header">
+	<div th:replace="thyme/layout_admin :: header"></div>
+
+   <!--  <div id="header">
         <div class="header_nav">
             <div class="header_nav_logo">
                 <a href="">RingMaBody</a>
@@ -26,8 +30,8 @@
                     <i class="fas fa-chevron-down"></i>
                 </div>
             </div>
-        </div><!--end header_nav-->
-    </div><!--end header-->
+        </div>end header_nav
+    </div>end header -->
 
     <div id="container">
         <div class="content_wrap">

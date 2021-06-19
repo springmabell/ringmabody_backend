@@ -24,7 +24,7 @@ import com.example.jpetstore.service.PetStoreFacade;
  * @modified by Changsup Park
  */
 @Controller
-@SessionAttributes("userSession")
+@SessionAttributes({"userSession","teacherSession"})
 public class ListUsersController {
 
 	private PetStoreFacade petStore;

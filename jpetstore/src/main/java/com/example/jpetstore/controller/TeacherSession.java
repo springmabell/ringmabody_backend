@@ -17,9 +17,6 @@ public class TeacherSession implements Serializable {
 
 	private TeacherAccount account;
 
-	private PagedListHolder<Product> myList;
-	
-
 	public TeacherSession(TeacherAccount account) {
 		this.account = account;
 	}
@@ -27,5 +24,4 @@ public class TeacherSession implements Serializable {
 	public TeacherAccount getAccount() {
 		return account;
 	}
-
 }

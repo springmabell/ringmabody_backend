@@ -17,8 +17,6 @@ public class UserSession implements Serializable {
 
 	private UserAccount account;
 
-	private PagedListHolder<Product> myList;
-	
 
 	public UserSession(UserAccount account) {
 		this.account = account;

@@ -8,6 +8,8 @@
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Comic+Neue:wght@700&display=swap" rel="stylesheet">
 
+
+ 	<div th:fragment="style">
     <style>
     
     #header{
@@ -46,30 +48,50 @@
     .header_nav_login{
         font-size: 18px;
         font-weight: 600;
-    }
-    .header_nav_logo_right{
-        width: 160px;
         display: flex;
         align-items: center;
-        justify-content: space-between;
+    }
+    .header_nav_logo_right{
+        width: 200px;
+/*         display: flex;
+        align-items: center;
+        justify-content: space-between; */
         font-size: 20px;
     }
+    #header_name {
+    	color: black;
+    }
+    
+	a { text-decoration:none;
+		color: black; } 
     </style>
+    </div>
 </head>
 <body>
 
+<div th:fragment="header">
 <div id="wrap">
 
     <div id="header">
         <div class="header_nav">
             <div class="header_nav_logo">
-                <a href="">RingMaBody</a>
-                <b>관리자</b>
+                <a href="" th:href="@{/main/mainPage}">RingMaBody</a>
             </div>
+            
             <div class="header_nav_logo_right">
-                <p>홍길동 관리자</p>
-                <a>▽</a>
-                <div class="header_nav_login">
+            	<div th:if="${session.userSession}">
+                	<a id="header_name" href="">홍길동 님 ▽</a>
+                </div>
+                <div th:if="${session.teacherSession}">
+                	<div class="header_nav_login">	
+	                    <a href="" th:href="@{/user/signoff.do}" onClick="alert('로그아웃 되었습니다.')">로그아웃</a><br/>
+	                </div>
+	            </div>
+                <div th:unless="${session.teacherSession}">
+	                <div class="header_nav_login">
+	                    <a href="" th:href="@{/user/loginForm.do}">회원 로그인</a>&nbsp&nbsp
+	                    <a href="" th:href="@{/teacher/loginForm.do}">강사 로그인</a>
+	                </div>
                 </div>
             </div>
         </div><!--end header_nav-->
@@ -82,7 +104,7 @@
     <div id="footer"></div><!--end footer-->
 
 </div><!--end wrap-->
-
+</div>
 
 
 </body>

@@ -23,7 +23,7 @@ import org.springframework.ui.Model;
  * @modified-by Changsup Park
  */
 @Controller
-@SessionAttributes("userSession")
+@SessionAttributes({"userSession","teacherSession"})
 public class LoginController { 
 
 	private PetStoreFacade petStore;

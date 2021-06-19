@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.example.jpetstore.service.MainFacade;
 import com.example.jpetstore.domain.Class;
 
-//¸ÞÀÎ ÆäÀÌÁö ÄÁÆ®·Ñ·¯
+//ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Æ®ï¿½Ñ·ï¿½
 @Controller
 @RequestMapping("/main")
 public class MainController {
@@ -21,11 +21,10 @@ public class MainController {
 
 	@Autowired
 	private MainFacade mainFacade;
-
 	
 	@GetMapping("/mainPage")
 	public String viewMain(Model model) {
-		//¸¶°¨ÀÓ¹Ú¼ø 3°³
+		//ï¿½ï¿½ï¿½ï¿½ï¿½Ó¹Ú¼ï¿½ 3ï¿½ï¿½
 		List<Class> endingSoonList = mainFacade.endingSoon();
 		List<Class> bestClassList = mainFacade.bestClass();
 		model.addAttribute("endingSoonList", endingSoonList);

@@ -3,6 +3,9 @@ package com.example.jpetstore.controller;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.support.PagedListHolder;
 import org.springframework.stereotype.Controller;
@@ -12,9 +15,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.example.jpetstore.domain.Account;
+import com.example.jpetstore.domain.Class;
 import com.example.jpetstore.domain.Product;
 import com.example.jpetstore.domain.TeacherAccount;
 import com.example.jpetstore.domain.UserAccount;
+import com.example.jpetstore.service.MainFacade;
 import com.example.jpetstore.service.PetStoreFacade;
 
 import org.springframework.web.bind.annotation.SessionAttributes;
@@ -26,10 +31,17 @@ import org.springframework.ui.Model;
  * @modified-by Changsup Park
  */
 @Controller
-@SessionAttributes("teacherSession")
+@SessionAttributes({"userSession","teacherSession"})
 public class TeacherLoginController { 
+	
+
+	private static final Logger LOGGER = LoggerFactory.getLogger(ClassController.class);
 
 	private PetStoreFacade petStore;
+
+	@Autowired
+	private MainFacade mainFacade;
+	
 	@Autowired
 	public void setPetStore(PetStoreFacade petStore) {
 		this.petStore = petStore;
@@ -74,10 +86,18 @@ public class TeacherLoginController {
 			model.addAttribute("size", size_of_list);
 			
 			model.addAttribute("teacherSession", teacherSession);
+			
+
+			List<Class> endingSoonList = mainFacade.endingSoon();
+			List<Class> bestClassList = mainFacade.bestClass();
+			model.addAttribute("endingSoonList", endingSoonList);
+			model.addAttribute("bestClassList", bestClassList);
+			
+			
 			if (forwardAction != null) 
 				return new ModelAndView("redirect:" + forwardAction);
 			else 
-				return new ModelAndView("thyme/admin_user_list");
+				return new ModelAndView("thyme/main");
 		}
 	}
 	
