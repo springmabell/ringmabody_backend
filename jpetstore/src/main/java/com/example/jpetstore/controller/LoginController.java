@@ -55,7 +55,7 @@ public class LoginController {
 			if (forwardAction != null) 
 				return new ModelAndView("redirect:" + forwardAction);
 			else 
-				return new ModelAndView("thyme/ViewClassList");
+				return new ModelAndView("thyme/ViewDetailClass");
 		}
 	}
 	

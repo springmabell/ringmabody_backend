@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="UTF-8">
+	<title>로그인</title>
+  	<link rel="stylesheet" href="/style/login.css" type="text/css" />
+</head>
+<body>
+	<div class="main-container">
+		<div class="main-wrap">
+            <header>
+                <div class="logo-wrap">
+                    <b>SpringMaBell</b>
+                </div>
+            </header>
+            <section class="login-input-section-wrap" >
+            	<form action="" th:action="@{/teacher/login.do}" method="post">
+            	    <!-- signonForwardAction 설정 해줘야함 -->
+            	    
+	                <div class="login-input-wrap">	
+	                    <input placeholder="아이디" type="text" name="teacher_id" size="30" value="teacher001"></input>
+	                </div>
+	                <div class="login-input-wrap password-wrap">	
+	                    <input placeholder="비밀번호" type="password" name="teacher_pwd" size="30" value="pwd001001"></input>
+	                </div>
+	                <div class="login-button-wrap">
+	                    <a href="#"><button>로그인</button></a>
+	                </div>
+                </form>
+            </section>
+            <section class="Easy-sgin-in-wrap">
+                <div class="find_info">
+                    <a class="forget-msg" href="" th:href="@{/user/joinUserAgreeForm.do}">일반 회원가입</a>
+                    <span class="bar" aria-hidden="true">|</span>
+                    <a class="forget-msg" href="" th:href="@{/user/joinTeacherAgreeForm.do}">강사 회원가입</a>
+				</div>
+            </section>
+            <footer>
+            </footer>
+		</div>
+	</div>
+<script src="https://kit.fontawesome.com/51db22a717.js" crossorigin="anonymous"></script>
+</body>
+</html>
