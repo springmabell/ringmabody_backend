@@ -1,6 +1,8 @@
 package com.example.jpetstore.controller;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.support.PagedListHolder;
 import org.springframework.stereotype.Controller;
@@ -52,6 +54,7 @@ public class LoginController {
 			@RequestParam("username") String username,
 			@RequestParam("password") String password,
 			@RequestParam(value="forwardAction", required=false) String forwardAction,
+			HttpSession session,
 			Model model) throws Exception {
 		
 		
@@ -64,6 +67,10 @@ public class LoginController {
 			UserSession userSession = new UserSession(account);
 			
 			model.addAttribute("userSession", userSession);
+			model.addAttribute("name", userSession.getAccount().getUser_name());
+			
+			session.setAttribute("userSession", userSession);
+			
 			if (forwardAction != null) 
 				return new ModelAndView("redirect:" + forwardAction);
 			else 

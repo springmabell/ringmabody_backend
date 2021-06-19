@@ -3,6 +3,7 @@ package com.example.jpetstore.controller;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -68,6 +69,7 @@ public class TeacherLoginController {
 			@RequestParam("teacher_id") String teacher_id,
 			@RequestParam("teacher_pwd") String teacher_pwd,
 			@RequestParam(value="forwardAction", required=false) String forwardAction,
+			HttpSession session,
 			Model model) throws Exception {
 		
 		
@@ -86,6 +88,9 @@ public class TeacherLoginController {
 			model.addAttribute("size", size_of_list);
 			
 			model.addAttribute("teacherSession", teacherSession);
+			model.addAttribute("name", teacherSession.getAccount().getTeacher_name());
+			
+			session.setAttribute("teacherSession", teacherSession);
 			
 
 			List<Class> endingSoonList = mainFacade.endingSoon();

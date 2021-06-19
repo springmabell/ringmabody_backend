@@ -166,7 +166,9 @@
 	                </div>
 	            </div>
 	        </div>
-	        <a class="btn" href="#" th:href="@{/class/writeClass}" style="float:right;color:white;background-color: rgb(123, 227, 251);border:none;">클래스 등록</a>
+	        <!-- <div th:if="${usertype}.toString().equals('teacher')"> -->
+	        	<a class="btn" href="#" th:href="@{/class/writeClass}" style="float:right;color:white;background-color: rgb(123, 227, 251);border:none;">클래스 등록</a>
+	    	<!-- </div> -->
 	    	<br/><br/>
 	    	<div style="display: block; text-align: center;">		
 	</div>

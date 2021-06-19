@@ -14,6 +14,7 @@ import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -86,12 +87,18 @@ public class ClassController {
 
 	@PostMapping("/viewList")
 	public String filteringClass(@ModelAttribute(value = "filtering") Filtering filtering, Model model,
-			HttpServletResponse response) {
+			HttpServletResponse response, HttpSession session) {
 		response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate"); // HTTP 1.1.
 		response.setHeader("Pragma", "no-cache"); // HTTP 1.0.
 		response.setHeader("Expires", "0"); // Proxies.
 
 		List<Class> classList = classFacade.filteringClass(filtering);
+		
+		if(session.getAttribute("userSession") != null){
+			model.addAttribute("usertype", "user");
+		} else if(session.getAttribute("teacherSession") != null){
+			model.addAttribute("usertype", "teacher");
+		}
 
 		model.addAttribute("classList", classList);
 
