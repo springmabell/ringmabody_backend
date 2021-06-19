@@ -80,7 +80,9 @@ public interface PetStoreFacade {
 
 	void updateTeacherAccount(TeacherAccount account);
 
-
+	List<Review> getAllReviews();
+	
+	List<Review> getReviews(String username);
 
 
 
