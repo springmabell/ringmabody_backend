@@ -4,7 +4,7 @@
 <mapper namespace="com.example.jpetstore.dao.mybatis.mapper.MainMapper">
   <cache />
 	<!-- 오늘날짜보다 큰 마감일 클래스들 중에서 가장 작은 클래스들 3개(마감임박 클래스들) -->
-	<select id="endingSoon" resultType="hello.spring.domain.Class">
+	<select id="endingSoon" resultType="com.example.jpetstore.domain.Class">
 		<![CDATA[
 		SELECT * FROM
 		(SELECT ROWNUM AS NUM, C.* FROM
@@ -17,7 +17,7 @@
 	</select>
 	
 	<!-- 	오늘날짜와 마감일까지의 남은 일수가 7일 이하인 클래스들 중에서 조회수가 높은 상위 클래스 3개 -->
-	<select id="bestClass" resultType="hello.spring.domain.Class">
+	<select id="bestClass" resultType="com.example.jpetstore.domain.Class">
 		<![CDATA[
 		SELECT * FROM
 		(SELECT ROWNUM AS NUM, C.* FROM

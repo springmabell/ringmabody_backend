@@ -41,24 +41,22 @@ import com.example.jpetstore.service.SchedulerFacade;
 import com.example.jpetstore.domain.Category;
 import com.example.jpetstore.domain.Class;
 import com.example.jpetstore.domain.Filtering;
-import com.example.jpetstore.domain.Foo;
 import com.example.jpetstore.domain.PagingVO;
-import com.example.jpetstore.domain.RequestModel;
-import com.example.jpetstore.domain.User;
-
 
 @Controller
 @RequestMapping("/class")
 @SessionAttributes("newClass")
 public class ClassController {
 
-	private static final Logger LOGGER = LoggerFactory.getLogger(ClassController.class);
-
+	/*
+	 * private static final Logger LOGGER =
+	 * LoggerFactory.getLogger(ClassController.class);
+	 */
 	@Autowired
 	private ClassFacade classFacade;
 
 	@Autowired
-	private SchedulerFacade schedulerFacade; // ½ºÄÉÁÙ·¯ ¼­ºñ½º ÀÎÅÍÆäÀÌ½º
+	private SchedulerFacade schedulerFacade; // ìŠ¤ì¼€ì¤„ëŸ¬ ì„œë¹„ìŠ¤ ì¸í„°í˜ì´ìŠ¤
 
 	@ModelAttribute("newClass")
 	public Class newClass() {
@@ -75,8 +73,8 @@ public class ClassController {
 	@ModelAttribute("localList")
 	public String[] getLocalList() {
 
-		return new String[] { "¼­¿ï", "°æ±â", "°­¿ø", "Ãæ³²", "ÃæºÏ", "Àü³²", "ÀüºÏ", "°æ³²", "°æºÏ", "ºÎ»ê", "´ë±¸", "ÀÎÃµ", "±¤ÁÖ", "¼¼Á¾", "´ëÀü",
-				"¿ï»ê", "Á¦ÁÖ" };
+		return new String[] { "ì„œìš¸", "ê²½ê¸°", "ê°•ì›", "ì¶©ë‚¨", "ì¶©ë¶", "ì „ë‚¨", "ì „ë¶", "ê²½ë‚¨", "ê²½ë¶", "ë¶€ì‚°", "ëŒ€êµ¬", "ì¸ì²œ", "ê´‘ì£¼", "ì„¸ì¢…", "ëŒ€ì „",
+				"ìš¸ì‚°", "ì œì£¼" };
 
 	}
 
@@ -99,7 +97,7 @@ public class ClassController {
 		return "thyme/viewList";
 	}
 
-	// Å¬·¡½º °Ô½ÃÆÇ ¸ñ·Ï
+	// í´ë˜ìŠ¤ ê²Œì‹œíŒ ëª©ë¡
 	@GetMapping("/viewList")
 	public String viewClassList(Model model, @RequestParam(required = false) String keyword,
 			@RequestParam(required = false) String nowPage, HttpServletResponse response) {
@@ -147,7 +145,7 @@ public class ClassController {
 		return "thyme/viewList";
 	}
 
-	// viewList¿¡¼­ ÀÌ¹ÌÁö Å¬¸¯ ½Ã ±×¿¡ ÇØ´çÇÏ´Â detail view·Î ÀÌµ¿
+	// viewListì—ì„œ ì´ë¯¸ì§€ í´ë¦­ ì‹œ ê·¸ì— í•´ë‹¹í•˜ëŠ” detail viewë¡œ ì´ë™
 	@GetMapping("/viewClass/{class_id}")
 	public String viewClass(@PathVariable("class_id") int class_id, Model model) {
 		Class findClass = classFacade.findClass(class_id);
@@ -156,22 +154,23 @@ public class ClassController {
 		return "thyme/detail";
 	}
 
-	//Å¬·¡½º »èÁ¦
+	// í´ë˜ìŠ¤ ì‚­ì œ
 	@GetMapping("/deleteClass")
 	public String deleteClass(@RequestParam("class_id") int class_id) {
 		classFacade.deleteClass(class_id);
 		return "redirect:/class/viewList";
 	}
-	
-	// Å¬·¡½º Æû ÀÛ¼º get
+
+	// í´ë˜ìŠ¤ í¼ ì‘ì„± get
 	@GetMapping("/writeClass")
 	public String writeClass() {
 		return "thyme/ClassForm";
 	}
 
-	// Å¬·¡½º Æû ÀÛ¼º post
+	// í´ë˜ìŠ¤ í¼ ì‘ì„± post
 	@PostMapping("/writeClass")
-	public String insertClass(@Valid Class newClass, BindingResult result, SessionStatus status, HttpServletRequest request) {
+	public String insertClass(@Valid Class newClass, BindingResult result, SessionStatus status,
+			HttpServletRequest request) {
 		if (result.hasErrors()) {
 			return "thyme/ClassForm";
 		}
@@ -185,7 +184,7 @@ public class ClassController {
 		DateFormat format = new SimpleDateFormat("yyyy/MM/dd");
 		String edate = format.format(newClass.getEdate());
 
-		// ¼±ÅÃÇÑ ¸¶°¨ÀÏ±îÁö ½ÅÃ»°¡´ÉÇÏ°í ÇÏ·ç µÚºÎÅÍ ½ÅÃ»¹öÆ° ºñÈ°¼ºÈ­·Î º¯°æÇÏ±â À§ÇÑ ÄÚµå
+		// ì„ íƒí•œ ë§ˆê°ì¼ê¹Œì§€ ì‹ ì²­ê°€ëŠ¥í•˜ê³  í•˜ë£¨ ë’¤ë¶€í„° ì‹ ì²­ë²„íŠ¼ ë¹„í™œì„±í™”ë¡œ ë³€ê²½í•˜ê¸° ìœ„í•œ ì½”ë“œ
 		try {
 			Date eDate = format.parse(edate);
 			Calendar c = Calendar.getInstance();
@@ -207,16 +206,16 @@ public class ClassController {
 	}
 
 	private String uploadFile(MultipartFile report, HttpServletRequest request) {
-//		uuid »ı¼º(Universal Unique IDentifier, ¹ü¿ë °íÀ¯ ½Äº°ÀÚ)
+//		uuid ìƒì„±(Universal Unique IDentifier, ë²”ìš© ê³ ìœ  ì‹ë³„ì)
 		UUID uuid = UUID.randomUUID();
-//		·£´ı»ı¼º + ÆÄÀÏÀÌ¸§ ÀúÀå
+//		ëœë¤ìƒì„± + íŒŒì¼ì´ë¦„ ì €ì¥
 		String savedName = uuid.toString() + "_" + report.getOriginalFilename();
 		/*
 		 * String storagePath =
-		 * "C:\\Users\\Á¤ÈÄ\\Documents\\sosigae\\springmabell\\src\\main\\resources\\static\\images\\";
+		 * "C:\\Users\\ì •í›„\\Documents\\sosigae\\springmabell\\src\\main\\resources\\static\\images\\";
 		 */
 		String storagePath = request.getServletContext().getRealPath("resources/images/" + savedName);
-//		ÀÓ½Ãµğ·ºÅä¸®¿¡ ÀúÀåµÈ ¾÷·ÎµåµÈ ÆÄÀÏÀ» ÁöÁ¤µÈ µğ·ºÅä¸®·Î º¹»ç
+//		ì„ì‹œë””ë ‰í† ë¦¬ì— ì €ì¥ëœ ì—…ë¡œë“œëœ íŒŒì¼ì„ ì§€ì •ëœ ë””ë ‰í† ë¦¬ë¡œ ë³µì‚¬
 		File file = new File(storagePath);
 		try {
 			report.transferTo(file);
@@ -226,8 +225,14 @@ public class ClassController {
 		return savedName;
 	}
 
-
-	  
+	/*
+	 * @GetMapping("/practice") public String practice(HttpServletRequest request)
+	 * {String imagePath =
+	 * request.getServletContext().getRealPath("resources/images/golf1.jpg"); String
+	 * imagePath = request.getServletContext().getRealPath("resources/image/" +
+	 * imageName + "." + extension); System.out.println(imagePath); return
+	 * "practice"; }
+	 */
 	/*
 	 * @PostMapping(value="/practice") public @ResponseBody String updateChkBox (
 	 * HttpServletRequest request,
@@ -244,5 +249,5 @@ public class ClassController {
 	 * 
 	 * return "viewList"; }
 	 */
-	 
+
 }
