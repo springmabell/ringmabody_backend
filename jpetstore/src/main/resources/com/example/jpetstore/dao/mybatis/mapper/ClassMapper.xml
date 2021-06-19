@@ -58,13 +58,6 @@
 	</update>	 -->
 	
 	
-	<!-- class_id 이용해서 class 객체 반환하기 -->
-	<select id="findClass"  parameterType="int" resultType="hello.spring.domain.Class">
-		SELECT C.*, CAT.NAME AS categoryName
-	 	FROM CLASS C, CATEGORY CAT
-	 	WHERE C.CLASS_ID = #{class_id} AND C.CATEGORY_ID = CAT.CATEGORY_ID
-	</select>
-	
 	<!-- 작성한 클래스 class 테이블에 삽입하기 -->
 	<select id="findClass"  parameterType="int" resultType="com.example.jpetstore.domain.Class">
 		SELECT c.*, ta.TEACHER_NAME AS teacher_name, ta.TEACHER_DESC AS teacher_desc FROM
@@ -100,6 +93,35 @@
 		IMG = #{img, jdbcType=VARCHAR}
 		WHERE CLASS_ID = #{class_id} 
 	</update>
+	
+	<!-- 장바구니 담겼는지 확인 -->
+	<select id="existCart" parameterType="com.example.jpetstore.domain.Cart" resultType="int">
+		SELECT COUNT(*) FROM CARTITEM
+		WHERE USER_ID = #{user_id} AND CLASS_ID = #{class_id}
+	</select>
+	
+	<!-- 장바구니에 추가 -->
+	<insert id="insertCartItem" parameterType="com.example.jpetstore.domain.Cart">
+		INSERT INTO CARTITEM (USER_ID, CLASS_ID) 
+		VALUES(#{user_id, jdbcType=VARCHAR}, #{class_id})
+	</insert>
+	
+	<!-- 장바구니 정보와 class 정보 join 해서 cart html 에 정보보여주기 -->
+	<select id="findCartList" parameterType="String" resultType="com.example.jpetstore.domain.CartCommand">
+		SELECT CI.USER_ID AS user_id , CI.CLASS_ID AS class_id, C.TEACHER_ID AS "findClass.teacher_id", C.CLASS_ID AS "findClass.class_id", C.PRICE AS "findClass.price", C.TITLE AS "findClass.title", C.IMG AS "findClass.img"
+		FROM CARTITEM CI, CLASS C
+		WHERE CI.CLASS_ID = C.CLASS_ID 
+		<if test="value != null">
+			AND CI.USER_ID = #{value}
+		</if> 
+		ORDER BY CI.CLASS_ID
+	</select>
+
+	<!-- 장바구니 삭제하기 -->
+	<delete id="deleteCart" parameterType="com.example.jpetstore.domain.Cart">
+		DELETE FROM CARTITEM
+		WHERE USER_ID = #{user_id} AND CLASS_ID = #{class_id}
+	</delete>
 	
 	<!-- 클래스 delete -->
 	<delete id="deleteClass" parameterType="int">

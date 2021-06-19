@@ -9,6 +9,8 @@ import org.springframework.stereotype.Repository;
 
 import com.example.jpetstore.dao.ClassDao;
 import com.example.jpetstore.dao.mybatis.mapper.ClassMapper;
+import com.example.jpetstore.domain.Cart;
+import com.example.jpetstore.domain.CartCommand;
 import com.example.jpetstore.domain.Category;
 import com.example.jpetstore.domain.Class;
 import com.example.jpetstore.domain.Filtering;
@@ -76,6 +78,30 @@ public class MybatisClassDao implements ClassDao{
 	public void deleteClass(int class_id) throws DataAccessException {
 		// TODO Auto-generated method stub
 		classMapper.deleteClass(class_id);
+	}
+	
+	@Override
+	public int existCart(Cart cart) throws DataAccessException {
+		// TODO Auto-generated method stub
+		return classMapper.existCart(cart);
+	}
+
+	@Override
+	public void insertCartItem(Cart cart) throws DataAccessException {
+		// TODO Auto-generated method stub
+		classMapper.insertCartItem(cart);
+	}
+
+	@Override
+	public List<CartCommand> findCartList(String user_id) throws DataAccessException {
+		// TODO Auto-generated method stub
+		return classMapper.findCartList(user_id);
+	}
+
+	@Override
+	public void deleteCart(Cart cart) throws DataAccessException {
+		// TODO Auto-generated method stub
+		classMapper.deleteCart(cart);
 	}
 
 }
