@@ -56,7 +56,7 @@ public class TeacherLoginController {
 			if (forwardAction != null) 
 				return new ModelAndView("redirect:" + forwardAction);
 			else 
-				return new ModelAndView("thyme/login");
+				return new ModelAndView("thyme/admin_user_list");
 		}
 	}
 	
