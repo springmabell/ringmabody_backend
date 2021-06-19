@@ -18,6 +18,7 @@ public class Review implements Serializable{
 	  private String review_img;
 	  private int review_hit;
 	  
+	  
 	public int getReview_id() {
 		return review_id;
 	}

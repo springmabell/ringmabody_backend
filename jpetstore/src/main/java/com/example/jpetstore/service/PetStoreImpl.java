@@ -40,7 +40,6 @@ public class PetStoreImpl implements PetStoreFacade {
 	private UserAccountDao userAccountDao;
 	@Autowired
 	private ReviewDao reviewDao;
-	
 
 	//-------------------------------------------------------------------------
 	// Operation methods, implementing the PetStoreFacade interface

@@ -11,12 +11,6 @@ import com.example.jpetstore.domain.Review;
 import com.example.jpetstore.domain.TeacherAccount;
 import com.example.jpetstore.domain.UserAccount;
 
-/**
- * JPetStore's central business interface.
- *
- * @author Juergen Hoeller
- * @since 30.11.2003
- */
 public interface PetStoreFacade {
 
 	Account getAccount(String username);
