@@ -51,5 +51,11 @@ public class MybatisTeacherAccountDao implements TeacherAccountDao {
 //			accountMapper.updateSignon(account);
 //		}
 	}
+
+	@Override
+	public List<TeacherAccount> getAllClass() throws DataAccessException {
+		// TODO Auto-generated method stub
+		return teacherAccountMapper.getAllClass();
+	}
 	
 }

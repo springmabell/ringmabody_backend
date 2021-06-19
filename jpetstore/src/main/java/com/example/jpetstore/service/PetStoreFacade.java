@@ -61,6 +61,8 @@ public interface PetStoreFacade {
 	
 	List<UserAccount> getAllUserAccount();
 	
+	List<TeacherAccount> getAllClass();
+	
 	UserAccount getUserAccount(String username);
 	
 	UserAccount getUserAccount(String username, String password);
@@ -77,6 +79,8 @@ public interface PetStoreFacade {
 	void insertTeacherAccount(TeacherAccount account);
 
 	void updateTeacherAccount(TeacherAccount account);
+
+
 
 
 

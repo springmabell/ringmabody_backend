@@ -42,5 +42,7 @@ public interface TeacherAccountMapper {
   
   void updateTeacherAccount(TeacherAccount account);
 
+  List<TeacherAccount> getAllClass();
+
 
 }

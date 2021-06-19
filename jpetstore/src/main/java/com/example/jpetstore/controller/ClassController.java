@@ -95,7 +95,7 @@ public class ClassController {
 
 		model.addAttribute("classList", classList);
 
-		return "thyme/viewList";
+		return "thyme/ViewClassList";
 	}
 
 	// 클래스 게시판 목록
@@ -143,7 +143,7 @@ public class ClassController {
 		model.addAttribute("paging", vo);
 		model.addAttribute("classList", classList);
 
-		return "thyme/viewList";
+		return "thyme/ViewClassList";
 	}
 
 	// viewList에서 이미지 클릭 시 그에 해당하는 detail view로 이동
@@ -152,7 +152,7 @@ public class ClassController {
 		Class findClass = classFacade.findClass(class_id);
 		classFacade.plusHit(class_id);
 		model.addAttribute("findClass", findClass);
-		return "thyme/detail";
+		return "thyme/ViewDetailClass";
 	}
 
 	// 클래스 삭제

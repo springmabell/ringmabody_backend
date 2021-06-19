@@ -37,6 +37,7 @@ public class PetStoreImpl implements PetStoreFacade {
 	@Autowired
 	private UserAccountDao userAccountDao;
 	
+	
 
 	//-------------------------------------------------------------------------
 	// Operation methods, implementing the PetStoreFacade interface
@@ -113,6 +114,11 @@ public class PetStoreImpl implements PetStoreFacade {
 		return teacherAccountDao.getAllTeacherAccount();
 	};
 	
+	public List<TeacherAccount> getAllClass() {
+		// TODO Auto-generated method stub
+		return teacherAccountDao.getAllClass();
+	}
+	
 	public List<UserAccount> getAllUserAccount() {
 		return userAccountDao.getAllUserAccount();
 	};
@@ -156,4 +162,5 @@ public class PetStoreImpl implements PetStoreFacade {
 		// TODO Auto-generated method stub
 		teacherAccountDao.updateTeacherAccount(account);
 	}
+
 }

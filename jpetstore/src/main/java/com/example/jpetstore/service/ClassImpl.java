@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.example.jpetstore.dao.ClassDao;
+import com.example.jpetstore.domain.Cart;
+import com.example.jpetstore.domain.CartCommand;
 import com.example.jpetstore.domain.Category;
 import com.example.jpetstore.domain.Class;
 import com.example.jpetstore.domain.Filtering;
@@ -70,5 +72,28 @@ public class ClassImpl implements ClassFacade{
 	public void deleteClass(int class_id) {
 		// TODO Auto-generated method stub
 		classDao.deleteClass(class_id);
+	}
+	@Override
+	public int existCart(Cart cart) {
+		// TODO Auto-generated method stub
+		return classDao.existCart(cart);
+	}
+
+	@Override
+	public void insertCartItem(Cart cart) {
+		// TODO Auto-generated method stub
+		classDao.insertCartItem(cart);
+	}
+
+	@Override
+	public List<CartCommand> findCartList(String user_id) {
+		// TODO Auto-generated method stub
+		return classDao.findCartList(user_id);
+	}
+
+	@Override
+	public void deleteCart(Cart cart) {
+		// TODO Auto-generated method stub
+		classDao.deleteCart(cart);
 	}
 }

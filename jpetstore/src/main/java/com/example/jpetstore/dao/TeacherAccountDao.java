@@ -8,6 +8,8 @@ import com.example.jpetstore.domain.TeacherAccount;
 public interface TeacherAccountDao {
 	
   List<TeacherAccount> getAllTeacherAccount() throws DataAccessException;
+  
+  List<TeacherAccount> getAllClass() throws DataAccessException;
 
   TeacherAccount getTeacherAccount(String teacher_id);
 

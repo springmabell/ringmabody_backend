@@ -60,15 +60,6 @@
 </head>
 <body>
 <div>
-<<<<<<< HEAD
-=======
-
-        <header id="wrapper">
-        <div class="logo-wrap">
-            <b>SpringMaBell</b><br />
-        </div>
-    </header>
->>>>>>> d295f553c654699841363203db602a9f9811a67d
     <div class="container" style="margin-bottom:100px;">
         <form th:action="@{/class/viewList}" th:object="${filtering}" method="post"><!-- th:action="@{/class/viewList}"  -->
             <table class="table mb-4">
@@ -181,13 +172,13 @@
 	</div>
 	    	<nav>
 			  <ul class="pagination  justify-content-center">
-			    <li class="page-item">
+			 <!--    <li class="page-item">
 				<span th:if="${paging.startPage != 1}">
 			      <a class="page-link" th:href="@{/class/viewList(nowPage=${paging.startPage - 1})}" aria-label="Previous">
 			        <span aria-hidden="true">&laquo;</span>
 			      </a>
 			    </span>
-			    </li>
+			    </li> -->
 			    <li class="page-item" th:each="p: ${#numbers.sequence(paging.startPage, paging.endPage)}">
 			    	<span th:if="${p == paging.nowPage}">
 			    		<a class="page-link" th:text="${paging.nowPage}"></a>
@@ -196,13 +187,13 @@
 			    		<a th:href="@{/class/viewList(nowPage=${p})}" class="page-link" th:text="${p}"></a>
 			    	</span>
 			    </li>
-			    <li class="page-item">
+			  <!--   <li class="page-item">
 			    <span th:if="${paging.endPage != paging.lastPage}">
 			      <a class="page-link" href="#" aria-label="Next">
 			        <span aria-hidden="true">&raquo;</span>
 			      </a>
 			     </span>
-			    </li>
+			    </li> -->
 			  </ul>
 			</nav>
 	    </div>

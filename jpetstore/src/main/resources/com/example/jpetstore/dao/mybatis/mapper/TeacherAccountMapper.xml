@@ -20,7 +20,25 @@
     FROM TEACHERACCOUNT
   </select>
   
-      <select id="getTeacherAccountByTeacher_id" resultType="TeacherAccount">
+  
+  <select id="getTeacherAccountByTeacher_id" resultType="TeacherAccount">
+    SELECT TEACHERACCOUNT.TEACHER_ID,
+    	   TEACHERACCOUNT.TEACHER_PWD,
+    	   TEACHERACCOUNT.TEACHER_NAME,
+    	   TEACHERACCOUNT.TEACHER_IMG,
+    	   TEACHERACCOUNT.EMAIL,
+    	   TEACHERACCOUNT.PHONENUM,
+    	   TEACHERACCOUNT.USER_TYPE,
+    	   TEACHERACCOUNT.BELONG,
+    	   TEACHERACCOUNT.CAREER,
+    	   TEACHERACCOUNT.WEBSITE,
+    	   TEACHERACCOUNT.TEACHER_DESC,
+    	   TEACHERACCOUNT.REGISTER_DATE
+    FROM TEACHERACCOUNT
+    WHERE TEACHERACCOUNT.TEACHER_ID = #{param1}
+  </select>
+  
+    <select id="getTeacherAccountByTeacher_idAndTeacher_pwd" resultType="TeacherAccount">
     SELECT TEACHERACCOUNT.TEACHER_ID,
     	   TEACHERACCOUNT.TEACHER_PWD,
     	   TEACHERACCOUNT.TEACHER_NAME,
