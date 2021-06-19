@@ -20,7 +20,7 @@
             </div>
             <div class="header_nav_logo_right">
                 <div class="header_nav_login">
-                    <a href="">김프링 회원님</a>
+                    <a href=""><span th:text="${user.user_name}">김프링</span>회원님</a>
                     <i class="fas fa-chevron-down"></i>
                 </div>
             </div>
@@ -32,7 +32,7 @@
             <div class="menu">
                 <ul class="menu_list">
                     <li><a href="" th:href="@{info.do}">개인정보 관리</a></li>
-                    <li><a href="">결제한 내역</a></li>
+                    <li><a href="" th:href="@{purchase.do}">결제한 내역</a></li>
                     <li><a href="">스크랩</a></li>
                     <li><a href="" th:href="@{review.do}">작성한 리뷰</a></li>
                 </ul>
@@ -44,7 +44,7 @@
                             <div>결제한 내역</div>
                         </div>
                         <div class="count_wrap">
-                            <div class="total_count">총 2개</div>
+                            <div class="total_count">총<span th:text="${size}">4</span>개</div>
                         </div>
                     </div>
 
@@ -56,34 +56,26 @@
 
                                     <!--게시글 리스트-->
                                     <div class="post_list">
-                                        <div class='detail_box'>
-                                            <img class='detail_img' src="../img/yoga.jpg"><br></img>
+                                    
+                                     <div class="review_box" th:each="review, iterStat : ${review}">
+                                            <p class="review_rate" th:text="${review.review_rating}">5</p>
+                                            <p class="review_title" th:text="${review.review_title}">너무 좋아요 강력추천</p>
+                                            <p class="review_date" th:text="${review.review_date}">2021.04.05</p>
+                                            <p class="review_rec" th:text="${review.review_like}">2</p>
+                                        </div>
+                                        
+                                        <div class='detail_box' th:each="order, iterStat : ${order}">
+                                            <img class='detail_img' src="/images/yoga.jpg"><br></img>
                                             <div class="detail_title_box">
                                                 <p class='detail_title'>필라테스 함께해요~ 바른 자세 만들어요</p>
                                                 <p class='detail_info detail_category'><i class="fas fa-tag"></i>&nbsp;요가/필라테스</p>
                                                 <p class='detail_info detail_time'><i class="far fa-calendar-alt"></i>&nbsp;2021-04-10 pm02:00</p>
                                                 <p class='detail_info detail_location'><i class="fas fa-map-marker-alt"></i>&nbsp;서울 강남구 봉은사로38길 12 3층</p>
                                                 <p class='detail_info detail_people'><i class="fas fa-user"></i>&nbsp;5명 (최소인원 2명)</p>
-                                                <p class='detail_info detail_value'><i class="fas fa-won-sign"></i>&nbsp;15,000</p>
+                                                <p class='detail_info detail_value'><i class="fas fa-won-sign"></i><span th:text="${order.total_price}">&nbsp;15,000</span></p>
                                             </div>
                                             <div class="detail_pay_box">
-                                                <p class='pay_date'>결제일 2021-04-05</p>
-                                                <p class='review_button'>리뷰 작성</p>
-                                            </div>
-                                        </div>
-
-                                        <div class='detail_box'>
-                                            <img class='detail_img' src="../img/zumba.jpg"><br></img>
-                                            <div class="detail_title_box">
-                                                <p class='detail_title'>지방 털기 끝판왕!!! 줌바 수업에 참여하세요</p>
-                                                <p class='detail_info detail_category'><i class="fas fa-tag"></i>&nbsp;줌바/스피닝</p>
-                                                <p class='detail_info detail_time'><i class="far fa-calendar-alt"></i>&nbsp;2021-05-09 am11:00</p>
-                                                <p class='detail_info detail_location'><i class="fas fa-map-marker-alt"></i>&nbsp;서울 강남구 봉은사로38길 12 3층</p>
-                                                <p class='detail_info detail_people'><i class="fas fa-user"></i>&nbsp;9명 (최소인원 2명)</p>
-                                                <p class='detail_info detail_value'><i class="fas fa-won-sign"></i>&nbsp;20,000</p>
-                                            </div>
-                                            <div class="detail_pay_box">
-                                                <p class='pay_date'>결제일 2021-05-01</p>
+                                                <p class='pay_date'>결제일 <span th:text="${#dates.format(order.order_date, 'yyyy-MM-dd')}">2021-04-05</span></p>
                                                 <p class='review_button'>리뷰 작성</p>
                                             </div>
                                         </div>

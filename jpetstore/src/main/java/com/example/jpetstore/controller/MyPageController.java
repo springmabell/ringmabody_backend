@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
+import com.example.jpetstore.domain.Order;
 import com.example.jpetstore.domain.Review;
 import com.example.jpetstore.domain.UserAccount;
 import com.example.jpetstore.service.PetStoreFacade;
@@ -35,7 +36,7 @@ public class MyPageController {
 	}
 	
 	@RequestMapping(value="/review.do", method=RequestMethod.GET)
-	public String Request(ModelMap model, @PathVariable String user_id) throws Exception {
+	public String ReviewRequest(ModelMap model, @PathVariable String user_id) throws Exception {
 		UserAccount user = this.petStore.getUserAccount(user_id);
 		List<Review> review = this.petStore.getReviews(user_id);
 		int size_of_list = review.size();
@@ -47,4 +48,18 @@ public class MyPageController {
 		return "thyme/my_review";
 	}
 	
+	@RequestMapping(value="/purchase.do", method=RequestMethod.GET)
+	public String PurchaseRequest(ModelMap model, @PathVariable String user_id) throws Exception {
+		UserAccount user = this.petStore.getUserAccount(user_id);
+		List<Order> orders = this.petStore.getOrdersByUsername(user_id);
+//		Order order = this.petStore.getOrderByUsername(user_id);
+//		Class class_ = this.petStore.getClassId(order);
+		int size_of_list = orders.size();
+		
+		model.put("user", user);
+		model.put("order", orders);
+		model.put("size", size_of_list);
+		
+		return "thyme/my_purchase";
+	}
 }
