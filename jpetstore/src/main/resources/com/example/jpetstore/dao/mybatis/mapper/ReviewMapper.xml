@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.example.jpetstore.dao.mybatis.mapper.ReviewMapper">
+  <cache />
+ 
+	 <select id="getReviewsByUsername" resultType="Review">
+		SELECT REVIEW.REVIEW_ID,
+	    	   REVIEW.CLASS_ID,
+	    	   REVIEW.REVIEW_DATE,
+	    	   REVIEW.USER_ID,
+	    	   REVIEW.REVIEW_TITLE,
+	    	   REVIEW.REVIEW_CONTENT,
+	    	   REVIEW.REVIEW_LIKE,
+	    	   REVIEW.REVIEW_RATING,
+	    	   REVIEW.REVIEW_IMG,
+	    	   REVIEW.REVIEW_HIT
+	   	FROM REVIEW
+	    WHERE REVIEW.USER_ID = #{username}
+	 </select>
+	 
+	 <select id="getAllReviews" resultType="Review">
+	    SELECT REVIEW.REVIEW_ID,
+	    	   REVIEW.CLASS_ID,
+	    	   REVIEW.REVIEW_DATE,
+	    	   REVIEW.USER_ID,
+	    	   REVIEW.REVIEW_TITLE,
+	    	   REVIEW.REVIEW_CONTENT,
+	    	   REVIEW.REVIEW_LIKE,
+	    	   REVIEW.REVIEW_RATING,
+	    	   REVIEW.REVIEW_IMG,
+	    	   REVIEW.REVIEW_HIT
+	    FROM REVIEW
+  	</select>
+ 
+ </mapper>
