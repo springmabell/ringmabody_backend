@@ -57,6 +57,13 @@
     	 WHERE CLASS_ID = #{class_id}
 	</update>	 -->
 	
+
+	<!-- class_id 이용해서 class 객체 반환하기 -->
+<!-- 	<select id="findClass"  parameterType="int" resultType="hello.spring.domain.Class">
+		SELECT C.*, CAT.NAME AS categoryName
+	 	FROM CLASS C, CATEGORY CAT
+	 	WHERE C.CLASS_ID = #{class_id} AND C.CATEGORY_ID = CAT.CATEGORY_ID
+	</select> -->
 	
 	<!-- 작성한 클래스 class 테이블에 삽입하기 -->
 	<select id="findClass"  parameterType="int" resultType="com.example.jpetstore.domain.Class">
