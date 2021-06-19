@@ -39,7 +39,6 @@ public class MybatisTeacherAccountDao implements TeacherAccountDao {
 		// TODO Auto-generated method stub
 		return teacherAccountMapper.getTeacherAccountByTeacher_idAndTeacher_pwd(teacher_id, teacher_pwd);
 	}
-	
 
 	public void insertTeacherAccount(TeacherAccount account) throws DataAccessException {
 		teacherAccountMapper.insertTeacherAccount(account);

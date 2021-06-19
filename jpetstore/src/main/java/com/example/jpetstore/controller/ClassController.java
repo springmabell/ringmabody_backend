@@ -41,12 +41,9 @@ import com.example.jpetstore.service.SchedulerFacade;
 import com.example.jpetstore.domain.Category;
 import com.example.jpetstore.domain.Class;
 import com.example.jpetstore.domain.Filtering;
-import com.example.jpetstore.domain.Foo;
 import com.example.jpetstore.domain.PagingVO;
-import com.example.jpetstore.domain.RequestModel;
-import com.example.jpetstore.domain.User;
 
-
+import com.example.jpetstore.domain.PagingVO;
 @Controller
 @RequestMapping("/class")
 @SessionAttributes("newClass")
@@ -54,11 +51,15 @@ public class ClassController {
 
 	private static final Logger LOGGER = LoggerFactory.getLogger(ClassController.class);
 
+	/*
+	 * private static final Logger LOGGER =
+	 * LoggerFactory.getLogger(ClassController.class);
+	 */
 	@Autowired
 	private ClassFacade classFacade;
 
 	@Autowired
-	private SchedulerFacade schedulerFacade; // �����ٷ� ���� �������̽�
+	private SchedulerFacade schedulerFacade; // 스케줄러 서비스 인터페이스
 
 	@ModelAttribute("newClass")
 	public Class newClass() {
@@ -74,10 +75,8 @@ public class ClassController {
 
 	@ModelAttribute("localList")
 	public String[] getLocalList() {
-
-		return new String[] { "����", "���", "����", "�泲", "���", "����", "����", "�泲", "���", "�λ�", "�뱸", "��õ", "����", "����", "����",
-				"���", "����" };
-
+		return new String[] { "서울", "경기", "강원", "충남", "충북", "전남", "전북", "경남", "경북", "부산", "대구", "인천", "광주", "세종", "대전",
+				"울산", "제주" };
 	}
 
 	@ModelAttribute("filtering")
@@ -99,7 +98,7 @@ public class ClassController {
 		return "thyme/viewList";
 	}
 
-	// Ŭ���� �Խ��� ���
+	// 클래스 게시판 목록
 	@GetMapping("/viewList")
 	public String viewClassList(Model model, @RequestParam(required = false) String keyword,
 			@RequestParam(required = false) String nowPage, HttpServletResponse response) {
@@ -147,7 +146,7 @@ public class ClassController {
 		return "thyme/viewList";
 	}
 
-	// viewList���� �̹��� Ŭ�� �� �׿� �ش��ϴ� detail view�� �̵�
+	// viewList에서 이미지 클릭 시 그에 해당하는 detail view로 이동
 	@GetMapping("/viewClass/{class_id}")
 	public String viewClass(@PathVariable("class_id") int class_id, Model model) {
 		Class findClass = classFacade.findClass(class_id);
@@ -156,22 +155,23 @@ public class ClassController {
 		return "thyme/detail";
 	}
 
-	//Ŭ���� ����
+	// 클래스 삭제
 	@GetMapping("/deleteClass")
 	public String deleteClass(@RequestParam("class_id") int class_id) {
 		classFacade.deleteClass(class_id);
 		return "redirect:/class/viewList";
 	}
-	
-	// Ŭ���� �� �ۼ� get
+
+	// 클래스 폼 작성 get
 	@GetMapping("/writeClass")
 	public String writeClass() {
 		return "thyme/ClassForm";
 	}
 
-	// Ŭ���� �� �ۼ� post
+	// 클래스 폼 작성 post
 	@PostMapping("/writeClass")
-	public String insertClass(@Valid Class newClass, BindingResult result, SessionStatus status, HttpServletRequest request) {
+	public String insertClass(@Valid Class newClass, BindingResult result, SessionStatus status,
+			HttpServletRequest request) {
 		if (result.hasErrors()) {
 			return "thyme/ClassForm";
 		}
@@ -185,7 +185,7 @@ public class ClassController {
 		DateFormat format = new SimpleDateFormat("yyyy/MM/dd");
 		String edate = format.format(newClass.getEdate());
 
-		// ������ �����ϱ��� ��û�����ϰ� �Ϸ� �ں��� ��û��ư ��Ȱ��ȭ�� �����ϱ� ���� �ڵ�
+		// 선택한 마감일까지 신청가능하고 하루 뒤부터 신청버튼 비활성화로 변경하기 위한 코드=
 		try {
 			Date eDate = format.parse(edate);
 			Calendar c = Calendar.getInstance();
@@ -207,16 +207,11 @@ public class ClassController {
 	}
 
 	private String uploadFile(MultipartFile report, HttpServletRequest request) {
-//		uuid ����(Universal Unique IDentifier, ���� ���� �ĺ���)
 		UUID uuid = UUID.randomUUID();
-//		�������� + �����̸� ����
+
 		String savedName = uuid.toString() + "_" + report.getOriginalFilename();
-		/*
-		 * String storagePath =
-		 * "C:\\Users\\����\\Documents\\sosigae\\springmabell\\src\\main\\resources\\static\\images\\";
-		 */
+
 		String storagePath = request.getServletContext().getRealPath("resources/images/" + savedName);
-//		�ӽõ��丮�� ����� ���ε�� ������ ������ ���丮�� ����
 		File file = new File(storagePath);
 		try {
 			report.transferTo(file);
@@ -226,8 +221,6 @@ public class ClassController {
 		return savedName;
 	}
 
-
-	  
 	/*
 	 * @PostMapping(value="/practice") public @ResponseBody String updateChkBox (
 	 * HttpServletRequest request,
@@ -244,5 +237,4 @@ public class ClassController {
 	 * 
 	 * return "viewList"; }
 	 */
-	 
 }

@@ -8,7 +8,7 @@
   </sql>
   
   	<!-- class모든 컬럼과 category의 name 필드 join해서 가져오기 -->
-	<select id="viewClassList" parameterType="hello.spring.domain.PagingVO" resultType="hello.spring.domain.Class">
+	<select id="viewClassList" parameterType="com.example.jpetstore.domain.PagingVO" resultType="com.example.jpetstore.domain.Class">
 		SELECT * FROM
 			(SELECT ROWNUM AS NUM, C.* FROM 
 				(SELECT C.*, CAT.NAME AS categoryName
@@ -26,13 +26,13 @@
 	</select>
 	
 	<!-- 카테고리 테이블에서 카테고리 리스트 가져오기 -->
-	<select id="getCategoryList" resultType="hello.spring.domain.Category">
+	<select id="getCategoryList" resultType="com.example.jpetstore.domain.Category">
 		SELECT *
 		FROM CATEGORY
 	</select>
 	
 	<!-- 필터링 : 클래스 리스트 반환과 합쳐야 하는가? -->
-	<select id="filteringClass" parameterType="hello.spring.domain.Filtering" resultType="hello.spring.domain.Class">
+	<select id="filteringClass" parameterType="com.example.jpetstore.domain.Filtering" resultType="com.example.jpetstore.domain.Class">
 		SELECT F.* FROM
 		(SELECT C.*, CAT.NAME AS categoryName
 		 FROM CLASS C, CATEGORY CAT
@@ -66,7 +66,16 @@
 	</select>
 	
 	<!-- 작성한 클래스 class 테이블에 삽입하기 -->
-	<insert id="writeClass" parameterType="hello.spring.domain.Class">
+	<select id="findClass"  parameterType="int" resultType="com.example.jpetstore.domain.Class">
+		SELECT c.*, ta.TEACHER_NAME AS teacher_name, ta.TEACHER_DESC AS teacher_desc FROM
+		(SELECT C.*, CAT.NAME AS categoryName
+	 	FROM CLASS C, CATEGORY CAT
+	 	WHERE C.CLASS_ID = #{class_id} AND C.CATEGORY_ID = CAT.CATEGORY_ID)c, TEACHERACCOUNT ta
+	 	WHERE c.TEACHER_ID = ta.TEACHER_ID
+	</select>
+	
+	<!-- 작성한 클래스 class 테이블에 삽입하기 -->
+	<insert id="writeClass" parameterType="com.example.jpetstore.domain.Class">
 		<selectKey keyProperty="class_id" resultType="int" order="BEFORE">
 			SELECT CLASS_ID_SEQ.NEXTVAL AS class_id FROM DUAL
 		</selectKey>
@@ -77,7 +86,7 @@
 	</insert>
 	
 	<!-- 클래스 update -->
-	<update id="updateClass" parameterType="hello.spring.domain.Class">
+	<update id="updateClass" parameterType="com.example.jpetstore.domain.Class">
 		UPDATE CLASS SET
 		TITLE = #{title},
 		CATEGORY_ID = #{category_id, jdbcType=INTEGER},

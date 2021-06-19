@@ -76,6 +76,7 @@
 		  </div>
 		  <div class="carousel-inner">
 		    <div class="carousel-item active" data-bs-interval="3000">
+<<<<<<< HEAD
 		      <img src="/images/main1.jpg" class="d-block w-100" alt="">
 		    </div>
 			<div class="carousel-item" data-bs-interval="3000">
@@ -83,6 +84,15 @@
 		    </div>
 		    <div class="carousel-item" data-bs-interval="3000">
 		      <img src="/images/main3.jpg" class="d-block w-100" alt="">
+=======
+		      <img src="/resources/images/main1.jpg" class="d-block w-100" alt="">
+		    </div>
+			<div class="carousel-item" data-bs-interval="3000">
+		      <img src="/resources/images/main2.jpg" class="d-block w-100" alt="">
+		    </div>
+		    <div class="carousel-item" data-bs-interval="3000">
+		      <img src="/resources/images/main3.jpg" class="d-block w-100" alt="">
+>>>>>>> d295f553c654699841363203db602a9f9811a67d
 		    </div> 
 		  </div>
 		  <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
@@ -151,7 +161,11 @@
 	            <div th:each="classes : ${endingSoonList}" class="p-4 col-lg-4 mb-5">
 	                <div>
 	                	<div class="thum">
+<<<<<<< HEAD
 	                        <img th:src="@{/images/} + ${classes.img}" alt="Image" id="image" class="img-fluid img-responsive" th:onclick="'location.href=\'' + @{/class/viewClass/{class_id}(class_id=${classes.class_id})} + '\''" >
+=======
+	                        <img th:src="@{/resources/images/} + ${classes.img}" alt="Image" id="image" class="img-fluid img-responsive" th:onclick="'location.href=\'' + @{/class/viewClass/{class_id}(class_id=${classes.class_id})} + '\''" >
+>>>>>>> d295f553c654699841363203db602a9f9811a67d
 	                           <span class="badge endingSoon">마감임박</span>
 	                        <span class="heart" style="color:gray;"><i class="xi-heart-o"></i></span>
 	                    </div>
