@@ -7,6 +7,7 @@ import com.example.jpetstore.domain.Category;
 import com.example.jpetstore.domain.Item;
 import com.example.jpetstore.domain.Order;
 import com.example.jpetstore.domain.Product;
+import com.example.jpetstore.domain.Review;
 import com.example.jpetstore.domain.TeacherAccount;
 import com.example.jpetstore.domain.UserAccount;
 
@@ -77,6 +78,10 @@ public interface PetStoreFacade {
 	void insertTeacherAccount(TeacherAccount account);
 
 	void updateTeacherAccount(TeacherAccount account);
+	
+	List<Review> getAllReviews();
+	
+	List<Review> getReviews(String username);
 
 
 

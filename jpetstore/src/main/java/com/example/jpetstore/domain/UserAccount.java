@@ -80,8 +80,8 @@ public void setUser_type(String user_type) {
 public Date getBirth_date() {
 	return birthdate;
 }
-public void setBirth_date(Date birth_date) {
-	this.birthdate = birth_date;
+public void setBirth_date(Date birthdate) {
+	this.birthdate = birthdate;
 }
 public Date getRegister_date() {
 	return register_date;

@@ -38,4 +38,16 @@ public class MybatisTeacherAccountDao implements TeacherAccountDao {
 		// TODO Auto-generated method stub
 		return teacherAccountMapper.getTeacherAccountByTeacher_idAndTeacher_pwd(teacher_id, teacher_pwd);
 	}
+
+	@Override
+	public void insertTeacherAccount(TeacherAccount account) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void updateTeacherAccount(TeacherAccount account) {
+		// TODO Auto-generated method stub
+		
+	}
 }
