@@ -72,10 +72,8 @@ public class ClassController {
 
 	@ModelAttribute("localList")
 	public String[] getLocalList() {
-
 		return new String[] { "서울", "경기", "강원", "충남", "충북", "전남", "전북", "경남", "경북", "부산", "대구", "인천", "광주", "세종", "대전",
 				"울산", "제주" };
-
 	}
 
 	@ModelAttribute("filtering")
@@ -184,7 +182,7 @@ public class ClassController {
 		DateFormat format = new SimpleDateFormat("yyyy/MM/dd");
 		String edate = format.format(newClass.getEdate());
 
-		// 선택한 마감일까지 신청가능하고 하루 뒤부터 신청버튼 비활성화로 변경하기 위한 코드
+		// 선택한 마감일까지 신청가능하고 하루 뒤부터 신청버튼 비활성화로 변경하기 위한 코드=
 		try {
 			Date eDate = format.parse(edate);
 			Calendar c = Calendar.getInstance();
@@ -206,16 +204,11 @@ public class ClassController {
 	}
 
 	private String uploadFile(MultipartFile report, HttpServletRequest request) {
-//		uuid 생성(Universal Unique IDentifier, 범용 고유 식별자)
 		UUID uuid = UUID.randomUUID();
-//		랜덤생성 + 파일이름 저장
+
 		String savedName = uuid.toString() + "_" + report.getOriginalFilename();
-		/*
-		 * String storagePath =
-		 * "C:\\Users\\정후\\Documents\\sosigae\\springmabell\\src\\main\\resources\\static\\images\\";
-		 */
+
 		String storagePath = request.getServletContext().getRealPath("resources/images/" + savedName);
-//		임시디렉토리에 저장된 업로드된 파일을 지정된 디렉토리로 복사
 		File file = new File(storagePath);
 		try {
 			report.transferTo(file);
