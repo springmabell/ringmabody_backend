@@ -60,9 +60,11 @@
 	
 	<!-- class_id 이용해서 class 객체 반환하기 -->
 	<select id="findClass"  parameterType="int" resultType="com.example.jpetstore.domain.Class">
-		SELECT C.*, CAT.NAME AS categoryName
+		SELECT c.*, ta.TEACHER_NAME AS teacher_name, ta.TEACHER_DESC AS teacher_desc FROM
+		(SELECT C.*, CAT.NAME AS categoryName
 	 	FROM CLASS C, CATEGORY CAT
-	 	WHERE C.CLASS_ID = #{class_id} AND C.CATEGORY_ID = CAT.CATEGORY_ID
+	 	WHERE C.CLASS_ID = #{class_id} AND C.CATEGORY_ID = CAT.CATEGORY_ID)c, TEACHERACCOUNT ta
+	 	WHERE c.TEACHER_ID = ta.TEACHER_ID
 	</select>
 	
 	<!-- 작성한 클래스 class 테이블에 삽입하기 -->

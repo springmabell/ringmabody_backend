@@ -154,26 +154,37 @@ public class Class implements Serializable {
 
 	public int cartadded;
 	public Date sdate;
-	/* @NotBlank(message = "留덇컧�씪�쓣 �엯�젰�빐二쇱꽭�슂.") */
-	/* @DateTimeFormat(pattern="yyyy-MM-dd") */
+
 	public Date edate;
 	public String state; 
 	public int participant; 
 	public String img;
-	/* @NotBlank(message = "二쇱냼瑜� �엯�젰�빐二쇱꽭�슂.") */
 	public String place;
 	public String local;
-	/*
-	 * @PositiveOrZero
-	 * 
-	 * @Min(value = 2, message = "2紐� �씠�긽 �엯�젰�븯�꽭�슂.")
-	 */
 	public int minNum; 
-	/* @PositiveOrZero */
 	public int maxNum;
 	public String categoryName;
 	public MultipartFile report;
 	public long date;
+	private String teacher_name;
+	private String teacher_desc;
+	
+	public String getTeacher_name() {
+		return teacher_name;
+	}
+
+	public void setTeacher_name(String teacher_name) {
+		this.teacher_name = teacher_name;
+	}
+
+	public String getTeacher_desc() {
+		return teacher_desc;
+	}
+
+	public void setTeacher_desc(String teacher_desc) {
+		this.teacher_desc = teacher_desc;
+	}
+
 	public long getDate() {
 		return date;
 	}
