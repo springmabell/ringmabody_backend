@@ -28,11 +28,4 @@ public class TeacherSession implements Serializable {
 		return account;
 	}
 
-//	public void setMyList(PagedListHolder<Product> myList) {
-//		this.myList = myList;
-//	}
-//
-//	public PagedListHolder<Product> getMyList() {
-//		return myList;
-//	}
 }

@@ -12,7 +12,7 @@
     <header id="wrapper">
         <div class="logo-wrap">
             <b>SpringMaBell</b><br />
-            <h6>강사 회원가입</h6>
+            <h6>일반 회원가입</h6>
         </div>
     </header>
 
@@ -21,18 +21,12 @@
     <div id="container" role="main">
         <!-- content -->
         <div id="content">
-            <!-- <div class="btn_area_cover">
-                <div class="btn_area double small">
-                    <span><a href="# "id="btnCancel" class="btn_type btn_up btn_default" role="button">일반회원가입</a></span>
-                    <span><a href="#" id="btnAgree" class="btn_type btn_up btn_primary" role="button">강사회원가입</a></span>
-                </div>
-            </div> -->
             <br/><br/><br/>
             <!-- tg-text=title -->
             <h2 class="blind">SpringMaBell 회원가입</h2>
             <div class="join_content">
                 <div class="join_form">
-                    <form id="join_form" method="GET" action="/user2/V2Join?m=begin" >
+                    <form id="join_form" action="/teacher/joinForm.do" >
                         <input type="hidden" id="token_sjoin" name="token_sjoin" value="ftSobs4h2umE1jN3">
                         <input type="hidden" id="langSelect" name="langSelect" value="ko_KR">
                         <!-- 약관동의 -->
@@ -487,8 +481,10 @@
 
                         <a name='agreeBottom'></a>
                         <div class="btn_area double">
-                            <span><!-- tg-text=terms_button_cancel --><a href="#" id="btnCancel" class="btn_type btn_default" role="button">취소</a></span>
-                            <span><!-- tg-text=terms_button_agree --><a href="#" id="btnAgree" class="btn_type btn_primary" role="button">확인</a></span>
+                            <!-- <span>tg-text=terms_button_cancel<a href="#" id="btnCancel" class="btn_type btn_default" role="button">취소</a></span> -->
+                            <!-- <span>tg-text=terms_button_agree<a href="#" id="btnAgree" class="btn_type btn_primary" role="button">확인</a></span> -->
+                            
+                            <span></span><input type="submit" id="btnAgree" class="btn_type btn_primary" role="button" value="확인"></span>
                         </div>
                     </form>
 

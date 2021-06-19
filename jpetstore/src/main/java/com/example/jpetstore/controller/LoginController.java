@@ -4,6 +4,7 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.support.PagedListHolder;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
@@ -30,6 +31,21 @@ public class LoginController {
 	public void setPetStore(PetStoreFacade petStore) {
 		this.petStore = petStore;
 	}
+	
+	@GetMapping("/user/loginForm.do")
+	public String loginForm(){
+		return "thyme/login";
+	}
+	
+	@GetMapping("/user/joinAgreeForm.do")
+	public String joinAgreeForm() {
+		return "thyme/join_user_agree";
+	}
+	
+	@GetMapping("/user/joinForm.do")
+	public String joingForm() {
+		return "thyme/join_user_form";
+	}
 
 	@RequestMapping("/user/login.do")
 	public ModelAndView handleRequest(HttpServletRequest request,
@@ -46,10 +62,6 @@ public class LoginController {
 		}
 		else {
 			UserSession userSession = new UserSession(account);
-			
-//			PagedListHolder<Product> myList = new PagedListHolder<Product>(this.petStore.getProductListByCategory(account.getFavouriteCategoryId()));
-//			myList.setPageSize(4);
-//			userSession.setMyList(myList);
 			
 			model.addAttribute("userSession", userSession);
 			if (forwardAction != null) 
