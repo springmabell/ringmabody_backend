@@ -6,7 +6,7 @@ import java.util.List;
 import org.apache.ibatis.annotations.Mapper;
 
 import com.example.jpetstore.domain.Cart;
-import com.example.jpetstore.domain.CartCommand;
+//import com.example.jpetstore.domain.CartCommand;
 import com.example.jpetstore.domain.Category;
 import com.example.jpetstore.domain.Class;
 import com.example.jpetstore.domain.Filtering;
@@ -26,6 +26,6 @@ public interface ClassMapper {
 	public void deleteClass(int class_id);
 	public int existCart(Cart cart);
 	public void insertCartItem(Cart cart);
-	public List<CartCommand> findCartList(String user_id);
+//	public List<CartCommand> findCartList(String user_id);
 	public void deleteCart(Cart cart);
 }

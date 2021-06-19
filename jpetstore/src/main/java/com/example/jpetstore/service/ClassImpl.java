@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 
 import com.example.jpetstore.dao.ClassDao;
 import com.example.jpetstore.domain.Cart;
-import com.example.jpetstore.domain.CartCommand;
+//import com.example.jpetstore.domain.CartCommand;
 import com.example.jpetstore.domain.Category;
 import com.example.jpetstore.domain.Class;
 import com.example.jpetstore.domain.Filtering;
@@ -85,11 +85,11 @@ public class ClassImpl implements ClassFacade{
 		classDao.insertCartItem(cart);
 	}
 
-	@Override
-	public List<CartCommand> findCartList(String user_id) {
-		// TODO Auto-generated method stub
-		return classDao.findCartList(user_id);
-	}
+//	@Override
+//	public List<CartCommand> findCartList(String user_id) {
+//		// TODO Auto-generated method stub
+//		return classDao.findCartList(user_id);
+//	}
 
 	@Override
 	public void deleteCart(Cart cart) {

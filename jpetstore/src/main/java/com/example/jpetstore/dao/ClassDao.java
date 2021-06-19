@@ -6,7 +6,7 @@ import java.util.List;
 import org.springframework.dao.DataAccessException;
 
 import com.example.jpetstore.domain.Cart;
-import com.example.jpetstore.domain.CartCommand;
+//import com.example.jpetstore.domain.CartCommand;
 import com.example.jpetstore.domain.Category;
 import com.example.jpetstore.domain.Class;
 import com.example.jpetstore.domain.Filtering;
@@ -26,6 +26,6 @@ public interface ClassDao {
 	public void deleteClass(int class_id) throws DataAccessException;
 	public int existCart(Cart cart) throws DataAccessException;
 	public void insertCartItem(Cart cart) throws DataAccessException;
-	public List<CartCommand> findCartList(String user_id) throws DataAccessException;
+//	public List<CartCommand> findCartList(String user_id) throws DataAccessException;
 	public void deleteCart(Cart cart) throws DataAccessException;
 }
