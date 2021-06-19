@@ -102,6 +102,6 @@ public class CartController {
 		Cart cart = new Cart(user_id, class_id);
 
 		classFacade.deleteCart(cart); 
-		return "thyme/ddd";
+		return "ddd";
 	}
 }
