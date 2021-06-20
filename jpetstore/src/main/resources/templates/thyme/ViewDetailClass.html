@@ -68,13 +68,7 @@
                 <span th:if="${findClass.state eq '마감'}">
                 	<input class="btn" type="button" onclick="" value="장바구니" disabled />
                 </span>
-                
-                <span th:unless="${findClass.state eq '마감'}">
-                	<input class="btn" type="button" onclick="" value="신청하기" />
-                </span>
-                <span th:if="${findClass.state eq '마감'}">
-                	<input class="btn" type="button" onclick="" value="신청하기" disabled />
-                </span>
+
                 <!-- if문 이용해서 마감일 지나면 신청하기는 disabled로 -->
             </form>
             <br/><br/>
@@ -89,8 +83,8 @@
         <h5>강사 정보</h5><br/>
         <div>
            <!--  <img src="teacher1.jpg" class="rounded-circle" style="width:200px;height:200px;float:left;margin-right:20px;"> -->
-            <span>이름 : 송카은</span><br/><br/>
-            <p>안녕하세요, 필라테스 강사 송카은입니다.</p>
+            <span th:text="|이름 &nbsp; :${findClass.teacher_name}|">이름 : 송카은</span><br/><br/>
+            <p th:text="${findClass.teacher_desc}">안녕하세요, 필라테스 강사 송카은입니다.</p>
         </div>
     </div>
 
@@ -134,7 +128,6 @@ function deleteClass(g, participant) {
 		data : {'class_id' : class_id},
 		dataType : 'json',
 		success : function(data) { 
-			alert("장바구니");
 		 	if (data.count == 0) {
 				alert('장바구니에 추가되었습니다.');
 				var con_test = confirm("장바구니로 이동하시겠습니까?");
