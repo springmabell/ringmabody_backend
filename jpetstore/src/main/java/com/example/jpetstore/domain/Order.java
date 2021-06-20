@@ -9,70 +9,76 @@ import java.util.List;
 public class Order implements Serializable {
 	  
 	/* Private Fields */
-		private int order_id;
-		private int class_id;
-		private String user_id;
-		private Date order_date;
-		private String card_bank;
-		private String card_number;
-		private Date expiration_date;
-		private int cvc;
-		private int total_price;
-		
-		public int getOrder_id() {
-			return order_id;
-		}
-		public void setOrder_id(int order_id) {
-			this.order_id = order_id;
-		}
-		public int getClass_id() {
-			return class_id;
-		}
-		public void setClass_id(int class_id) {
-			this.class_id = class_id;
-		}
-		public String getUser_id() {
-			return user_id;
-		}
-		public void setUser_id(String user_id) {
-			this.user_id = user_id;
-		}
-		public Date getOrder_date() {
-			return order_date;
-		}
-		public void setOrder_date(Date order_date) {
-			this.order_date = order_date;
-		}
-		public String getCard_bank() {
-			return card_bank;
-		}
-		public void setCard_bank(String card_bank) {
-			this.card_bank = card_bank;
-		}
-		public String getCard_number() {
-			return card_number;
-		}
-		public void setCard_number(String card_number) {
-			this.card_number = card_number;
-		}
-		public Date getExpiration_date() {
-			return expiration_date;
-		}
-		public void setExpiration_date(Date expiration_date) {
-			this.expiration_date = expiration_date;
-		}
-		public int getCvc() {
-			return cvc;
-		}
-		public void setCvc(int cvc) {
-			this.cvc = cvc;
-		}
-		public int getTotal_price() {
-			return total_price;
-		}
-		public void setTotal_price(int total_price) {
-			this.total_price = total_price;
-		}
+	 
+	 public Order() {
+		 
+	 }
+
+	 public int order_id;
+	 public int class_id;
+	 public String user_id;
+	 public Date order_date;
+	 public String card_bank;
+	 public String card_number;
+	 public String expiration_date;
+	 public int cvc;
+	 public int total_price;
+
+	public int getOrder_id() {
+		return order_id;
+	}
+	public void setOrder_id(int order_id) {
+		this.order_id = order_id;
+	}
+	public int getClass_id() {
+		return class_id;
+	}
+	public void setClass_id(int class_id) {
+		this.class_id = class_id;
+	}
+	public String getUser_id() {
+		return user_id;
+	}
+	public void setUser_id(String user_id) {
+		this.user_id = user_id;
+	}
+	public Date getOrder_date() {
+		return order_date;
+	}
+	public void setOrder_date(Date order_date) {
+		this.order_date = order_date;
+	}
+	public String getCard_bank() {
+		return card_bank;
+	}
+	public void setCard_bank(String card_bank) {
+		this.card_bank = card_bank;
+	}
+	public String getCard_number() {
+		return card_number;
+	}
+	public void setCard_number(String card_number) {
+		this.card_number = card_number;
+	}
+
+	public int getCvc() {
+		return cvc;
+	}
+	public void setCvc(int cvc) {
+		this.cvc = cvc;
+	}
+	public String getExpiration_date() {
+		return expiration_date;
+	}
+	public void setExpiration_date(String expiration_date) {
+		this.expiration_date = expiration_date;
+	}
+	public int getTotal_price() {
+		return total_price;
+	}
+	public void setTotal_price(int total_price) {
+		this.total_price = total_price;
+	}
 		
   /* Private Fields */
 

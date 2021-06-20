@@ -29,4 +29,5 @@ public interface ClassMapper {
 	public void insertCartItem(Cart cart);
 	public List<CartCommand> findCartList(String user_id);
 	public void deleteCart(Cart cart);
+	public void deleteFinishedClassFromCart();
 }

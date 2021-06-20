@@ -36,17 +36,17 @@
             </div><br/>
 
             <h5 th:text="${findClass.categoryName}">카테고리 :  헬스</h5>
-            <h5><i class="xi-calendar"></i> : 
-            <span th:text="|~ ${#dates.format(findClass.edate, 'yyyy-MM-dd')}|">~2021-06-02</span></h5>
-            <h5><i class="xi-maker"></i> :
-            <span th:text="|${findClass.place}|">: 경기도 성남시 분당구 수내2동 63-2</span> </h5>
-            <h5><i class="xi-user"></i> :
+            <h5>
+            <span th:text="|마감일 &nbsp; :  ~ ${#dates.format(findClass.edate, 'yyyy-MM-dd')}|">~2021-06-02</span></h5>
+            <h5>
+            <span th:text="|장소 &nbsp; : ${findClass.place}|">: 경기도 성남시 분당구 수내2동 63-2</span> </h5>
+            <h5>
             <span th:text="|${findClass.minNum}명|">7명</span> ~ <span th:text="|${findClass.maxNum}명|">20명</span>
             </h5>
             <h5 th:text="|현재 참여자 수 : ${findClass.participant}명|">현재 참여자 수 :  8명</h5><br/>
             <h5 th:text="|${findClass.state}|">남은 시간 :  마감되었습니다.</h5><br/>
-            <h4><i class="xi-credit-card"></i>&nbsp;
-            <span th:text="|${findClass.price}원|">20000원</span></h4>
+            <h4>
+            <span th:text="|가격 &nbsp;: ${findClass.price}원|">20000원</span></h4>
             <br />
 
             <form name="form" action="" method="GET">
@@ -57,10 +57,18 @@
                 <button class="btn" id="cart">
                 <span class="xi-cart-o"></span></button>
                 <input type="hidden" id="classId" value="${findClass.class_id}" /> -->
-                 <a class="btn py-2 px-4" id="cart">
+               
+
+				
+                <span th:unless="${findClass.state eq '마감'}">
+                	  <a class="btn py-2 px-4" id="cart">
                  장바구니</a>
                 <input type="hidden" id="classId" th:value="${findClass.class_id}" />
-                <!-- th:attr="onclick=|cart(${findClass.class_id})|" -->
+                </span>
+                <span th:if="${findClass.state eq '마감'}">
+                	<input class="btn" type="button" onclick="" value="장바구니" disabled />
+                </span>
+                
                 <span th:unless="${findClass.state eq '마감'}">
                 	<input class="btn" type="button" onclick="" value="신청하기" />
                 </span>

@@ -39,7 +39,7 @@
                 <th>&nbsp;</th>
             </tr> 
             <tr th:each="cart : ${cartList}" >
-                <td><input type="checkbox" id="chk" name ="chk" onClick="itemSum()" class="check" th:value="${cart.findClass.price}" data-cartNum="${cart.class_id}" /></td>
+                <td><input type="checkbox" id="chk" name ="chk" onClick="itemSum()" class="check" th:value="${cart.findClass.price}" th:attr="data-cartNum=${cart.class_id}"  /></td>
                 <td>
                 	<img  th:src="@{/resources/images/} + ${cart.findClass.img}" style="width:100px;height:100px" alt="image" th:onclick="'location.href=\'' + @{/class/viewClass/{class_id}(class_id=${cart.class_id})} + '\''" />
                 </td>
@@ -55,47 +55,44 @@
         </table>
         </div>
 
-<form action="/shop/cartList" method="post" autocomplete="off" id="orderForm">
-        <input type="hidden" name="amount" id="amount" value="" />
-        <input type="hidden" name="chk[]" id="chk" value="" />
-        <table align="right">
-            <tr>
-                <td>총 금액 합계</td>
-                <td id="total">0원</td>
-            </tr>
-            <tr>
-                <td>&nbsp;</td>
-                <td>&nbsp;</td>
-                <td><button type="button" id="orderClass" name ="orderClass" class="btn">주문</button></td>
-            </tr>
-        </table>
-        </form>
-        </div>
+		<form action="/order/cart" method="post" id="orderForm">
+	        <input type="hidden" name="amount" id="amount" value="" />
+	        <input type="hidden" name="array" id="array" value="" />
+	        <table align="right">
+	            <tr>
+	                <td>총 금액 합계</td>
+	                <td id="total">0원</td>
+	            </tr>
+	            <tr>
+	                <td>&nbsp;</td>
+	                <td>&nbsp;</td>
+	                <td><button type="button" id="orderClass" name ="orderClass" class="btn">주문</button></td>
+	            </tr>
+	        </table>
+       </form>
+       </div>
         
-        </div>
-        </div>
-        </div>
+       </div>
+     </div>
+   </div>
 </body>
 <script>
 $("#orderClass").click(function () {
-    var checkArr = new Array();
-    //checked 되어있는 row에 data-cartNum 속성 값을 가져와 Array에 넣어준다. 
-    $("input[class='check']:checked").each(function () {
-        checkArr.push($(this).attr("data-cartNum"));
-        alert($(this).attr("data-cartNum"));
+ var arr1 = new Array();
+    $('#chk:checked').each(function(i){
+        arr1.push($(this).attr('data-cartNum'));  // 체크된 것만 값을 뽑아서 배열에 push
     });
 
-    //input hidden으로 되어있는 id가 chk에 배열을 넣어준다.
-    //넣어주면 chk[]이름으로 controller에 넘어가 method에서 @RequestParam으로 받기만 해주면 된다.
-    //Param으로는 안된다.
-/* 
-    $("#chk").val(checkArr); //
-
-    if (confirm("주문완료 하시겠습니까?")) {
-        alert("주문 감사합니다.");
+    $("#array").val(arr1);
+	
+    if (confirm("결제하시겠습니까?")) {
+    	if(arr1 == "" || arr1 == null ){
+    		alert("클래스를 선택해주세요");
+    	}
+    	else{
         $("#orderForm").submit();
-    } */
-
+    	}
+    } 
 });
 
 $(document).ready(function(){
@@ -140,18 +137,10 @@ function itemSum(){
           sum += parseInt($(".check")[i].value); 
         }
     }
+    
+    $("#amount").val(sum);
     $("#total").html(sum+" 원");
  }
- /* 	 $( document ).ready(function() {
-
-			$('#deleteCart').click(function(){
-
-				alert("|${cart.class_id}");
-
-			});
-
-		}); */
-
 
 </script>
 </html>

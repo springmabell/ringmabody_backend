@@ -29,4 +29,5 @@ public interface ClassDao {
 	public void insertCartItem(Cart cart) throws DataAccessException;
 	public List<CartCommand> findCartList(String user_id) throws DataAccessException;
 	public void deleteCart(Cart cart) throws DataAccessException;
+	public void deleteFinishedClassFromCart() throws DataAccessException;
 }

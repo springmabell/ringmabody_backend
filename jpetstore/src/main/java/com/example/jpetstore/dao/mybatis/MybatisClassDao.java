@@ -104,5 +104,12 @@ public class MybatisClassDao implements ClassDao{
 		// TODO Auto-generated method stub
 		classMapper.deleteCart(cart);
 	}
+	
+
+	@Override
+	public void deleteFinishedClassFromCart() throws DataAccessException {
+		// TODO Auto-generated method stub
+		classMapper.deleteFinishedClassFromCart();
+	}
 
 }

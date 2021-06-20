@@ -5,6 +5,11 @@
 
   <cache />
 
+	<update id="updateParticipant" parameterType="int">
+		UPDATE CLASS SET PARTICIPANT = PARTICIPANT + 1
+		WHERE CLASS_ID = #{class_id}
+	</update>  
+<!-- 	
   <select id="getOrder" resultType="Order">
     select
       BILLADDR1 AS billAddress1,
@@ -101,6 +106,6 @@
 	  	#billToLastName#, #shipToFirstName#, #shipToLastName#,
 	  	#creditCard#, #expiryDate#, #cardType#, #locale#); 
   	select @@identity as value
-  </insert>
+  </insert> -->
 
 </mapper>

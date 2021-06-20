@@ -146,4 +146,11 @@
 		UPDATE CLASS SET HIT = HIT + 1
 		WHERE CLASS_ID = #{class_id}
 	</update>
+		
+	<delete id="deleteFinishedClassFromCart">
+		DELETE FROM CARTITEM
+		WHERE class_id in(
+        select class_id from class
+        where state = '마감')
+	</delete>
 </mapper>
