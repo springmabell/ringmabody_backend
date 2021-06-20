@@ -31,8 +31,6 @@ public class RegisterTeacherController {
 
 	@Value("thyme/join_teacher_form")
 	private String formViewName;
-	
-	
 
 	@Autowired
 	private MainFacade mainFacade;

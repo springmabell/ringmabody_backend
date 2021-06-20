@@ -97,12 +97,12 @@ public class TeacherLoginController {
 			List<Class> bestClassList = mainFacade.bestClass();
 			model.addAttribute("endingSoonList", endingSoonList);
 			model.addAttribute("bestClassList", bestClassList);
-			
+			model.addAttribute("usertype", "teacher");
 			
 			if (forwardAction != null) 
 				return new ModelAndView("redirect:" + forwardAction);
 			else 
-				return new ModelAndView("thyme/main");
+				return new ModelAndView("thyme/ViewClassList");
 		}
 	}
 	
