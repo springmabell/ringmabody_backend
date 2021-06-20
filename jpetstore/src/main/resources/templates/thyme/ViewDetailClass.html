@@ -97,7 +97,6 @@
     <br/><br/><br/>
 
     <div style="clear:left;" class="form-group" align="right">
-        <a th:attr="onclick=|updateClass(${findClass.class_id})|" class="btn py-2 px-4">수정</a>
     	<a th:attr="onclick=|deleteClass(${findClass.class_id}, ${findClass.participant})|" class="btn py-2 px-4" onClick="del(3);">삭제</a>
         <a class="btn py-2 px-4" onclick="list();">목록</a>
     </div>
@@ -105,12 +104,7 @@
 </div>
 <script>
 
-function updateClass(g) {
-	if (confirm("수업을 수정하시겠습니까?")) {
-		location.href= "/class/writeClass?class_id=" + g;
-	} 
-	
-}
+
 function deleteClass(g, participant) {
 	var con = confirm("수업을 삭제하시겠습니까?");
 	if (con == true && participant > 0) {

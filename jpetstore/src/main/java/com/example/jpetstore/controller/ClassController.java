@@ -88,9 +88,6 @@ public class ClassController {
 	@PostMapping("/viewList")
 	public String filteringClass(@ModelAttribute(value = "filtering") Filtering filtering, Model model,
 			HttpServletResponse response, HttpSession session) {
-		response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate"); // HTTP 1.1.
-		response.setHeader("Pragma", "no-cache"); // HTTP 1.0.
-		response.setHeader("Expires", "0"); // Proxies.
 
 		List<Class> classList = classFacade.filteringClass(filtering);
 		
@@ -109,9 +106,6 @@ public class ClassController {
 	@GetMapping("/viewList")
 	public String viewClassList(Model model, @RequestParam(required = false) String keyword,
 			@RequestParam(required = false) String nowPage, HttpServletResponse response) {
-		response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate"); // HTTP 1.1.
-		response.setHeader("Pragma", "no-cache"); // HTTP 1.0.
-		response.setHeader("Expires", "0"); // Proxies.
 
 		int total = classFacade.countClass();
 		int cntPerPage = 9;
