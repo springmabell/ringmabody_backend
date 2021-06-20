@@ -59,9 +59,9 @@
   
   <insert id="insertTeacherAccount" parameterType="TeacherAccount">
     INSERT INTO TEACHERACCOUNT
-      (TEACHER_ID, TEACHER_PWD, TEACHER_NAME, TEACHER_IMG, EMAIL, PHONENUM, USER_TYPE, BELONG, CAREER, WEBSITE, TEACHER_DESC, REGISTER_DATE)
+      (TEACHER_ID, TEACHER_PWD, TEACHER_NAME, EMAIL, PHONENUM, USER_TYPE)
     VALUES
-      (#{teacher_id}, #{teacher_pwd}, #{teacher_name}, #{teacher_img}, #{email}, #{phonenum}, #{user_type}, #{belong}, #{career}, #{website}, #{teacher_desc}, #{register_date})
+      (#{teacher_id}, #{teacher_pwd}, #{teacher_name},  #{email}, #{phonenum}, #{user_type})
   </insert>
   
   

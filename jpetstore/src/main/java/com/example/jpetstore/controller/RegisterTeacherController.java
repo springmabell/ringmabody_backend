@@ -26,10 +26,8 @@ import com.example.jpetstore.service.PetStoreFacade;
 @RequestMapping({"/teacher/join.do","/teacher/updateTeacher.do"})
 public class RegisterTeacherController { 
 
-	@Value("EditAccountForm")
+	@Value("thyme/join_teacher_form")
 	private String formViewName;
-	@Value("index")
-	private String successViewName;
 	
 	@Autowired
 	private PetStoreFacade petStore;
@@ -37,27 +35,13 @@ public class RegisterTeacherController {
 		this.petStore = petStore;
 	}
 
-//	@Autowired
-//	private AccountFormValidator validator;
-//	public void setValidator(AccountFormValidator validator) {
-//		this.validator = validator;
-//	}
 		
 	@ModelAttribute("teacherAccountForm")
 	public TeacherAccountForm formBackingObject(HttpServletRequest request) 
 			throws Exception {
 		TeacherSession teacherSession = 
 			(TeacherSession) WebUtils.getSessionAttribute(request, "teacherSession");
-//		if (userSession != null) {	// edit an existing accoun
-//			System.out.println("pass 1");
-//			
-//			System.out.println(userSession.getAccount().getUser_id());
-//			return new UserAccountForm(
-//				petStore.getUserAccount(userSession.getAccount().getUser_id()));
-//		}
-//		else {	// create a new account
 			return new TeacherAccountForm();
-//		}
 	}
 
 
@@ -73,15 +57,6 @@ public class RegisterTeacherController {
 			@ModelAttribute("teacherAccountForm") TeacherAccountForm teacherAccountForm,
 			BindingResult result) throws Exception {
 
-//		if (request.getParameter("account.listOption") == null) {
-//			userAccountForm.getAccount().setListOption(false);
-//		}
-//		if (request.getParameter("account.bannerOption") == null) {
-//			userAccountForm.getAccount().setBannerOption(false);
-//		}
-
-//		validator.validate(userAccountForm, result);
-		
 		if (result.hasErrors()) return formViewName;
 		try {
 			if (teacherAccountForm.isNewAccount()) {
@@ -100,12 +75,8 @@ public class RegisterTeacherController {
 		TeacherSession teacherSession = new TeacherSession(
 			petStore.getTeacherAccount(teacherAccountForm.getAccount().getTeacher_id()));
 		
-//		PagedListHolder<Product> myList = new PagedListHolder<Product>(
-//			petStore.getProductListByCategory(accountForm.getAccount().getFavouriteCategoryId()));
-//		myList.setPageSize(4);
-//		userSession.setMyList(myList);
-		
 		session.setAttribute("teacherSession", teacherSession);
-		return successViewName;  
+		
+		return "thyme/main";  
 	}
 }

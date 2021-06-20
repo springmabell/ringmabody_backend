@@ -40,10 +40,6 @@ public class MybatisUserAccountDao implements UserAccountDao {
 
 	public void updateUserAccount(UserAccount account) throws DataAccessException {
 		userAccountMapper.updateUserAccount(account);
-//		if (account.getPassword() != null && account.getPassword().length() > 0) 
-//		{
-//			accountMapper.updateSignon(account);
-//		}
 	}
 	
 	public List<UserAccount> getAllUserAccount() throws DataAccessException {
