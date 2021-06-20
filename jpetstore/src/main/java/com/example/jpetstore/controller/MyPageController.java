@@ -59,6 +59,15 @@ public class MyPageController {
 		return "thyme/my_review_detail";
 	}
 	
+	@RequestMapping(value="/review.write.do", method=RequestMethod.GET)
+	public String ReviewWriteRequest(ModelMap model, @PathVariable String user_id) throws Exception {
+		UserAccount user = this.petStore.getUserAccount(user_id);
+		
+		model.put("user", user);
+		
+		return "thyme/my_review_write";
+	}
+	
 	@RequestMapping(value="/purchase.do", method=RequestMethod.GET)
 	public String PurchaseRequest(ModelMap model, @PathVariable String user_id) throws Exception {
 		UserAccount user = this.petStore.getUserAccount(user_id);

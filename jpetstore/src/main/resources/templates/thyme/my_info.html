@@ -20,8 +20,9 @@
             </div>
             <div class="header_nav_logo_right">
                 <div class="header_nav_login">
-                    <a href=""><span th:text="${user.user_name}">김프링</span>회원님</a>
-                    <i class="fas fa-chevron-down"></i>
+                    <a href=""><span th:text="${user.user_name}">김프링</span>&nbsp;회원님</a>
+      				<span>&nbsp;&nbsp;|&nbsp;&nbsp;</span>
+                    <a href="">로그아웃</a>
                 </div>
             </div>
         </div><!--end header_nav-->
@@ -79,15 +80,16 @@
                             <li class="info_item phone_item">
                                 <div>휴대전화</div>
                                 <div class="phone_update_wrap">
-                                    <div th:text="${user.phone}">
+                                    <div>
+                                    	<input id="phoneInput" type="text" th:value="${user.phone}">
                                     </div>
                                 </div>
                             </li>
                             <li class="info_item email_item">
                                 <div>이메일</div>
                                 <div class="email_update_wrap">
-                                    <div th:text="${user.email}">
-                                        <input id="emailInput" type="text">
+                                    <div>
+                                        <input id="emailInput" type="text" th:value="${user.email}">
                                     </div>
                                 </div>
                             </li>
@@ -109,7 +111,7 @@
     <div id="footer"></div><!--end footer-->
 
 </div><!--end wrap-->
-
+<script src="/js/my_info.js"></script>
 
 
 </body>

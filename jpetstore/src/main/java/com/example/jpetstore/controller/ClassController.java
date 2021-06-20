@@ -47,7 +47,7 @@ import com.example.jpetstore.domain.PagingVO;
 import com.example.jpetstore.domain.PagingVO;
 @Controller
 @RequestMapping("/class")
-@SessionAttributes("newClass")
+@SessionAttributes({"userSession","teacherSession", "newClass"})
 public class ClassController {
 
 	private static final Logger LOGGER = LoggerFactory.getLogger(ClassController.class);
@@ -90,13 +90,6 @@ public class ClassController {
 			HttpServletResponse response, HttpSession session) {
 
 		List<Class> classList = classFacade.filteringClass(filtering);
-		
-		if(session.getAttribute("userSession") != null){
-			model.addAttribute("usertype", "user");
-		} else if(session.getAttribute("teacherSession") != null){
-			model.addAttribute("usertype", "teacher");
-		}
-
 		model.addAttribute("classList", classList);
 
 		return "thyme/ViewClassList";

@@ -57,9 +57,15 @@
 	   background-color: red;
 	}
 	</style>
+	
+	<div th:replace="thyme/layout_admin :: style"></div>
 </head>
 <body>
 <div>
+
+	<div th:replace="thyme/layout_admin :: header"></div><br/><br/>
+	
+	
     <div class="container" style="margin-bottom:100px;">
         <form th:action="@{/class/viewList}" th:object="${filtering}" method="post"><!-- th:action="@{/class/viewList}"  -->
             <table class="table mb-4">
@@ -166,9 +172,9 @@
 	                </div>
 	            </div>
 	        </div>
-	        <!-- <div th:if="${usertype}.toString().equals('teacher')"> -->
+	        <div th:if="${usertype}">
 	        	<a class="btn" href="#" th:href="@{/class/writeClass}" style="float:right;color:white;background-color: rgb(123, 227, 251);border:none;">클래스 등록</a>
-	    	<!-- </div> -->
+	    	</div> 
 	    	<br/><br/>
 	    	<div style="display: block; text-align: center;">		
 	</div>

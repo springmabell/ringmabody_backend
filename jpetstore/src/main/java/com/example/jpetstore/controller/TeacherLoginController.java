@@ -1,5 +1,7 @@
 package com.example.jpetstore.controller;
 
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -11,17 +13,22 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.support.PagedListHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.example.jpetstore.domain.Account;
+import com.example.jpetstore.domain.Category;
 import com.example.jpetstore.domain.Class;
+import com.example.jpetstore.domain.Filtering;
 import com.example.jpetstore.domain.Product;
 import com.example.jpetstore.domain.TeacherAccount;
 import com.example.jpetstore.domain.UserAccount;
+import com.example.jpetstore.service.ClassFacade;
 import com.example.jpetstore.service.MainFacade;
 import com.example.jpetstore.service.PetStoreFacade;
+import com.example.jpetstore.service.SchedulerFacade;
 
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.ui.Model;
@@ -42,6 +49,34 @@ public class TeacherLoginController {
 
 	@Autowired
 	private MainFacade mainFacade;
+	@Autowired
+	private ClassFacade classFacade;
+
+	@Autowired
+	private SchedulerFacade schedulerFacade; // 스케줄러 서비스 인터페이스
+
+	@ModelAttribute("newClass")
+	public Class newClass() {
+		Class newClass = new Class();
+		return newClass;
+	}
+
+	@ModelAttribute("categoryList")
+	public List<Category> getCategoryList() {
+		List<Category> categoryList = classFacade.getCategoryList();
+		return categoryList;
+	}
+
+	@ModelAttribute("localList")
+	public String[] getLocalList() {
+		return new String[] { "서울", "경기", "강원", "충남", "충북", "전남", "전북", "경남", "경북", "부산", "대구", "인천", "광주", "세종", "대전",
+				"울산", "제주" };
+	}
+
+	@ModelAttribute("filtering")
+	public Filtering formBacking(HttpServletRequest request) throws Exception {
+		return new Filtering();
+	}
 	
 	@Autowired
 	public void setPetStore(PetStoreFacade petStore) {
@@ -63,6 +98,7 @@ public class TeacherLoginController {
 	public String joingForm() {
 		return "thyme/join_teacher_form";
 	}
+	
 
 	@RequestMapping("/teacher/login.do")
 	public ModelAndView handleRequest(HttpServletRequest request,
@@ -70,6 +106,7 @@ public class TeacherLoginController {
 			@RequestParam("teacher_pwd") String teacher_pwd,
 			@RequestParam(value="forwardAction", required=false) String forwardAction,
 			HttpSession session,
+			@RequestParam(required = false) String keyword,
 			Model model) throws Exception {
 		
 		
@@ -97,12 +134,40 @@ public class TeacherLoginController {
 			List<Class> bestClassList = mainFacade.bestClass();
 			model.addAttribute("endingSoonList", endingSoonList);
 			model.addAttribute("bestClassList", bestClassList);
+			model.addAttribute("usertype", "teacher");
 			
+
+			/* ViewClassList */
+			Filtering filtering = new Filtering();
+			List<String> checkedCategory = new ArrayList<String>();
+			String checkedLocal = "dd";
+			// value1 will be checked by default.
+			checkedCategory.add("value1");
+			filtering.setCheckedLocal(checkedLocal);
+			filtering.setCheckedCategory(checkedCategory);
+			model.addAttribute("filtering", filtering);
+			
+			List<Class> classList = classFacade.viewClassList(keyword);
+			Date today = new Date();
+			long t = today.getTime();
+			for (Class c : classList) {
+				long e = c.getEdate().getTime();
+				long cal = e - t;
+				long calcDate = cal / (24 * 60 * 60 * 1000);
+				if (calcDate > 0) {
+					c.setDate(calcDate + 1);
+				} else if (calcDate == 0) {
+					c.setDate(0);
+				} else {
+					c.setDate(-1);
+				}
+			}
+			/* */
 			
 			if (forwardAction != null) 
 				return new ModelAndView("redirect:" + forwardAction);
 			else 
-				return new ModelAndView("thyme/main");
+				return new ModelAndView("thyme/ViewClassList");
 		}
 	}
 	
