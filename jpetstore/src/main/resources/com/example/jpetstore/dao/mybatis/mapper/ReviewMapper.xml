@@ -32,5 +32,20 @@
 	    	   REVIEW.REVIEW_HIT
 	    FROM REVIEW
   	</select>
+  	
+  	<select id="getReviewDetail" resultType="Review">
+		SELECT REVIEW.REVIEW_ID,
+	    	   REVIEW.CLASS_ID,
+	    	   REVIEW.REVIEW_DATE,
+	    	   REVIEW.USER_ID,
+	    	   REVIEW.REVIEW_TITLE,
+	    	   REVIEW.REVIEW_CONTENT,
+	    	   REVIEW.REVIEW_LIKE,
+	    	   REVIEW.REVIEW_RATING,
+	    	   REVIEW.REVIEW_IMG,
+	    	   REVIEW.REVIEW_HIT
+	   	FROM REVIEW
+	    WHERE REVIEW.REVIEW_ID = #{review_id}
+	 </select>
  
  </mapper>

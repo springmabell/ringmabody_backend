@@ -28,4 +28,11 @@ public class MybatisReviewDao implements ReviewDao{
 		return reviewMapper.getReviewsByUsername(username);
 	}
 
+
+	@Override
+	public Review getReviewDetail(int review_id) {
+		// TODO Auto-generated method stub
+		return reviewMapper.getReviewDetail(review_id);
+	}
+
 }

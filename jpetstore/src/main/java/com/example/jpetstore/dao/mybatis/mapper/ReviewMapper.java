@@ -12,4 +12,6 @@ public interface ReviewMapper {
 	List<Review> getAllReviews();
 	
 	List<Review> getReviewsByUsername(String username);
+
+	Review getReviewDetail(int review_id);
 }

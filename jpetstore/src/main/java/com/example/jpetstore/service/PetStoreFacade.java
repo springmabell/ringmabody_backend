@@ -85,9 +85,6 @@ public interface PetStoreFacade {
 	
 	List<Review> getReviews(String username);
 
+	Review getReviewDetail(int review_id);
 
-
-
-	
-	
 }

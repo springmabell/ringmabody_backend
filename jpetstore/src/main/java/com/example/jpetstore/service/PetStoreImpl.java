@@ -178,4 +178,10 @@ public class PetStoreImpl implements PetStoreFacade {
 		return reviewDao.getAllReviews();
 	}
 
+	@Override
+	public Review getReviewDetail(int review_id) {
+		// TODO Auto-generated method stub
+		return reviewDao.getReviewDetail(review_id);
+	}
+
 }
