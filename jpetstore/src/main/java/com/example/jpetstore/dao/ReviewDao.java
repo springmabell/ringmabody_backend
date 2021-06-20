@@ -11,4 +11,6 @@ public interface ReviewDao {
 	List<Review> getAllReviews() throws DataAccessException;
 	
 	List<Review> getReviews(String username) throws DataAccessException;
+
+	Review getReviewDetail(int review_id);
 }

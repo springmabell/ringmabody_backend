@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>작성한 리뷰</title>
+    <link rel="stylesheet" href="/style/reset.css">
+    <link rel="stylesheet" href="/style/all.min.css">
+    <link rel="stylesheet" href="/style/my_review_detail.css">
+    <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+</head>
+<body>
+
+<div id="wrap">
+
+    <div id="header">
+        <div class="header_nav">
+            <div class="header_nav_logo">
+                <a href="">RingMaBody</a>
+                <span class="my_page_logo">MY PAGE</span>
+            </div>
+            <div class="header_nav_logo_right">
+                <div class="header_nav_login">
+                    <a href=""><span th:text="${user.user_name}">김프링</span> 회원님</a>
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+            </div>
+        </div><!--end header_nav-->
+    </div><!--end header-->
+
+    <div id="container">
+        <div class="content_wrap">
+            <div class="menu">
+                <ul class="menu_list">
+                    <li><a href="" th:href="@{/} + ${user.user_id} + @{/mypage/info.do}">개인정보 관리</a></li>
+                    <li><a href="" th:href="@{/} + ${user.user_id} + @{/mypage/purchase.do}">결제한 내역</a></li>
+                    <li><a href="">스크랩</a></li>
+                    <li><a href="" th:href="@{/} + ${user.user_id} + @{/mypage/review.do}">작성한 리뷰</a></li>
+                </ul>
+            </div>
+            <div class="content">
+                <form action="">
+                    <div class="post_wrap">
+                        <section>
+                            <!--게시글 시작-->
+                            <div class="inner">
+                                <div class="review_box">
+                                    <span class="review_title">제목</span>
+                                    <input class="review_title_input" type="text" th:value="${review.review_title}">
+                                </div>
+                                <hr>
+                                <div class="review_rate_box">
+                                    <span class="review_rate">평점</span>
+                                    <label id="reviewRate">
+                                        <select class="review_rate_input" name="rate">
+                                            <option value="1">1점 (아쉬워요 ( ‾ʖ̫‾))</option>
+                                            <option value="2">2점 (그냥그래요 ƪ( ˘ ⌣˘ )ʃ)</option>
+                                            <option value="3">3점 (보통이에요) ◡( ╹◡╹ )◡</option>
+                                            <option value="4">4점 (좋아요 (๑>ᴗ<๑))</option>
+                                            <option value="5" selected>5점 (최고에요 ✧*｡٩(ˊᗜˋ*)و✧*｡)</option>
+                                        </select>
+                                    </label>
+                                </div>
+                                <hr>
+                                <div class="review_img_box">
+                                    <span class="review_img">사진</span>
+                                    <label class="picture" for="pictureInput">
+                                        <img th:src="@{/images/} + ${review.review_img}"/>
+                                    </label>
+                                </div>
+                                <hr>
+                                <div class="review_content_box">
+                                    <span class="review_content">내용</span>
+                                    <textarea class="review_content_input" rows="10" cols="70" th:text="${review.review_content}">리뷰내용테스트입니다</textarea>
+                                </div>
+                                <div class="review_button_box">
+                                    <input type="reset" class="review_button" value="취소">
+                                    <input type="submit" class="review_button" value="수정">
+                                </div>
+                                <div class="review_box_bottom">
+                                    <span class="review_hit">조회수 <span th:text="${review.review_hit}">0</span>회 &nbsp;&nbsp;</span>
+                                    <span class="review_like">&nbsp;&nbsp;좋아요 <span th:text="${review.review_like}">0</span>회</span>
+                                </div>
+                            </div>
+                        </section>
+                    </div>
+
+                    <div class="paging_btn_wrap">
+                        <div class="post_paging_btn_wrap"></div>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+    </div><!--end container-->
+
+    <div id="footer"></div><!--end footer-->
+
+</div><!--end wrap-->
+
+
+
+</body>
+</html>
