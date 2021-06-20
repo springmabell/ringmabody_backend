@@ -181,14 +181,20 @@
 			      </a>
 			    </span>
 			    </li> -->
-			    <li class="page-item" th:each="p: ${#numbers.sequence(paging.startPage, paging.endPage)}">
+			    
+			    
+			    <!-- 각주 -->
+			    <!-- <li class="page-item" th:each="p: ${#numbers.sequence(paging.startPage, paging.endPage)}">
 			    	<span th:if="${p == paging.nowPage}">
 			    		<a class="page-link" th:text="${paging.nowPage}"></a>
 			    	</span>
 			    	<span th:if="${p != paging.nowPage}">
 			    		<a th:href="@{/class/viewList(nowPage=${p})}" class="page-link" th:text="${p}"></a>
 			    	</span>
-			    </li>
+			    </li> -->
+			    <!-- 각주 -->
+			    
+			    
 		<!-- 	    <li class="page-item">
 			    <span th:if="${paging.endPage != paging.lastPage}">
 			      <a class="page-link" href="#" aria-label="Next">

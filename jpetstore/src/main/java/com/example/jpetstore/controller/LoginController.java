@@ -77,6 +77,4 @@ public class LoginController {
 				return new ModelAndView("thyme/ViewClassList");
 		}
 	}
-	
-	
 }
