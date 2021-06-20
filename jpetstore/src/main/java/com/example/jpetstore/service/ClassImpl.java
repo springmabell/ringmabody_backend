@@ -23,8 +23,8 @@ public class ClassImpl implements ClassFacade{
 	@Autowired
 	private ClassDao classDao;
 	
-	public List<Class> viewClassList(PagingVO vo) {
-		return classDao.viewClassList(vo);
+	public List<Class> viewClassList(String keyword) {
+		return classDao.viewClassList(keyword);
 	}
 
 	@Override

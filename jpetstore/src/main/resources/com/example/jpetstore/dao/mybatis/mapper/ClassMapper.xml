@@ -8,9 +8,8 @@
   </sql>
   
   	<!-- class모든 컬럼과 category의 name 필드 join해서 가져오기 -->
-	<select id="viewClassList" parameterType="com.example.jpetstore.domain.PagingVO" resultType="com.example.jpetstore.domain.Class">
-		SELECT * FROM
-			(SELECT ROWNUM AS NUM, C.* FROM 
+	<select id="viewClassList" parameterType="String" resultType="com.example.jpetstore.domain.Class">
+		SELECT ROWNUM AS NUM, C.* FROM 
 				(SELECT C.*, CAT.NAME AS categoryName
 			 	FROM CLASS C, CATEGORY CAT
 			 	<where>
@@ -21,8 +20,7 @@
 			 		AND C.TITLE LIKE '%' || #{keyword} || '%'
 			 		</if>
 			 	</where>
-			 	ORDER BY CLASS_ID)C)
-		WHERE NUM BETWEEN #{start} AND #{end}
+			 	ORDER BY CLASS_ID)C
 	</select>
 	
 	<!-- 카테고리 테이블에서 카테고리 리스트 가져오기 -->

@@ -23,8 +23,8 @@ public class MybatisClassDao implements ClassDao{
 	@Autowired
 	private ClassMapper classMapper;
 	
-	public List<Class> viewClassList(PagingVO vo) throws DataAccessException{
-		return classMapper.viewClassList(vo);
+	public List<Class> viewClassList(String keyword) throws DataAccessException{
+		return classMapper.viewClassList(keyword);
 	}
 
 	@Override

@@ -105,14 +105,14 @@ public class ClassController {
 	// 클래스 게시판 목록
 	@GetMapping("/viewList")
 	public String viewClassList(Model model, @RequestParam(required = false) String keyword,
-			@RequestParam(required = false) String nowPage, HttpServletResponse response) {
+		 HttpServletResponse response) {
 
 		int total = classFacade.countClass();
-		int cntPerPage = 9;
+		/* int cntPerPage = 9; */
 
-		if (nowPage == null) {
-			nowPage = "1";
-		}
+		/*
+		 * if (nowPage == null) { nowPage = "1"; }
+		 */
 
 		Filtering filtering = new Filtering();
 		List<String> checkedCategory = new ArrayList<String>();
@@ -122,10 +122,12 @@ public class ClassController {
 		filtering.setCheckedLocal(checkedLocal);
 		filtering.setCheckedCategory(checkedCategory);
 		model.addAttribute("filtering", filtering);
+		/*
+		 * PagingVO vo = new PagingVO(total, Integer.parseInt(nowPage), cntPerPage,
+		 * keyword);
+		 */
 
-		PagingVO vo = new PagingVO(total, Integer.parseInt(nowPage), cntPerPage, keyword);
-
-		List<Class> classList = classFacade.viewClassList(vo);
+		List<Class> classList = classFacade.viewClassList(keyword);
 		Date today = new Date();
 		long t = today.getTime();
 		for (Class c : classList) {
@@ -141,7 +143,7 @@ public class ClassController {
 			}
 		}
 
-		model.addAttribute("paging", vo);
+		/* model.addAttribute("paging", vo); */
 		model.addAttribute("classList", classList);
 
 		return "thyme/ViewClassList";
