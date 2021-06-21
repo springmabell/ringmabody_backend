@@ -2,12 +2,18 @@ package com.example.jpetstore.dao;
 
 import java.util.List;
 import org.springframework.dao.DataAccessException;
+
+import com.example.jpetstore.domain.PagingVO;
 import com.example.jpetstore.domain.TeacherAccount;
 import com.example.jpetstore.domain.UserAccount;
 
 public interface UserAccountDao {
 	
 
+	int countUser() throws DataAccessException;
+	
+	List<UserAccount> selectUser(PagingVO vo) throws DataAccessException;
+	
   UserAccount getUserAccount(String username) throws DataAccessException;
 
   UserAccount getUserAccount(String username, String password) throws DataAccessException;

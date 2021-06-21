@@ -5,6 +5,7 @@ import java.util.List;
 import com.example.jpetstore.domain.Category;
 import com.example.jpetstore.domain.Item;
 import com.example.jpetstore.domain.Order;
+import com.example.jpetstore.domain.PagingVO;
 import com.example.jpetstore.domain.Payment;
 import com.example.jpetstore.domain.Product;
 import com.example.jpetstore.domain.Review;
@@ -79,5 +80,13 @@ public interface PetStoreFacade {
 	List<Payment> getAllPayments();
 	
 	List<Order> getAllOrders();
+	
+
+	// 게시물 총 갯수
+	public int countUser();
+
+	// 페이징 처리 게시글 조회
+	public List<UserAccount> selectUser(PagingVO vo);
+
 
 }

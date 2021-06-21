@@ -15,6 +15,7 @@ import com.example.jpetstore.dao.UserAccountDao;
 import com.example.jpetstore.domain.Category;
 import com.example.jpetstore.domain.Item;
 import com.example.jpetstore.domain.Order;
+import com.example.jpetstore.domain.PagingVO;
 import com.example.jpetstore.domain.Payment;
 import com.example.jpetstore.domain.Product;
 import com.example.jpetstore.domain.Review;
@@ -173,4 +174,13 @@ public class PetStoreImpl implements PetStoreFacade {
 		return orderDao.getAllOrders();
 	}
 	
+	@Override
+	public int countUser() {
+		return userAccountDao.countUser();
+	}
+
+	@Override
+	public List<UserAccount> selectUser(PagingVO vo) {
+		return userAccountDao.selectUser(vo);
+	}
 }
