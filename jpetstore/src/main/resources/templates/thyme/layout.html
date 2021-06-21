@@ -8,83 +8,91 @@
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Comic+Neue:wght@700&display=swap" rel="stylesheet">
 
-    <style>
-    #header{
-        height: 100px;
-        background-color: rgb(123, 227, 251);
-    }
-    .header_nav{
-        width: 1100px;
-        height: 100px;
-        margin: auto;
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-    }
-    .header_nav_logo{
-        font-size: 40px;
-        font-family: 'Comic Neue', cursive;
-        color: rgb(51, 51, 51);
-    }
-    .header_nav_search{
-        background-color: white;
-        padding-left: 10px;
-        padding-right: 10px;
-        box-sizing: border-box;
-        border-radius: 10px;
-    }
-    .header_nav_search input{
-        width: 250px;
-        height: 40px;
-        border: none;
-        outline: none;
-        font-size: 22px;
-    }
-    .header_nav_search i{
-        display: inline-block;
-        font-size: 22px;
-        color: aqua;
-    }
-    .header_nav_login{
-        font-size: 18px;
-        font-weight: 600;
-    }
-    .header_nav_logo_right{
-        width: 400px;
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-    }
-    </style>
+
+ 	<div th:fragment="style">
+	    <style>
+	    
+	    #header{
+	        height: 100px;
+	        background-color: rgb(123, 227, 251);
+	    }
+	    .header_nav{
+	        width: 1100px;
+	        height: 100px;
+	        margin: auto;
+	        display: flex;
+	        align-items: center;
+	        justify-content: space-between;
+	    }
+	    .header_nav_logo{
+	        font-size: 40px;
+	        font-family: 'Comic Neue', cursive;
+	        color: rgb(51, 51, 51);
+	    }
+	    .header_nav_search{
+	        background-color: white;
+	        padding-left: 10px;
+	        padding-right: 10px;
+	        box-sizing: border-box;
+	        border-radius: 10px;
+	    }
+	    .header_nav_search input{
+	        width: 250px;
+	        height: 40px;
+	        border: none;
+	        outline: none;
+	        font-size: 22px;
+	    }
+	    .header_nav_search i{
+	        display: inline-block;
+	        font-size: 22px;
+	        color: aqua;
+	    }
+	    .header_nav_login{
+	        font-size: 18px;
+	        font-weight: 600;
+	    }
+	    .header_nav_logo_right{
+	        width: 450px;
+	        display: flex;
+	        align-items: center;
+	        justify-content: space-between;
+	    }
+	    
+	    a { text-decoration:none } 
+	    </style>
+    </div>
 </head>
 <body>
 
-<div id="wrap">
-
-    <div id="header">
-        <div class="header_nav">
-            <div class="header_nav_logo">
-                <a href="">RingMaBody</a>
-            </div>
-            <div class="header_nav_logo_right">
-                <div class="header_nav_search">
-                    <form>
-                        <input type="text">
-                        <button><i class="fas fa-search"></i></button>
-                    </form>
-                </div>
-                <div class="header_nav_login">
-                    <a href="">로그인</a>
-                </div>
-            </div>
-        </div><!--end header_nav-->
-    </div><!--end header-->
-
-    <div id="container"></div><!--end container-->
-    <div id="footer"></div><!--end footer-->
-
-</div><!--end wrap-->
-
+ <div th:fragment="header">
+	<div id="wrap">
+	
+	    <div id="header">
+	        <div class="header_nav">
+	            <div class="header_nav_logo">
+	                <a href="" th:href="@{/main/mainPage}">RingMaBody</a>
+	            </div>
+	            <div class="header_nav_logo_right">
+	                <div class="header_nav_search">
+	                    <form>
+	                        <input type="text">
+	                        <button><i class="fas fa-search">검색</i></button>
+	                    </form>
+	                </div>
+	                <div class="header_nav_login">
+	                    <a href="" th:href="@{/user/loginForm.do}">회원 로그인</a><br/>
+	                    <a href="" th:href="@{/teacher/loginForm.do}">강사 로그인</a>
+	                </div>
+	            </div>
+	        </div><!--end header_nav-->
+	    </div><!--end header-->
+	
+	    <div id="container"></div><!--end container-->
+	    <div id="footer"></div><!--end footer-->
+	
+	</div><!--end wrap-->
+</div>
 
 
 </body>

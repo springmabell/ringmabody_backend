@@ -1,3 +1,4 @@
+
 /*
  *    Copyright 2010-2013 the original author or authors.
  *
@@ -20,8 +21,8 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
 
-import com.example.jpetstore.domain.Account;
 import com.example.jpetstore.domain.TeacherAccount;
+import com.example.jpetstore.domain.UserAccount;
 
 /**
  * @author Eduardo Macarron
@@ -35,6 +36,12 @@ public interface TeacherAccountMapper {
   TeacherAccount getTeacherAccountByTeacher_id(String teacher_id);
 
   TeacherAccount getTeacherAccountByTeacher_idAndTeacher_pwd(String teacher_id, String teacher_pwd);
+
+  void insertTeacherAccount(TeacherAccount account);
   
+  void updateTeacherAccount(TeacherAccount account);
+
+  List<TeacherAccount> getAllClass();
+
 
 }

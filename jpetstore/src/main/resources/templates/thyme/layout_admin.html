@@ -8,6 +8,8 @@
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Comic+Neue:wght@700&display=swap" rel="stylesheet">
 
+
+ 	<div th:fragment="style">
     <style>
     
     #header{
@@ -46,30 +48,70 @@
     .header_nav_login{
         font-size: 18px;
         font-weight: 600;
-    }
-    .header_nav_logo_right{
-        width: 160px;
         display: flex;
         align-items: center;
-        justify-content: space-between;
+    }
+    .header_nav_logo_right{
+        width: 200px;
+/*         display: flex;
+        align-items: center;
+        justify-content: space-between; */
         font-size: 20px;
     }
+    #header_name {
+    	color: black;
+    }
+    
+	a { text-decoration:none;
+		color: black; 
+	} 
+	div {
+		white-space: nowrap;
+	}
     </style>
+    
+	<script type="text/JavaScript"  th:inline="javascript">
+	function password() {
+			
+		pass=prompt('패스워드를 입력하세요. ','');
+		if (pass=="1234") {location.href="/admin/listUsers.do";}
+		else {alert("패스워드가 일치하지 않습니다. 다시 입력해 주세요.");}
+		
+	} 
+	//
+	</script>
+    </div>
 </head>
 <body>
 
+<div th:fragment="header">
 <div id="wrap">
 
     <div id="header">
         <div class="header_nav">
             <div class="header_nav_logo">
-                <a href="">RingMaBody</a>
-                <b>관리자</b>
+                <a href="" th:href="@{/main/mainPage}">RingMaBody</a>
             </div>
+            <span class="header_nav_login">
+                  	<a th:href="@{/class/viewList}" onclick="list();">강의 목록 보기</a>
+            </span>
             <div class="header_nav_logo_right">
-                <p>홍길동 관리자</p>
-                <a>▽</a>
-                <div class="header_nav_login">
+            	<div class="header_nav_login">
+	            	<div th:if="${session.userSession} or ${session.teacherSession}">
+	                	<a id="header_name" href=""  th:href="@{/mypage/info.do}" ><span th:text="${user_id}">홍길동</span>
+	                	<span th:if="${session.userSession}">회원</span>
+	                	<span th:if="${session.teacherSession}">강사</span>님 ▽</a>&nbsp&nbsp&nbsp&nbsp
+	                </div>
+	                <div th:if="${session.userSession} or ${session.teacherSession}">
+	                    <a href="" th:href="@{/user/signoff.do}" onClick="alert('로그아웃 되었습니다.')">로그아웃</a><br/>
+	           		</div>
+	            </div>
+                <div th:unless="${session.userSession} or ${session.teacherSession}">
+	                <div class="header_nav_login">
+	                    <a href="" th:href="@{/user/loginForm.do}">회원 로그인</a>&nbsp&nbsp
+	                    <a href="" th:href="@{/teacher/loginForm.do}">강사 로그인</a>&nbsp&nbsp
+	                    <a href="javascript:password();" style="color:orange" >관리자</a>
+	                </div>
                 </div>
             </div>
         </div><!--end header_nav-->
@@ -82,8 +124,7 @@
     <div id="footer"></div><!--end footer-->
 
 </div><!--end wrap-->
-
-
+</div>
 
 </body>
 </html>

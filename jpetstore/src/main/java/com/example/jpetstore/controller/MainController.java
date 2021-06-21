@@ -2,18 +2,21 @@ package com.example.jpetstore.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.example.jpetstore.service.MainFacade;
 import com.example.jpetstore.domain.Class;
 
-//¸ÞÀÎ ÆäÀÌÁö ÄÁÆ®·Ñ·¯
+//ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Æ®ï¿½Ñ·ï¿½
 @Controller
 @RequestMapping("/main")
 public class MainController {
@@ -21,15 +24,29 @@ public class MainController {
 
 	@Autowired
 	private MainFacade mainFacade;
-
 	
 	@GetMapping("/mainPage")
-	public String viewMain(Model model) {
-		//¸¶°¨ÀÓ¹Ú¼ø 3°³
+	public String viewMain(Model model, HttpSession session) {
+		//ï¿½ï¿½ï¿½ï¿½ï¿½Ó¹Ú¼ï¿½ 3ï¿½ï¿½
 		List<Class> endingSoonList = mainFacade.endingSoon();
 		List<Class> bestClassList = mainFacade.bestClass();
 		model.addAttribute("endingSoonList", endingSoonList);
 		model.addAttribute("bestClassList", bestClassList);
+		
+
+		System.out.println("main");
+		
+		if(session.getAttribute("userSession") != null){
+			UserSession userSession1 = (UserSession)session.getAttribute("userSession");
+			model.addAttribute("user_id", userSession1.getAccount().getUser_id());
+			model.addAttribute("name", userSession1.getAccount().getUser_name());
+			System.out.println(userSession1.getAccount().getUser_id() + "main");
+			
+		} else if(session.getAttribute("teacherSession") != null){
+			TeacherSession teacherSession1 = (TeacherSession)session.getAttribute("teacherSession");
+			model.addAttribute("name", teacherSession1.getAccount().getTeacher_name());
+		}
+
 		return "thyme/main";
 	}
 	

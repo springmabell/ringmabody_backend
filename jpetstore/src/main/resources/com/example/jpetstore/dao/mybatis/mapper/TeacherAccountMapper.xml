@@ -19,5 +19,68 @@
     	   TEACHERACCOUNT.REGISTER_DATE
     FROM TEACHERACCOUNT
   </select>
+  
+  
+  <select id="getTeacherAccountByTeacher_id" resultType="TeacherAccount">
+    SELECT TEACHERACCOUNT.TEACHER_ID,
+    	   TEACHERACCOUNT.TEACHER_PWD,
+    	   TEACHERACCOUNT.TEACHER_NAME,
+    	   TEACHERACCOUNT.TEACHER_IMG,
+    	   TEACHERACCOUNT.EMAIL,
+    	   TEACHERACCOUNT.PHONENUM,
+    	   TEACHERACCOUNT.USER_TYPE,
+    	   TEACHERACCOUNT.BELONG,
+    	   TEACHERACCOUNT.CAREER,
+    	   TEACHERACCOUNT.WEBSITE,
+    	   TEACHERACCOUNT.TEACHER_DESC,
+    	   TEACHERACCOUNT.REGISTER_DATE
+    FROM TEACHERACCOUNT
+    WHERE TEACHERACCOUNT.TEACHER_ID = #{param1}
+  </select>
+  
+    <select id="getTeacherAccountByTeacher_idAndTeacher_pwd" resultType="TeacherAccount">
+    SELECT TEACHERACCOUNT.TEACHER_ID,
+    	   TEACHERACCOUNT.TEACHER_PWD,
+    	   TEACHERACCOUNT.TEACHER_NAME,
+    	   TEACHERACCOUNT.TEACHER_IMG,
+    	   TEACHERACCOUNT.EMAIL,
+    	   TEACHERACCOUNT.PHONENUM,
+    	   TEACHERACCOUNT.USER_TYPE,
+    	   TEACHERACCOUNT.BELONG,
+    	   TEACHERACCOUNT.CAREER,
+    	   TEACHERACCOUNT.WEBSITE,
+    	   TEACHERACCOUNT.TEACHER_DESC,
+    	   TEACHERACCOUNT.REGISTER_DATE
+    FROM TEACHERACCOUNT
+    WHERE TEACHERACCOUNT.TEACHER_ID = #{param1}
+      AND TEACHERACCOUNT.TEACHER_PWD = #{param2}
+  </select>
+  
+  
+  <insert id="insertTeacherAccount" parameterType="TeacherAccount">
+    INSERT INTO TEACHERACCOUNT
+      (TEACHER_ID, TEACHER_PWD, TEACHER_NAME, EMAIL, PHONENUM, USER_TYPE)
+    VALUES
+      (#{teacher_id}, #{teacher_pwd}, #{teacher_name},  #{email}, #{phonenum}, #{user_type})
+  </insert>
+  
+  
+  <update id="updateTeacherAccount" parameterType="TeacherAccount">
+    UPDATE TEACHERACCOUNT SET
+      TEACHER_ID = #{teacher_id},
+      TEACHER_PWD = #{teacher_pwd},
+      TEACHER_NAME = #{teacher_name},
+      TEACHER_IMG = #{teacher_img},
+      EMAIL = #{email},
+      PHONENUM = #{phonenum},
+      USER_TYPE = #{user_type},
+      BELONG = #{belong},
+      CAREER = #{career},
+      WEBSITE = #{website},
+      TEACHER_DESC = #{teacher_desc},
+      REGISTER_DATE = #{register_date}
+    WHERE TEACHER_ID = #{teacher_id}
+  </update>
+  
 
 </mapper>

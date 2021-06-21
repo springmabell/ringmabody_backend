@@ -2,11 +2,12 @@ package com.example.jpetstore.service;
 
 import java.util.List;
 
-import com.example.jpetstore.domain.Account;
 import com.example.jpetstore.domain.Category;
+import com.example.jpetstore.domain.Class;
 import com.example.jpetstore.domain.Item;
 import com.example.jpetstore.domain.Order;
 import com.example.jpetstore.domain.Product;
+import com.example.jpetstore.domain.Review;
 import com.example.jpetstore.domain.TeacherAccount;
 import com.example.jpetstore.domain.UserAccount;
 
@@ -17,17 +18,6 @@ import com.example.jpetstore.domain.UserAccount;
  * @since 30.11.2003
  */
 public interface PetStoreFacade {
-
-	Account getAccount(String username);
-
-	Account getAccount(String username, String password);
-
-	void insertAccount(Account account);
-
-	void updateAccount(Account account);
-
-	List<String> getUsernameList();
-
 
 	List<Category> getCategoryList();
 
@@ -61,6 +51,8 @@ public interface PetStoreFacade {
 	
 	List<UserAccount> getAllUserAccount();
 	
+	List<TeacherAccount> getAllClass();
+	
 	UserAccount getUserAccount(String username);
 	
 	UserAccount getUserAccount(String username, String password);
@@ -78,9 +70,12 @@ public interface PetStoreFacade {
 
 	void updateTeacherAccount(TeacherAccount account);
 
-
-
-
+	List<Review> getAllReviews();
 	
+	List<Review> getReviews(String username);
+
+	Review getReviewDetail(int review_id);
 	
+	public void writeReview(Review newReview);
+
 }

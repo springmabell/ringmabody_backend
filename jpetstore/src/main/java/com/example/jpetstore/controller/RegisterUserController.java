@@ -8,13 +8,17 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.beans.support.PagedListHolder;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.util.WebUtils;
 import com.example.jpetstore.domain.Category;
+import com.example.jpetstore.domain.Class;
 import com.example.jpetstore.domain.Product;
+import com.example.jpetstore.service.MainFacade;
 import com.example.jpetstore.service.PetStoreFacade;
 
 /**
@@ -24,12 +28,15 @@ import com.example.jpetstore.service.PetStoreFacade;
  */
 @Controller
 @RequestMapping({"/user/join.do","/user/updateUser.do"})
+@SessionAttributes("userSession")
 public class RegisterUserController { 
 
-	@Value("EditAccountForm")
+	@Value("thyme/join_user_form")
 	private String formViewName;
-	@Value("index")
-	private String successViewName;
+	
+
+	@Autowired
+	private MainFacade mainFacade;
 	
 	@Autowired
 	private PetStoreFacade petStore;
@@ -37,27 +44,12 @@ public class RegisterUserController {
 		this.petStore = petStore;
 	}
 
-//	@Autowired
-//	private AccountFormValidator validator;
-//	public void setValidator(AccountFormValidator validator) {
-//		this.validator = validator;
-//	}
-		
 	@ModelAttribute("userAccountForm")
 	public UserAccountForm formBackingObject(HttpServletRequest request) 
 			throws Exception {
 		UserSession userSession = 
 			(UserSession) WebUtils.getSessionAttribute(request, "userSession");
-//		if (userSession != null) {	// edit an existing accoun
-//			System.out.println("pass 1");
-//			
-//			System.out.println(userSession.getAccount().getUser_id());
-//			return new UserAccountForm(
-//				petStore.getUserAccount(userSession.getAccount().getUser_id()));
-//		}
-//		else {	// create a new account
 			return new UserAccountForm();
-//		}
 	}
 
 
@@ -71,16 +63,9 @@ public class RegisterUserController {
 	public String onSubmit(
 			HttpServletRequest request, HttpSession session,
 			@ModelAttribute("userAccountForm") UserAccountForm userAccountForm,
+			Model model,
 			BindingResult result) throws Exception {
 
-//		if (request.getParameter("account.listOption") == null) {
-//			userAccountForm.getAccount().setListOption(false);
-//		}
-//		if (request.getParameter("account.bannerOption") == null) {
-//			userAccountForm.getAccount().setBannerOption(false);
-//		}
-
-//		validator.validate(userAccountForm, result);
 		
 		if (result.hasErrors()) return formViewName;
 		try {
@@ -100,12 +85,25 @@ public class RegisterUserController {
 		UserSession userSession = new UserSession(
 			petStore.getUserAccount(userAccountForm.getAccount().getUser_id()));
 		
-//		PagedListHolder<Product> myList = new PagedListHolder<Product>(
-//			petStore.getProductListByCategory(accountForm.getAccount().getFavouriteCategoryId()));
-//		myList.setPageSize(4);
-//		userSession.setMyList(myList);
-		
 		session.setAttribute("userSession", userSession);
-		return successViewName;  
+		
+
+		List<Class> endingSoonList = mainFacade.endingSoon();
+		List<Class> bestClassList = mainFacade.bestClass();
+		model.addAttribute("endingSoonList", endingSoonList);
+		model.addAttribute("bestClassList", bestClassList);
+		model.addAttribute("name", userSession.getAccount().getUser_name());
+
+		
+		return "thyme/main";  
 	}
 }
+
+
+
+
+
+
+
+
+

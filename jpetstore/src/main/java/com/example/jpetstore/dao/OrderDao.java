@@ -12,6 +12,6 @@ public interface OrderDao {
 
   Order getOrder(int orderId) throws DataAccessException;
 
-  void insertOrder(Order order) throws DataAccessException;
-
+	public void insertOrder(Order order) throws DataAccessException;
+	public void updateParticipant(int class_id) throws DataAccessException;
 }

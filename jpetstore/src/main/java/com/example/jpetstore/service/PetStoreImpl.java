@@ -4,26 +4,25 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import com.example.jpetstore.dao.AccountDao;
 import com.example.jpetstore.dao.CategoryDao;
 import com.example.jpetstore.dao.ItemDao;
 import com.example.jpetstore.dao.OrderDao;
 import com.example.jpetstore.dao.ProductDao;
+import com.example.jpetstore.dao.ReviewDao;
 import com.example.jpetstore.dao.TeacherAccountDao;
 import com.example.jpetstore.dao.UserAccountDao;
-import com.example.jpetstore.domain.Account;
 import com.example.jpetstore.domain.Category;
+import com.example.jpetstore.domain.Class;
 import com.example.jpetstore.domain.Item;
 import com.example.jpetstore.domain.Order;
 import com.example.jpetstore.domain.Product;
+import com.example.jpetstore.domain.Review;
 import com.example.jpetstore.domain.TeacherAccount;
 import com.example.jpetstore.domain.UserAccount;
 
 @Service
 @Transactional
 public class PetStoreImpl implements PetStoreFacade { 
-	@Autowired
-	private AccountDao accountDao;
 	@Autowired
 	private CategoryDao categoryDao;
 	@Autowired
@@ -36,31 +35,13 @@ public class PetStoreImpl implements PetStoreFacade {
 	private TeacherAccountDao teacherAccountDao;
 	@Autowired
 	private UserAccountDao userAccountDao;
+	@Autowired
+	private ReviewDao reviewDao;
 	
 
 	//-------------------------------------------------------------------------
 	// Operation methods, implementing the PetStoreFacade interface
 	//-------------------------------------------------------------------------
-
-	public Account getAccount(String username) {
-		return accountDao.getAccount(username);
-	}
-
-	public Account getAccount(String username, String password) {
-		return accountDao.getAccount(username, password);
-	}
-
-	public void insertAccount(Account account) {
-		accountDao.insertAccount(account);
-	}
-
-	public void updateAccount(Account account) {
-		accountDao.updateAccount(account);
-	}
-
-	public List<String> getUsernameList() {
-		return accountDao.getUsernameList();
-	}
 
 	public List<Category> getCategoryList() {
 		return categoryDao.getCategoryList();
@@ -113,6 +94,11 @@ public class PetStoreImpl implements PetStoreFacade {
 		return teacherAccountDao.getAllTeacherAccount();
 	};
 	
+	public List<TeacherAccount> getAllClass() {
+		// TODO Auto-generated method stub
+		return teacherAccountDao.getAllClass();
+	}
+	
 	public List<UserAccount> getAllUserAccount() {
 		return userAccountDao.getAllUserAccount();
 	};
@@ -156,4 +142,29 @@ public class PetStoreImpl implements PetStoreFacade {
 		// TODO Auto-generated method stub
 		teacherAccountDao.updateTeacherAccount(account);
 	}
+	
+	@Override
+	public List<Review> getReviews(String user_id) {
+		// TODO Auto-generated method stub
+		return reviewDao.getReviews(user_id);
+	}
+
+	@Override
+	public List<Review> getAllReviews() {
+		// TODO Auto-generated method stub
+		return reviewDao.getAllReviews();
+	}
+
+	@Override
+	public Review getReviewDetail(int review_id) {
+		// TODO Auto-generated method stub
+		return reviewDao.getReviewDetail(review_id);
+	}
+
+	@Override
+	public void writeReview(Review newReview) {
+		// TODO Auto-generated method stub
+		reviewDao.writeReview(newReview);
+	}
+
 }

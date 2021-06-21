@@ -8,9 +8,8 @@
   </sql>
   
   	<!-- class모든 컬럼과 category의 name 필드 join해서 가져오기 -->
-	<select id="viewClassList" parameterType="hello.spring.domain.PagingVO" resultType="hello.spring.domain.Class">
-		SELECT * FROM
-			(SELECT ROWNUM AS NUM, C.* FROM 
+	<select id="viewClassList" parameterType="String" resultType="com.example.jpetstore.domain.Class">
+		SELECT ROWNUM AS NUM, C.* FROM 
 				(SELECT C.*, CAT.NAME AS categoryName
 			 	FROM CLASS C, CATEGORY CAT
 			 	<where>
@@ -21,18 +20,17 @@
 			 		AND C.TITLE LIKE '%' || #{keyword} || '%'
 			 		</if>
 			 	</where>
-			 	ORDER BY CLASS_ID)C)
-		WHERE NUM BETWEEN #{start} AND #{end}
+			 	ORDER BY CLASS_ID)C
 	</select>
 	
 	<!-- 카테고리 테이블에서 카테고리 리스트 가져오기 -->
-	<select id="getCategoryList" resultType="hello.spring.domain.Category">
+	<select id="getCategoryList" resultType="com.example.jpetstore.domain.Category">
 		SELECT *
 		FROM CATEGORY
 	</select>
 	
 	<!-- 필터링 : 클래스 리스트 반환과 합쳐야 하는가? -->
-	<select id="filteringClass" parameterType="hello.spring.domain.Filtering" resultType="hello.spring.domain.Class">
+	<select id="filteringClass" parameterType="com.example.jpetstore.domain.Filtering" resultType="com.example.jpetstore.domain.Class">
 		SELECT F.* FROM
 		(SELECT C.*, CAT.NAME AS categoryName
 		 FROM CLASS C, CATEGORY CAT
@@ -57,16 +55,25 @@
     	 WHERE CLASS_ID = #{class_id}
 	</update>	 -->
 	
-	
+
 	<!-- class_id 이용해서 class 객체 반환하기 -->
-	<select id="findClass"  parameterType="int" resultType="hello.spring.domain.Class">
+<!-- 	<select id="findClass"  parameterType="int" resultType="hello.spring.domain.Class">
 		SELECT C.*, CAT.NAME AS categoryName
 	 	FROM CLASS C, CATEGORY CAT
 	 	WHERE C.CLASS_ID = #{class_id} AND C.CATEGORY_ID = CAT.CATEGORY_ID
+	</select> -->
+	
+	<!-- 작성한 클래스 class 테이블에 삽입하기 -->
+	<select id="findClass"  parameterType="int" resultType="com.example.jpetstore.domain.Class">
+		SELECT c.*, ta.TEACHER_NAME AS teacher_name, ta.TEACHER_DESC AS teacher_desc FROM
+		(SELECT C.*, CAT.NAME AS categoryName
+	 	FROM CLASS C, CATEGORY CAT
+	 	WHERE C.CLASS_ID = #{class_id} AND C.CATEGORY_ID = CAT.CATEGORY_ID)c, TEACHERACCOUNT ta
+	 	WHERE c.TEACHER_ID = ta.TEACHER_ID
 	</select>
 	
 	<!-- 작성한 클래스 class 테이블에 삽입하기 -->
-	<insert id="writeClass" parameterType="hello.spring.domain.Class">
+	<insert id="writeClass" parameterType="com.example.jpetstore.domain.Class">
 		<selectKey keyProperty="class_id" resultType="int" order="BEFORE">
 			SELECT CLASS_ID_SEQ.NEXTVAL AS class_id FROM DUAL
 		</selectKey>
@@ -77,7 +84,7 @@
 	</insert>
 	
 	<!-- 클래스 update -->
-	<update id="updateClass" parameterType="hello.spring.domain.Class">
+	<update id="updateClass" parameterType="com.example.jpetstore.domain.Class">
 		UPDATE CLASS SET
 		TITLE = #{title},
 		CATEGORY_ID = #{category_id, jdbcType=INTEGER},
@@ -91,6 +98,35 @@
 		IMG = #{img, jdbcType=VARCHAR}
 		WHERE CLASS_ID = #{class_id} 
 	</update>
+	
+	<!-- 장바구니 담겼는지 확인 -->
+	<select id="existCart" parameterType="com.example.jpetstore.domain.Cart" resultType="int">
+		SELECT COUNT(*) FROM CARTITEM
+		WHERE USER_ID = #{user_id} AND CLASS_ID = #{class_id}
+	</select>
+	
+	<!-- 장바구니에 추가 -->
+	<insert id="insertCartItem" parameterType="com.example.jpetstore.domain.Cart">
+		INSERT INTO CARTITEM (USER_ID, CLASS_ID) 
+		VALUES(#{user_id, jdbcType=VARCHAR}, #{class_id})
+	</insert>
+	
+	<!-- 장바구니 정보와 class 정보 join 해서 cart html 에 정보보여주기 -->
+	<select id="findCartList" parameterType="String" resultType="com.example.jpetstore.domain.CartCommand">
+		SELECT CI.USER_ID AS user_id , CI.CLASS_ID AS class_id, C.TEACHER_ID AS "findClass.teacher_id", C.CLASS_ID AS "findClass.class_id", C.PRICE AS "findClass.price", C.TITLE AS "findClass.title", C.IMG AS "findClass.img"
+		FROM CARTITEM CI, CLASS C
+		WHERE CI.CLASS_ID = C.CLASS_ID 
+		<if test="value != null">
+			AND CI.USER_ID = #{value}
+		</if> 
+		ORDER BY CI.CLASS_ID
+	</select>
+
+	<!-- 장바구니 삭제하기 -->
+	<delete id="deleteCart" parameterType="com.example.jpetstore.domain.Cart">
+		DELETE FROM CARTITEM
+		WHERE USER_ID = #{user_id} AND CLASS_ID = #{class_id}
+	</delete>
 	
 	<!-- 클래스 delete -->
 	<delete id="deleteClass" parameterType="int">
@@ -108,4 +144,11 @@
 		UPDATE CLASS SET HIT = HIT + 1
 		WHERE CLASS_ID = #{class_id}
 	</update>
+		
+	<delete id="deleteFinishedClassFromCart">
+		DELETE FROM CARTITEM
+		WHERE class_id in(
+        select class_id from class
+        where state = '마감')
+	</delete>
 </mapper>

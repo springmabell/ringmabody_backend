@@ -14,6 +14,7 @@ import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,24 +42,25 @@ import com.example.jpetstore.service.SchedulerFacade;
 import com.example.jpetstore.domain.Category;
 import com.example.jpetstore.domain.Class;
 import com.example.jpetstore.domain.Filtering;
-import com.example.jpetstore.domain.Foo;
 import com.example.jpetstore.domain.PagingVO;
-import com.example.jpetstore.domain.RequestModel;
-import com.example.jpetstore.domain.User;
 
-
+import com.example.jpetstore.domain.PagingVO;
 @Controller
 @RequestMapping("/class")
-@SessionAttributes("newClass")
+@SessionAttributes({"userSession","teacherSession", "newClass"})
 public class ClassController {
 
 	private static final Logger LOGGER = LoggerFactory.getLogger(ClassController.class);
 
+	/*
+	 * private static final Logger LOGGER =
+	 * LoggerFactory.getLogger(ClassController.class);
+	 */
 	@Autowired
 	private ClassFacade classFacade;
 
 	@Autowired
-	private SchedulerFacade schedulerFacade; // ½ºÄÉÁÙ·¯ ¼­ºñ½º ÀÎÅÍÆäÀÌ½º
+	private SchedulerFacade schedulerFacade; // ìŠ¤ì¼€ì¤„ëŸ¬ ì„œë¹„ìŠ¤ ì¸í„°í˜ì´ìŠ¤
 
 	@ModelAttribute("newClass")
 	public Class newClass() {
@@ -66,6 +68,19 @@ public class ClassController {
 		return newClass;
 	}
 
+	@ModelAttribute("name")
+	public String returnName(HttpSession session, Model model) {
+		String name="";
+		if(session.getAttribute("userSession") != null){
+			UserSession userSession1 = (UserSession)session.getAttribute("userSession");
+			name = userSession1.getAccount().getUser_name();
+		} else if(session.getAttribute("teacherSession") != null){
+			TeacherSession teacherSession1 = (TeacherSession)session.getAttribute("teacherSession");
+			name = teacherSession1.getAccount().getTeacher_name();
+		}
+		return name;
+	}
+	
 	@ModelAttribute("categoryList")
 	public List<Category> getCategoryList() {
 		List<Category> categoryList = classFacade.getCategoryList();
@@ -74,10 +89,8 @@ public class ClassController {
 
 	@ModelAttribute("localList")
 	public String[] getLocalList() {
-
-		return new String[] { "¼­¿ï", "°æ±â", "°­¿ø", "Ãæ³²", "ÃæºÏ", "Àü³²", "ÀüºÏ", "°æ³²", "°æºÏ", "ºÎ»ê", "´ë±¸", "ÀÎÃµ", "±¤ÁÖ", "¼¼Á¾", "´ëÀü",
-				"¿ï»ê", "Á¦ÁÖ" };
-
+		return new String[] { "ì„œìš¸", "ê²½ê¸°", "ê°•ì›", "ì¶©ë‚¨", "ì¶©ë¶", "ì „ë‚¨", "ì „ë¶", "ê²½ë‚¨", "ê²½ë¶", "ë¶€ì‚°", "ëŒ€êµ¬", "ì¸ì²œ", "ê´‘ì£¼", "ì„¸ì¢…", "ëŒ€ì „",
+				"ìš¸ì‚°", "ì œì£¼" };
 	}
 
 	@ModelAttribute("filtering")
@@ -87,32 +100,25 @@ public class ClassController {
 
 	@PostMapping("/viewList")
 	public String filteringClass(@ModelAttribute(value = "filtering") Filtering filtering, Model model,
-			HttpServletResponse response) {
-		response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate"); // HTTP 1.1.
-		response.setHeader("Pragma", "no-cache"); // HTTP 1.0.
-		response.setHeader("Expires", "0"); // Proxies.
+			HttpServletResponse response, HttpSession session) {
 
 		List<Class> classList = classFacade.filteringClass(filtering);
-
 		model.addAttribute("classList", classList);
 
-		return "thyme/viewList";
+		return "thyme/ViewClassList";
 	}
 
-	// Å¬·¡½º °Ô½ÃÆÇ ¸ñ·Ï
+	// í´ë˜ìŠ¤ ê²Œì‹œíŒ ëª©ë¡
 	@GetMapping("/viewList")
 	public String viewClassList(Model model, @RequestParam(required = false) String keyword,
-			@RequestParam(required = false) String nowPage, HttpServletResponse response) {
-		response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate"); // HTTP 1.1.
-		response.setHeader("Pragma", "no-cache"); // HTTP 1.0.
-		response.setHeader("Expires", "0"); // Proxies.
+		 HttpServletResponse response, HttpSession session) {
 
 		int total = classFacade.countClass();
-		int cntPerPage = 9;
+		/* int cntPerPage = 9; */
 
-		if (nowPage == null) {
-			nowPage = "1";
-		}
+		/*
+		 * if (nowPage == null) { nowPage = "1"; }
+		 */
 
 		Filtering filtering = new Filtering();
 		List<String> checkedCategory = new ArrayList<String>();
@@ -122,10 +128,12 @@ public class ClassController {
 		filtering.setCheckedLocal(checkedLocal);
 		filtering.setCheckedCategory(checkedCategory);
 		model.addAttribute("filtering", filtering);
+		/*
+		 * PagingVO vo = new PagingVO(total, Integer.parseInt(nowPage), cntPerPage,
+		 * keyword);
+		 */
 
-		PagingVO vo = new PagingVO(total, Integer.parseInt(nowPage), cntPerPage, keyword);
-
-		List<Class> classList = classFacade.viewClassList(vo);
+		List<Class> classList = classFacade.viewClassList(keyword);
 		Date today = new Date();
 		long t = today.getTime();
 		for (Class c : classList) {
@@ -140,38 +148,54 @@ public class ClassController {
 				c.setDate(-1);
 			}
 		}
-
-		model.addAttribute("paging", vo);
+		
+		TeacherSession teacherSession1 = (TeacherSession)session.getAttribute("teacherSession");
+		String usertype;
+		if(teacherSession1 != null) {
+			usertype = teacherSession1.getAccount().getUser_type();
+			model.addAttribute("usertype", usertype);
+		}
+		
 		model.addAttribute("classList", classList);
 
-		return "thyme/viewList";
+		return "thyme/ViewClassList";
 	}
 
-	// viewList¿¡¼­ ÀÌ¹ÌÁö Å¬¸¯ ½Ã ±×¿¡ ÇØ´çÇÏ´Â detail view·Î ÀÌµ¿
+	// viewListì—ì„œ ì´ë¯¸ì§€ í´ë¦­ ì‹œ ê·¸ì— í•´ë‹¹í•˜ëŠ” detail viewë¡œ ì´ë™
 	@GetMapping("/viewClass/{class_id}")
-	public String viewClass(@PathVariable("class_id") int class_id, Model model) {
+	public String viewClass(@PathVariable("class_id") int class_id, Model model, HttpSession session) {
 		Class findClass = classFacade.findClass(class_id);
 		classFacade.plusHit(class_id);
+		TeacherSession teacherSession1 = (TeacherSession)session.getAttribute("teacherSession");
+		String userId;
+		String usertype;
+		if(teacherSession1 != null) {
+			userId = teacherSession1.getAccount().getTeacher_id();
+			usertype = teacherSession1.getAccount().getUser_type();
+			model.addAttribute("userId", userId);
+			model.addAttribute("usertype", usertype);
+		}
 		model.addAttribute("findClass", findClass);
-		return "thyme/detail";
+		return "thyme/ViewDetailClass";
 	}
 
-	//Å¬·¡½º »èÁ¦
+	// í´ë˜ìŠ¤ ì‚­ì œ
 	@GetMapping("/deleteClass")
 	public String deleteClass(@RequestParam("class_id") int class_id) {
 		classFacade.deleteClass(class_id);
 		return "redirect:/class/viewList";
 	}
-	
-	// Å¬·¡½º Æû ÀÛ¼º get
+
+	// í´ë˜ìŠ¤ í¼ ì‘ì„± get
 	@GetMapping("/writeClass")
 	public String writeClass() {
 		return "thyme/ClassForm";
 	}
 
-	// Å¬·¡½º Æû ÀÛ¼º post
+	// í´ë˜ìŠ¤ í¼ ì‘ì„± post
 	@PostMapping("/writeClass")
-	public String insertClass(@Valid Class newClass, BindingResult result, SessionStatus status, HttpServletRequest request) {
+	public String insertClass(@Valid Class newClass, BindingResult result, SessionStatus status,
+			HttpServletRequest request, HttpSession session) {
 		if (result.hasErrors()) {
 			return "thyme/ClassForm";
 		}
@@ -181,11 +205,14 @@ public class ClassController {
 
 		newClass.setImg(savedName);
 
-		newClass.setTeacher_id("teacher001");
+		TeacherSession teacherSession1 = (TeacherSession)session.getAttribute("teacherSession");
+		String teacherId = teacherSession1.getAccount().getTeacher_id();
+		System.out.println(teacherId);
+		newClass.setTeacher_id(teacherId);
 		DateFormat format = new SimpleDateFormat("yyyy/MM/dd");
 		String edate = format.format(newClass.getEdate());
 
-		// ¼±ÅÃÇÑ ¸¶°¨ÀÏ±îÁö ½ÅÃ»°¡´ÉÇÏ°í ÇÏ·ç µÚºÎÅÍ ½ÅÃ»¹öÆ° ºñÈ°¼ºÈ­·Î º¯°æÇÏ±â À§ÇÑ ÄÚµå
+		// ì„ íƒí•œ ë§ˆê°ì¼ê¹Œì§€ ì‹ ì²­ê°€ëŠ¥í•˜ê³  í•˜ë£¨ ë’¤ë¶€í„° ì‹ ì²­ë²„íŠ¼ ë¹„í™œì„±í™”ë¡œ ë³€ê²½í•˜ê¸° ìœ„í•œ ì½”ë“œ=
 		try {
 			Date eDate = format.parse(edate);
 			Calendar c = Calendar.getInstance();
@@ -201,22 +228,16 @@ public class ClassController {
 		classFacade.writeClass(newClass);
 
 		schedulerFacade.test(new Date());
-		status.setComplete();
 
 		return "thyme/finish";
 	}
 
 	private String uploadFile(MultipartFile report, HttpServletRequest request) {
-//		uuid »ı¼º(Universal Unique IDentifier, ¹ü¿ë °íÀ¯ ½Äº°ÀÚ)
 		UUID uuid = UUID.randomUUID();
-//		·£´ı»ı¼º + ÆÄÀÏÀÌ¸§ ÀúÀå
+
 		String savedName = uuid.toString() + "_" + report.getOriginalFilename();
-		/*
-		 * String storagePath =
-		 * "C:\\Users\\Á¤ÈÄ\\Documents\\sosigae\\springmabell\\src\\main\\resources\\static\\images\\";
-		 */
+
 		String storagePath = request.getServletContext().getRealPath("resources/images/" + savedName);
-//		ÀÓ½Ãµğ·ºÅä¸®¿¡ ÀúÀåµÈ ¾÷·ÎµåµÈ ÆÄÀÏÀ» ÁöÁ¤µÈ µğ·ºÅä¸®·Î º¹»ç
 		File file = new File(storagePath);
 		try {
 			report.transferTo(file);
@@ -226,8 +247,6 @@ public class ClassController {
 		return savedName;
 	}
 
-
-	  
 	/*
 	 * @PostMapping(value="/practice") public @ResponseBody String updateChkBox (
 	 * HttpServletRequest request,
@@ -244,5 +263,4 @@ public class ClassController {
 	 * 
 	 * return "viewList"; }
 	 */
-	 
 }

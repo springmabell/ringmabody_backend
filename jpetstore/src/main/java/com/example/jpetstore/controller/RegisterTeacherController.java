@@ -8,13 +8,16 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.beans.support.PagedListHolder;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.util.WebUtils;
 import com.example.jpetstore.domain.Category;
+import com.example.jpetstore.domain.Class;
 import com.example.jpetstore.domain.Product;
+import com.example.jpetstore.service.MainFacade;
 import com.example.jpetstore.service.PetStoreFacade;
 
 /**
@@ -26,10 +29,12 @@ import com.example.jpetstore.service.PetStoreFacade;
 @RequestMapping({"/teacher/join.do","/teacher/updateTeacher.do"})
 public class RegisterTeacherController { 
 
-	@Value("EditAccountForm")
+	@Value("thyme/join_teacher_form")
 	private String formViewName;
-	@Value("index")
-	private String successViewName;
+
+	@Autowired
+	private MainFacade mainFacade;
+	
 	
 	@Autowired
 	private PetStoreFacade petStore;
@@ -37,27 +42,13 @@ public class RegisterTeacherController {
 		this.petStore = petStore;
 	}
 
-//	@Autowired
-//	private AccountFormValidator validator;
-//	public void setValidator(AccountFormValidator validator) {
-//		this.validator = validator;
-//	}
 		
 	@ModelAttribute("teacherAccountForm")
 	public TeacherAccountForm formBackingObject(HttpServletRequest request) 
 			throws Exception {
 		TeacherSession teacherSession = 
 			(TeacherSession) WebUtils.getSessionAttribute(request, "teacherSession");
-//		if (userSession != null) {	// edit an existing accoun
-//			System.out.println("pass 1");
-//			
-//			System.out.println(userSession.getAccount().getUser_id());
-//			return new UserAccountForm(
-//				petStore.getUserAccount(userSession.getAccount().getUser_id()));
-//		}
-//		else {	// create a new account
 			return new TeacherAccountForm();
-//		}
 	}
 
 
@@ -71,17 +62,11 @@ public class RegisterTeacherController {
 	public String onSubmit(
 			HttpServletRequest request, HttpSession session,
 			@ModelAttribute("teacherAccountForm") TeacherAccountForm teacherAccountForm,
+			Model model,
 			BindingResult result) throws Exception {
-
-//		if (request.getParameter("account.listOption") == null) {
-//			userAccountForm.getAccount().setListOption(false);
-//		}
-//		if (request.getParameter("account.bannerOption") == null) {
-//			userAccountForm.getAccount().setBannerOption(false);
-//		}
-
-//		validator.validate(userAccountForm, result);
 		
+		System.out.println("pass 1");
+
 		if (result.hasErrors()) return formViewName;
 		try {
 			if (teacherAccountForm.isNewAccount()) {
@@ -100,12 +85,16 @@ public class RegisterTeacherController {
 		TeacherSession teacherSession = new TeacherSession(
 			petStore.getTeacherAccount(teacherAccountForm.getAccount().getTeacher_id()));
 		
-//		PagedListHolder<Product> myList = new PagedListHolder<Product>(
-//			petStore.getProductListByCategory(accountForm.getAccount().getFavouriteCategoryId()));
-//		myList.setPageSize(4);
-//		userSession.setMyList(myList);
-		
 		session.setAttribute("teacherSession", teacherSession);
-		return successViewName;  
+		
+
+		List<Class> endingSoonList = mainFacade.endingSoon();
+		List<Class> bestClassList = mainFacade.bestClass();
+		model.addAttribute("endingSoonList", endingSoonList);
+		model.addAttribute("bestClassList", bestClassList);
+		model.addAttribute("name", teacherSession.getAccount().getTeacher_name());
+
+		
+		return "thyme/main";  
 	}
 }

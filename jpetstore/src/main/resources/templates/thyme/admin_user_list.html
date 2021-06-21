@@ -8,25 +8,14 @@
   	<link rel="stylesheet" href="/style/admin_user_list.css" type="text/css" />
   	
     <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+    
+	<div th:replace="thyme/layout_admin :: style"></div>
 </head>
 <body>
 
 <div id="wrap">
-
-    <div id="header">
-        <div class="header_nav">
-            <div class="header_nav_logo">
-                <a href="">RingMaBody</a>
-                <span class="my_page_logo">MY PAGE</span>
-            </div>
-            <div class="header_nav_logo_right">
-                <div class="header_nav_login">
-                    <a href="">관리자</a>
-                    <i class="fas fa-chevron-down"></i>
-                </div>
-            </div>
-        </div><!--end header_nav-->
-    </div><!--end header-->
+	
+	<div th:replace="thyme/layout_admin :: header"></div>
 
     <div id="container">
         <div class="content_wrap">
@@ -47,7 +36,7 @@
                         <option value="번호순">번호순</option>
                     </select>
                     <div class="total-num">
-                       총 <b class="total-num" th:text="${size}">14</b>명
+                       총 <b class="total-num" th:text="${size}" style="color:black">14</b>명
                     </div>
                 </div>
                 <form>

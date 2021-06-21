@@ -30,7 +30,7 @@ public class SchedulerImpl implements SchedulerFacade {
 				
 				  Date today = new Date(); 
 				  classDao.closeEvent(today);
-				  
+				  classDao.deleteFinishedClassFromCart();
 
 			}
 		};

@@ -25,6 +25,18 @@ public class MybatisOrderDao implements OrderDao {
 	@Autowired
 	private SequenceDao sequenceDao;
 
+	@Override
+	public void insertOrder(Order order) throws DataAccessException {
+		// TODO Auto-generated method stub
+		orderMapper.insertOrder(order);
+	}
+
+	@Override
+	public void updateParticipant(int class_id) throws DataAccessException {
+		// TODO Auto-generated method stub
+		orderMapper.updateParticipant(class_id);
+	}
+
 	public List<Order> getOrdersByUsername(String username) 
 			throws DataAccessException {
 	    return orderMapper.getOrdersByUsername(username);
@@ -39,15 +51,13 @@ public class MybatisOrderDao implements OrderDao {
 	    return order;
 	}
 	
-	@Transactional
-	public void insertOrder(Order order) throws DataAccessException {  
-    	order.setOrderId(sequenceDao.getNextId("ordernum"));
-    	orderMapper.insertOrder(order);
-    	orderMapper.insertOrderStatus(order);
-    	for (int i = 0; i < order.getLineItems().size(); i++) {
-    		LineItem lineItem = (LineItem) order.getLineItems().get(i);
-    		lineItem.setOrderId(order.getOrderId());
-    		lineItemMapper.insertLineItem(lineItem);
-    	}
-	}
+	/*
+	 * @Transactional public void insertOrder(Order order) throws
+	 * DataAccessException { order.setOrderId(sequenceDao.getNextId("ordernum"));
+	 * orderMapper.insertOrder(order); orderMapper.insertOrderStatus(order); for
+	 * (int i = 0; i < order.getLineItems().size(); i++) { LineItem lineItem =
+	 * (LineItem) order.getLineItems().get(i);
+	 * lineItem.setOrderId(order.getOrderId());
+	 * lineItemMapper.insertLineItem(lineItem); } }
+	 */
 }

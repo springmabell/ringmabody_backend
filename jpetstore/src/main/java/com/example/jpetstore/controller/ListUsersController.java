@@ -24,7 +24,7 @@ import com.example.jpetstore.service.PetStoreFacade;
  * @modified by Changsup Park
  */
 @Controller
-@SessionAttributes("userSession")
+@SessionAttributes({"userSession","teacherSession"})
 public class ListUsersController {
 
 	private PetStoreFacade petStore;
@@ -38,6 +38,8 @@ public class ListUsersController {
 	public String handleRequest(ModelMap model) throws Exception {
 		List<UserAccount> userList = this.petStore.getAllUserAccount();
 		int size_of_list = userList.size();
+		
+		System.out.println(size_of_list);
 		
 		model.put("userList", userList);
 		model.put("size", size_of_list);

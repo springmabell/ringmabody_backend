@@ -7,8 +7,8 @@
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js" integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="http://cdn.jsdelivr.net/npm/xeicon@2.3.3/xeicon.min.css">
-</head>
-<style>
+    
+    <style>
 	.carousel-inner > .carousel-item > img{
 		width:1200px;
 		height:400px;
@@ -66,7 +66,15 @@
 		padding: 100px 0px;
 	}
 </style>
+
+	<div th:replace="thyme/layout_admin :: style"></div>
+    
+</head>
+
 <body>
+
+	<div th:replace="thyme/layout_admin :: header"></div>
+
 	<div id="images" class="container-xxl mb-5">
 		<div id="carouselExampleIndicators" class="carousel slide  carousel-fade" data-bs-ride="carousel">
 		  <div class="carousel-indicators">
@@ -76,13 +84,13 @@
 		  </div>
 		  <div class="carousel-inner">
 		    <div class="carousel-item active" data-bs-interval="3000">
-		      <img src="/images/main1.jpg" class="d-block w-100" alt="">
+		      <img src="/resources/images/main1.jpg" class="d-block w-100" alt="">
 		    </div>
 			<div class="carousel-item" data-bs-interval="3000">
-		      <img src="/images/main2.jpg" class="d-block w-100" alt="">
+		      <img src="/resources/images/main2.jpg" class="d-block w-100" alt="">
 		    </div>
 		    <div class="carousel-item" data-bs-interval="3000">
-		      <img src="/images/main3.jpg" class="d-block w-100" alt="">
+		      <img src="/resources/images/main3.jpg" class="d-block w-100" alt="">
 		    </div> 
 		  </div>
 		  <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
@@ -151,7 +159,8 @@
 	            <div th:each="classes : ${endingSoonList}" class="p-4 col-lg-4 mb-5">
 	                <div>
 	                	<div class="thum">
-	                        <img th:src="@{/images/} + ${classes.img}" alt="Image" id="image" class="img-fluid img-responsive" th:onclick="'location.href=\'' + @{/class/viewClass/{class_id}(class_id=${classes.class_id})} + '\''" >
+	                        <img th:src="@{/resources/images/} + ${classes.img}" alt="Image" id="image" class="img-fluid img-responsive" th:onclick="'location.href=\'' + @{/class/viewClass/{class_id}(class_id=${classes.class_id})} + '\''" >
+
 	                           <span class="badge endingSoon">마감임박</span>
 	                        <span class="heart" style="color:gray;"><i class="xi-heart-o"></i></span>
 	                    </div>

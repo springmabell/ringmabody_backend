@@ -1,40 +1,27 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>작성한 리뷰</title>
-    <link rel="stylesheet" href="../css/reset.css">
-    <link rel="stylesheet" href="../css/all.min.css">
-    <link rel="stylesheet" href="../css/my_review.css">
+    <link rel="stylesheet" href="/style/reset.css">
+    <link rel="stylesheet" href="/style/all.min.css">
+    <link rel="stylesheet" href="/style/my_review.css">
     <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+     <div th:replace="thyme/layout_admin :: style"></div>
 </head>
 <body>
 
 <div id="wrap">
+<div th:replace="thyme/layout_admin :: header"></div>
 
-    <div id="header">
-        <div class="header_nav">
-            <div class="header_nav_logo">
-                <a href="">RingMaBody</a>
-                <span>MY PAGE</span>
-            </div>
-            <div class="header_nav_logo_right">
-                <div class="header_nav_login">
-                    <a href="">김프링 회원님</a>
-                    <i class="fas fa-chevron-down"></i>
-                </div>
-            </div>
-        </div><!--end header_nav-->
-    </div><!--end header-->
 
     <div id="container">
         <div class="content_wrap">
             <div class="menu">
                 <ul class="menu_list">
-                    <li><a href="my_info.html">개인정보 관리</a></li>
-                    <li><a href="my_purchase.html">결제한 내역</a></li>
-                    <li><a href="my_scrap.html">스크랩</a></li>
-                    <li><a href="my_review.html">작성한 리뷰</a></li>
+                    <li><a href="" th:href="@{/mypage/info.do}">개인정보 관리</a></li>
+                    <li><a href="" th:href="@{/mypage/purchase.do}">결제한 내역</a></li>
+                    <li><a href="" th:href="@{/mypage/review.do}">작성한 리뷰</a></li>
                 </ul>
             </div>
             <div class="content">
@@ -44,7 +31,7 @@
                             <div>작성한 리뷰</div>
                         </div>
                         <div class="count_wrap">
-                            <div class="total_count">총 4개</div>
+                            <div class="total_count">총 <span th:text="${size}">4</span>개</div>
                         </div>
                     </div>
 
@@ -62,31 +49,14 @@
                                             <p class="review_date_top">작성일</p>
                                             <p class="review_rec_top">추천수</p>
                                         </div>
-
-                                        <div class="review_box">
-                                            <p class="review_rate">5</p>
-                                            <p class="review_title">너무 좋아요 강력추천</p>
-                                            <p class="review_date">2021.04.05</p>
-                                            <p class="review_rec">2</p>
+                            			
+                                        <div class="review_box" th:each="review, iterStat : ${review}">
+                                            <p class="review_rate" th:text="${review.review_rating}">5</p>
+                                            <a class="review_title" th:text="${review.review_title}" th:href="${review.review_id} + @{/review.detail.do}">너무 좋아요 강력추천</a>
+                                            <p class="review_date" th:text="${#dates.format(review.review_date, 'yyyy-MM-dd')}">2021.04.05</p>
+                                            <p class="review_rec" th:text="${review.review_like}">2</p>
                                         </div>
-                                        <div class="review_box">
-                                            <p class="review_rate">3</p>
-                                            <p class="review_title">보통이네요</p>
-                                            <p class="review_date">2020.12.22</p>
-                                            <p class="review_rec">6</p>
-                                        </div>
-                                        <div class="review_box">
-                                            <p class="review_rate">1</p>
-                                            <p class="review_title">돈낭비한 기분이에요... 실망</p>
-                                            <p class="review_date">2020.07.29</p>
-                                            <p class="review_rec">15</p>
-                                        </div>
-                                        <div class="review_box">
-                                            <p class="review_rate">4</p>
-                                            <p class="review_title">추천합니다</p>
-                                            <p class="review_date">2020.03.11</p>
-                                            <p class="review_rec">10</p>
-                                        </div>
+                                       
                                     </div>
                                 </div>
                             </div>

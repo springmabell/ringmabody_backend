@@ -20,6 +20,7 @@ import com.example.jpetstore.service.PetStoreFacade;
  * @modified-by Changsup Park
  */
 @Controller
+@SessionAttributes({"userSession","teacherSession"})
 public class ViewTeacherController { 
 
 	private PetStoreFacade petStore;

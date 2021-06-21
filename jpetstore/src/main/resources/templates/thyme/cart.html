@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous">
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js" integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery/1.9.0/jquery.js"></script>
+
+	<style>
+	img{
+		cursor:pointer;
+	}
+	
+	</style>
+	
+	<div th:replace="thyme/layout_admin :: style"></div>
+</head>
+<body>  
+	<div th:replace="thyme/layout_admin :: header"></div><br/><br/>
+
+<div>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="mb-5">
+                	<h2>장바구니</h2>
+                </div>
+                <br />
+ 
+                <div id="table">
+                    <table class="table table-striped">
+             <tr>
+                <th><input type="checkbox" onClick="itemSum()" id="checkall" class="check" /></th>
+                <th>사진</th>
+                <th>클래스명</th>
+                <th>가격</th>
+                <th>&nbsp;</th>
+            </tr> 
+            <tr th:each="cart : ${cartList}" >
+                <td><input type="checkbox" id="chk" name ="chk" onClick="itemSum()" class="check" th:value="${cart.findClass.price}" th:attr="data-cartNum=${cart.class_id}"  /></td>
+                <td>
+                	<img  th:src="@{/resources/images/} + ${cart.findClass.img}" style="width:100px;height:100px" alt="image" th:onclick="'location.href=\'' + @{/class/viewClass/{class_id}(class_id=${cart.class_id})} + '\''" />
+                </td>
+                <td th:text="${cart.findClass.title}">헬스</td>
+                <td th:text="|${cart.findClass.price}원|">3000원</td>
+                <td> <!-- <input type="submit" class = "btn" value="x" id="deleteCart" /> -->
+                 <a class="btn py-2 px-4" id="deleteCart" th:attr="onclick=|cart(${cart.class_id})|">
+                 x</a>
+           <!--      <input type="hidden" id="class_id" th:value="${cart.class_id}" /> -->
+                </td>
+            </tr>
+            
+        </table>
+        </div>
+
+		<form action="/order/cart" method="post" id="orderForm">
+	        <input type="hidden" name="amount" id="amount" value="" />
+	        <input type="hidden" name="array" id="array" value="" />
+	        <table align="right">
+	            <tr>
+	                <td>총 금액 합계</td>
+	                <td id="total">0원</td>
+	            </tr>
+	            <tr>
+	                <td>&nbsp;</td>
+	                <td>&nbsp;</td>
+	                <td><button type="button" id="orderClass" name ="orderClass" class="btn">주문</button></td>
+	            </tr>
+	        </table>
+       </form>
+       </div>
+        
+       </div>
+     </div>
+   </div>
+</body>
+<script>
+$("#orderClass").click(function () {
+ var arr1 = new Array();
+    $('#chk:checked').each(function(i){
+        arr1.push($(this).attr('data-cartNum'));  // 체크된 것만 값을 뽑아서 배열에 push
+    });
+
+    $("#array").val(arr1);
+	
+    if (confirm("결제하시겠습니까?")) {
+    	if(arr1 == "" || arr1 == null ){
+    		alert("클래스를 선택해주세요");
+    	}
+    	else{
+        $("#orderForm").submit();
+    	}
+    } 
+});
+
+$(document).ready(function(){
+    //최상단 체크박스 클릭
+    $("#checkall").click(function(){
+        //클릭되었으면
+        if($("#checkall").prop("checked")){
+            //input태그의 name이 chk인 태그들을 찾아서 checked옵션을 true로 정의
+            $("input[name=chk]").prop("checked",true);
+            itemSum();
+            //클릭이 안되있으면
+        }else{
+            //input태그의 name이 chk인 태그들을 찾아서 checked옵션을 false로 정의
+            $("input[name=chk]").prop("checked",false);
+            itemSum()
+        }
+    })
+})
+//삭제
+function cart(class_id){
+	var chk = confirm("정말 삭제하시겠습니까?");
+	if (chk) {
+		$.ajax({
+			url : '/cart/deleteCart/' + class_id,
+			type : 'delete',
+			dataType : 'text',
+			success : function(data) {
+				if(data == "ddd"){
+					alert("삭제했습니다.");
+					location.href = "/class/cartlist";
+				}
+			}
+		});
+	}
+}
+function itemSum(){
+    var sum = 0;
+    var count = $(".check").length;
+    for(var i=1; i < count; i++ ){
+        if( $(".check")[i].checked == true ){
+          sum += parseInt($(".check")[i].value); 
+        }
+    }
+    
+    $("#amount").val(sum);
+    $("#total").html(sum+" 원");
+ }
+
+</script>
+</html>
