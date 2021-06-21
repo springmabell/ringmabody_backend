@@ -12,6 +12,7 @@ import com.example.jpetstore.domain.Category;
 import com.example.jpetstore.domain.Class;
 import com.example.jpetstore.domain.Filtering;
 import com.example.jpetstore.domain.PagingVO;
+import com.example.jpetstore.domain.UserAccount;
 
 public interface ClassDao {
 	
@@ -31,4 +32,6 @@ public interface ClassDao {
 	public List<CartCommand> findCartList(String user_id) throws DataAccessException;
 	public void deleteCart(Cart cart) throws DataAccessException;
 	public void deleteFinishedClassFromCart() throws DataAccessException;
+
+	List<Class> selectClass(PagingVO vo) throws DataAccessException;
 }

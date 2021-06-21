@@ -92,7 +92,7 @@ public class RegisterUserController {
 		List<Class> bestClassList = mainFacade.bestClass();
 		model.addAttribute("endingSoonList", endingSoonList);
 		model.addAttribute("bestClassList", bestClassList);
-		model.addAttribute("name", userSession.getAccount().getUser_name());
+		model.addAttribute("user_id", userSession.getAccount().getUser_id());
 
 		
 		return "thyme/main";  

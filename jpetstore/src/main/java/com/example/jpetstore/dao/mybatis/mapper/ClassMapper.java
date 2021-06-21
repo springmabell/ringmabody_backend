@@ -32,4 +32,7 @@ public interface ClassMapper {
 	public List<CartCommand> findCartList(String user_id);
 	public void deleteCart(Cart cart);
 	public void deleteFinishedClassFromCart();
+
+	// 페이징 처리 게시글 조회
+	public List<Class> selectClass(PagingVO vo);
 }

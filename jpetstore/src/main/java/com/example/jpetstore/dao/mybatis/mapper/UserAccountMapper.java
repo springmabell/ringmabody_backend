@@ -31,6 +31,8 @@ import com.example.jpetstore.domain.UserAccount;
 @Mapper
 public interface UserAccountMapper {
 	
+	public void deleteUser(String user_id);
+	
 	// 게시물 총 갯수
 	public int countUser();
 

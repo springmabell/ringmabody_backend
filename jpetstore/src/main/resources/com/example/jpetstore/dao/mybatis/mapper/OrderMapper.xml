@@ -8,6 +8,25 @@
   		ORDER_ID, CLASS_ID, USER_ID, CARD_BANK, CARD_NUMBER, EXPIRATION_DATE, CVC, TOTAL_PRICE
     </sql>
     
+    <!-- 총 게시글 갯수 출력 -->
+	<select id="countOrder" resultType="int">
+		SELECT COUNT(*) FROM ORDER1
+	</select>
+	
+	<!-- 페이징 처리 후 게시글 조회 -->
+	<select id="selectOrder" resultType="Order">
+		SELECT * 
+			FROM (
+				SELECT ROWNUM RN, A.* 
+					FROM (
+							SELECT * 
+							FROM ORDER1 
+							ORDER BY ORDER_ID DESC 
+							) A
+					)
+		WHERE RN BETWEEN #{start} AND #{end}
+	</select>
+    
     
     
     <select id="getAllOrders" resultType="Order">

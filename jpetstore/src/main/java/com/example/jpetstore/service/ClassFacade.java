@@ -26,4 +26,7 @@ public interface ClassFacade {
 	public void insertCartItem(Cart cart);
 	public List<CartCommand> findCartList(String user_id);
 	public void deleteCart(Cart cart);
+
+	// 페이징 처리 게시글 조회
+	public List<Class> selectClass(PagingVO vo);
 }

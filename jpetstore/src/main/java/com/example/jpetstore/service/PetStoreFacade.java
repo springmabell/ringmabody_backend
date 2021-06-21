@@ -92,6 +92,20 @@ public interface PetStoreFacade {
 
 	// 페이징 처리 게시글 조회
 	public List<UserAccount> selectUser(PagingVO vo);
+	
+	// 게시물 총 갯수
+	public int countTeacher();
 
-
+	// 페이징 처리 게시글 조회
+	public List<TeacherAccount> selectTeacher(PagingVO vo);
+	
+	public void deleteUser(String user_id);
+	
+//	
+//	// 게시물 총 갯수
+//	public int countOrder();
+//
+//	// 페이징 처리 게시글 조회
+//	public List<Order> selectOrder(PagingVO vo);
+//	
 }

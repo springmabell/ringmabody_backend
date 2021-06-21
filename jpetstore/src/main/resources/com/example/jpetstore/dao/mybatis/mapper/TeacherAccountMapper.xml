@@ -3,6 +3,25 @@
 
 <mapper namespace="com.example.jpetstore.dao.mybatis.mapper.TeacherAccountMapper">
   <cache />
+  
+  <!-- 총 게시글 갯수 출력 -->
+	<select id="countTeacher" resultType="int">
+		SELECT COUNT(*) FROM TEACHERACCOUNT
+	</select>
+	
+	<!-- 페이징 처리 후 게시글 조회 -->
+	<select id="selectTeacher" resultType="TeacherAccount">
+		SELECT * 
+			FROM (
+				SELECT ROWNUM RN, A.* 
+					FROM (
+							SELECT * 
+							FROM TEACHERACCOUNT 
+							ORDER BY TEACHER_ID DESC 
+							) A
+					)
+		WHERE RN BETWEEN #{start} AND #{end}
+	</select>
 
   <select id="getAllTeacherAccount" resultType="TeacherAccount">
     SELECT TEACHERACCOUNT.TEACHER_ID,

@@ -3,10 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <title>관리자 페이지</title>
-    <link rel="stylesheet" href="../css/reset.css">
-    <link rel="stylesheet" href="../css/all.min.css">
-    <link rel="stylesheet" href="../css/admin_user_info_detail.css">
+    <link rel="stylesheet" href="/style/reset.css">
+    <link rel="stylesheet" href="/style/all.min.css">
+    <link rel="stylesheet" href="/style/admin_user_info_detail.css">
     <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+    <!-- deleteMessage() -->
     
 	<div th:replace="thyme/layout_admin :: style"></div>
 </head>
@@ -14,7 +15,7 @@
 
 <div id="wrap">
 
-	<div th:replace="thyme/layout_admin :: style"></div>
+	<div th:replace="thyme/layout_admin :: header"></div>
 
     <div id="container">
         <div class="content_wrap">
@@ -34,7 +35,7 @@
                             <li class="profile_title">
                                 <div>고객 정보</div>
                             </li>
-                            <li class="profile_item picture_item">
+                           <!--  <li class="profile_item picture_item">
                                 <div class="picture_update_wrap">
                                     <div>
                                         <label class="picture" for="pictureInput">
@@ -43,42 +44,42 @@
                                         <input type="file" id="pictureInput" class="picture_input" accept="image/jpg, image/jpeg, image/png" multiple="" style="display:none" onchange="setThumbnail(event);">
                                     </div>
                                 </div>
-                            </li>
+                            </li> -->
                             <li class="info_item">
                                 <div>이름</div>
-                                <div>오윤희</div>
+                                <div th:text="${user.user_name}">오윤희</div>
                             </li>
                             <li class="info_item">
                                 <div>아이디</div>
-                                <div>ohwoonhee0101</div>
+                                <div th:text="${user.user_id}">ohwoonhee0101</div>
                             </li>
                             <li class="info_item">
                                 <div>휴대전화</div>
-                                <div>010-1111-2222</div>
+                                <div th:text="${user.phone}">010-1111-2222</div>
                             </li>
                             <li class="info_item">
                                 <div>이메일</div>
-                                <div>ohwoonhee0101@naver.com</div>
+                                <div th:text="${user.email}">ohwoonhee0101@naver.com</div>
                             </li>
                             <li class="info_item">
                                 <div>성별</div>
-                                <div>여성</div>
+                                <div th:text="${user.gender}">여성</div>
                             </li>
                             <li class="info_item">
                                 <div>등록일</div>
-                                <div>2021-04-01</div>
+                                <div th:text="${user.register_date}">2021-04-01</div>
                             </li>
                         </ul>
-                        <ul class="info_list">
+                        <!-- <ul class="info_list">
                             <li class="profile_title">
                                 <div>고객이 결제한 수업</div>
                             </li>
-                        </ul>
+                        </ul> -->
                         <ul class="info_btn">
                             <li>
                                 <div class="btn_area double">
-                                    <span><!-- tg-text=terms_button_cancel --><a href="#" id="btnCancel" class="btn_type btn_default" role="button">삭제하기</a></span>
-                                    <span><!-- tg-text=terms_button_agree --><a href="#" id="btnAgree" class="btn_type btn_primary" role="button">돌아가기</a></span>
+                                    <span><a href="" th:href="@{/admin/User/delete?user_id=}+${user.user_id}" id="btnCancel" class="btn_type btn_default" role="button" onclick="deleteMessage()">삭제하기</a></span>
+                                    <span><a href="" th:href="@{/admin/listUsers.do}" id="btnAgree" class="btn_type btn_primary" role="button">돌아가기</a></span>
                                 </div>
                             </li>
                         </ul>

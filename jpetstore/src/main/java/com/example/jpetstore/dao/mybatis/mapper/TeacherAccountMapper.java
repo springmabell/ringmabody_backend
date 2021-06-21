@@ -21,6 +21,7 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
 
+import com.example.jpetstore.domain.PagingVO;
 import com.example.jpetstore.domain.TeacherAccount;
 import com.example.jpetstore.domain.UserAccount;
 
@@ -30,6 +31,13 @@ import com.example.jpetstore.domain.UserAccount;
  */
 @Mapper
 public interface TeacherAccountMapper {
+
+	// 게시물 총 갯수
+	public int countTeacher();
+
+	// 페이징 처리 게시글 조회
+	public List<TeacherAccount> selectTeacher(PagingVO vo);
+
 
   List<TeacherAccount> getAllTeacherAccount();
 

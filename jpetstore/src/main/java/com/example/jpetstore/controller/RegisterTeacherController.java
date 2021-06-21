@@ -82,17 +82,20 @@ public class RegisterTeacherController {
 			return formViewName; 
 		}
 		
+		System.out.println("register teacher, "+teacherAccountForm.getAccount().getTeacher_id());
+		
 		TeacherSession teacherSession = new TeacherSession(
 			petStore.getTeacherAccount(teacherAccountForm.getAccount().getTeacher_id()));
 		
 		session.setAttribute("teacherSession", teacherSession);
+		
 		
 
 		List<Class> endingSoonList = mainFacade.endingSoon();
 		List<Class> bestClassList = mainFacade.bestClass();
 		model.addAttribute("endingSoonList", endingSoonList);
 		model.addAttribute("bestClassList", bestClassList);
-		model.addAttribute("name", teacherSession.getAccount().getTeacher_name());
+		model.addAttribute("user_id", teacherSession.getAccount().getTeacher_id());
 
 		
 		return "thyme/main";  

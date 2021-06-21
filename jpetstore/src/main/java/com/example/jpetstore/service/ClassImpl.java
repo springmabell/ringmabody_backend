@@ -15,6 +15,7 @@ import com.example.jpetstore.domain.Category;
 import com.example.jpetstore.domain.Class;
 import com.example.jpetstore.domain.Filtering;
 import com.example.jpetstore.domain.PagingVO;
+import com.example.jpetstore.domain.TeacherAccount;
 
 @Service
 @Transactional
@@ -100,5 +101,11 @@ public class ClassImpl implements ClassFacade{
 	public void deleteCart(Cart cart) {
 		// TODO Auto-generated method stub
 		classDao.deleteCart(cart);
+	}
+	
+
+	@Override
+	public List<Class> selectClass(PagingVO vo) {
+		return classDao.selectClass(vo);
 	}
 }
