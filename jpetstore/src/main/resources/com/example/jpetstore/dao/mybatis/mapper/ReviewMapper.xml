@@ -57,10 +57,14 @@
 	 </select>
 	 
 	 
-	 <select id="updateReview" resultType="Review">
+	 <update id="updateReview" parameterType="Review">
 	 	update review
-		set review_title=#{review_title}, review_content=#{review_content} 
+		set review_title=#{review_title}, review_rating=#{review_rating}, review_content=#{review_content} 
 		where review_id=#{review_id}
-	 </select>
- 
+	 </update>
+
+ 		<delete id="deleteReview" parameterType="int">
+		DELETE FROM REVIEW
+		WHERE REVIEW_ID = #{review_id}
+	</delete>
  </mapper>

@@ -49,4 +49,11 @@ public class MybatisReviewDao implements ReviewDao{
 		reviewMapper.updateReview(review);
 	}
 
+
+	@Override
+	public void deleteReview(int review_id) {
+		// TODO Auto-generated method stub
+		reviewMapper.deleteReview(review_id);
+	}
+
 }

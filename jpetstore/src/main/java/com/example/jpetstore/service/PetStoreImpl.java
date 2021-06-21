@@ -195,4 +195,10 @@ public class PetStoreImpl implements PetStoreFacade {
 	public List<UserAccount> selectUser(PagingVO vo) {
 		return userAccountDao.selectUser(vo);
 	}
+
+	@Override
+	public void deleteReview(int review_id) {
+		// TODO Auto-generated method stub
+		reviewDao.deleteReview(review_id);
+	}
 }

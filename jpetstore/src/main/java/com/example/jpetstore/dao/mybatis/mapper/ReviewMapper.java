@@ -18,4 +18,6 @@ public interface ReviewMapper {
 	void writeReview(Review newReview);
 
 	void updateReview(Review review);
+	
+	void deleteReview(int review_id);
 }

@@ -85,7 +85,8 @@ public interface PetStoreFacade {
 	
 	List<Order> getAllOrders();
 	
-
+	public void deleteReview(int review_id);
+	
 	// 게시물 총 갯수
 	public int countUser();
 

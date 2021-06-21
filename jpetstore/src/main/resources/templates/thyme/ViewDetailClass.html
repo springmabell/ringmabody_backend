@@ -92,7 +92,7 @@
 
     <div style="clear:left;" class="form-group" align="right">
     	<span th:if="${userId} eq ${findClass.teacher_id}">
-    	<a th:attr="onclick=|deleteClass(${findClass.class_id}, ${findClass.participant})|" class="btn py-2 px-4" onClick="del(3);">삭제</a>
+    	<a th:attr="onclick=|deleteClass(${findClass.class_id}, ${findClass.participant})|" class="btn py-2 px-4" >삭제</a>
     	</span>
     	<!--  -->
         <a class="btn py-2 px-4" onclick="list();">목록</a>

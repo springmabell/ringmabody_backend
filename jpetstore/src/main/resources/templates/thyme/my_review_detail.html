@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="/style/my_review_detail.css">
     <script src="https://kit.fontawesome.com/a076d05399.js"></script>
     <div th:replace="thyme/layout_admin :: style"></div>
+    
 </head>
 <body>
 
@@ -38,12 +39,12 @@
                                 <div class="review_rate_box">
                                     <span class="review_rate">평점</span>
                                     <label id="reviewRate">
-                                        <select class="review_rate_input" name="rate">
-                                            <option value="1">1점 (아쉬워요 ( ‾ʖ̫‾))</option>
-                                            <option value="2">2점 (그냥그래요 ƪ( ˘ ⌣˘ )ʃ)</option>
-                                            <option value="3">3점 (보통이에요) ◡( ╹◡╹ )◡</option>
-                                            <option value="4">4점 (좋아요 (๑>ᴗ<๑))</option>
-                                            <option value="5" selected>5점 (최고에요 ✧*｡٩(ˊᗜˋ*)و✧*｡)</option>
+                                        <select th:field="*{review_rating}" class="review_rate_input" name="rate">
+                                            <option th:value="1">1점 (아쉬워요 ( ‾ʖ̫‾))</option>
+                                            <option th:value="2">2점 (그냥그래요 ƪ( ˘ ⌣˘ )ʃ)</option>
+                                            <option th:value="3">3점 (보통이에요) ◡( ╹◡╹ )◡</option>
+                                            <option th:value="4">4점 (좋아요 (๑>ᴗ<๑))</option>
+                                            <option th:value="5" selected>5점 (최고에요 ✧*｡٩(ˊᗜˋ*)و✧*｡)</option>
                                         </select>
                                     </label>
                                 </div>
@@ -60,7 +61,9 @@
                                     <textarea class="review_content_input" rows="10" cols="70" th:text="${review.review_content}" th:field="*{review_content}">리뷰내용테스트입니다</textarea>
                                 </div>
                                 <div class="review_button_box">
-                                    <input type="reset" class="review_button" value="삭제">
+                                    	<button th:attr="onclick=|deleteReview(${review.review_id})|" >삭제</button>
+  
+    <!--                                 <input type="reset" class="review_button" value="삭제"> -->
                                     <input type="submit" class="review_button" value="수정">
                                 </div>
                                 <div class="review_box_bottom">
@@ -76,6 +79,7 @@
                     </div>
 
                 </form>
+                
             </div>
         </div>
     </div><!--end container-->
@@ -83,8 +87,14 @@
     <div id="footer"></div><!--end footer-->
 
 </div><!--end wrap-->
+<script>
+function deleteReview(review_id) {
+	var con = confirm("리뷰를 삭제하시겠습니까?");
 
-
-
+	if (con == true){
+		location.href= "/mypage/deleteReview?review_id=" + review_id;
+	}
+}
+</script>
 </body>
 </html>
