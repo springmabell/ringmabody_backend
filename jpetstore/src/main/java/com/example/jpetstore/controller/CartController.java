@@ -53,35 +53,17 @@ public class CartController {
 	public HashMap<String, Integer> cartAdd(HttpServletRequest request,
 			@RequestParam(required = false) int class_id) {
 
-		System.out.println("ajax");
-		
 		String user_id = "user333";
-		/* Class findClass = classFacade.findClass(class_id); */
+
 		Cart cart = new Cart(user_id, class_id);
 
-//		이미 사용자가 게시글을 담았는지 판별하기 위해 호출
 		int count = classFacade.existCart(cart);
-		
-//		만약 담지 않았을 때
-//		징바구니 개수가 증가하고, cart 테이블에 제품을 담은 userID와 게시글의 ID가 삽입됨
-		if (count == 0) {
+				if (count == 0) {
 			classFacade.insertCartItem(cart);
 		}
 		
-//		장바구니 수 가지고 오기
-		/* int cartAdded = gpurchaseFacade.countCartByboardNum(boardNum); */
-//		장바구니 개수 update
-		/*
-		 * gpurchase.setCartAdded(cartAdded);
-		 * gpurchaseFacade.gpurchaseCartUpdate(gpurchase);
-		 */
-		/*
-		 * gpurchase = gpurchaseFacade.getGpurchaseDetail(boardNum);
-		 */
 		HashMap<String, Integer> map = new HashMap<String, Integer>();
-		/*
-		 * map.put("count", count); map.put("cartAdded", cartAdded);
-		 */
+
 		map.put("count", count);
 		
 		return map;
