@@ -12,13 +12,13 @@
 	img{
 		cursor:pointer;
 	}
+	
 	</style>
+	
+	<div th:replace="thyme/layout_admin :: style"></div>
 </head>
-<body>
-<!--   <div th:each="cart : ${cartList}" class="p-4 col-lg-4 mb-5">
-	<span th:text="|${cart.findClass.title}원|" ></span> 
-  	<span th:text="|${cart.findClass.price}원|" ></span> 
-  </div> -->
+<body>  
+	<div th:replace="thyme/layout_admin :: header"></div><br/><br/>
 
 <div>
     <div class="container">
