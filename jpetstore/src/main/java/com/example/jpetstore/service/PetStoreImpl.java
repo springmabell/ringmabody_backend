@@ -195,15 +195,13 @@ public class PetStoreImpl implements PetStoreFacade {
 	public List<UserAccount> selectUser(PagingVO vo) {
 		return userAccountDao.selectUser(vo);
 	}
-<<<<<<< HEAD
 
 	@Override
 	public void deleteReview(int review_id) {
 		// TODO Auto-generated method stub
 		reviewDao.deleteReview(review_id);
 	}
-=======
-	
+
 	@Override
 	public int countTeacher() {
 		return teacherAccountDao.countTeacher();
@@ -230,5 +228,4 @@ public class PetStoreImpl implements PetStoreFacade {
 //	}
 	
 
->>>>>>> branch 'main' of https://github.com/springmabell/ringmabody_backend.git
 }
