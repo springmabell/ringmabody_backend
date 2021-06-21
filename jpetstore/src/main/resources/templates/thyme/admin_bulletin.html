@@ -54,24 +54,6 @@
 	                        </tbody>
 							
                         </table>
-                    <!-- 
-                        <table>
-                        <thead>
-                            <tr>
-                            <th class="jb-th-1">ID</th><th>TITLE</th><th>강사</th><th>시작일</th><th>가격</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                        	<tr th:each="class,iterStat : ${classList}">
-                            	<td class="jb-td-1" th:text="${class.class_id}">1</td>
-                            	<td th:text="${class.title}">필라테스</td>
-                            	<td th:text="${class.teacher_id}">김원희</td>
-                            	<td th:text="${class.sdate}">2021-04-04</td>
-                            	<td><span th:text="${class.price}">100,000원</span>원</td>
-                            </tr>
-                            
-                        </tbody>
-                        </table> -->
                     </div>
                 </form>
                 <div id="page-num">
@@ -80,19 +62,6 @@
 	            			<a th:href="@{/admin/listClasses.do?nowPage=} + ${page}" th:text="${page}"></a>
 	            		</li>
             		</ul>
-                <!-- 
-                    <ul>  
-                        <li><a href="#">1</a></li>  
-                        <li><a href="#">2</a></li>  
-                        <li><a href="#">3</a></li>  
-                        <li><a href="#">4</a></li>  
-                        <li><a href="#">5</a></li>  
-                        <li><a href="#">6</a></li>  
-                        <li><a href="#">7</a></li>  
-                        <li><a href="#">8</a></li>  
-                        <li><a href="#">9</a></li>  
-                        <li><a href="#">10</a></li>  
-                    </ul> -->
                 </div>
             </div>
         </div>

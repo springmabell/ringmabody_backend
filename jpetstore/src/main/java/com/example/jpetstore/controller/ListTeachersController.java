@@ -39,6 +39,7 @@ public class ListTeachersController {
 	public String handleRequest(PagingVO vo, Model model
 			, @RequestParam(value="nowPage", required=false)String nowPage
 			, @RequestParam(value="cntPerPage", required=false)String cntPerPage) throws Exception {
+		
 		List<TeacherAccount> teacherList = this.petStore.getAllTeacherAccount();
 		int size_of_list = teacherList.size();
 		

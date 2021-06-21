@@ -193,4 +193,21 @@ public class PetStoreImpl implements PetStoreFacade {
 	public List<TeacherAccount> selectTeacher(PagingVO vo) {
 		return teacherAccountDao.selectTeacher(vo);
 	}
+
+	public void deleteUser(String user_id) {
+		userAccountDao.deleteUser(user_id);
+	}
+	
+//
+//	@Override
+//	public int countOrder() {
+//		return orderDao.countOrder();
+//	}
+//
+//	@Override
+//	public List<Order> selectOrder(PagingVO vo) {
+//		return orderDao.selectOrder(vo);
+//	}
+	
+
 }

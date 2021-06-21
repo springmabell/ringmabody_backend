@@ -102,7 +102,7 @@ public class TeacherLoginController {
 			model.addAttribute("size", size_of_list);
 			
 			model.addAttribute("teacherSession", teacherSession);
-			model.addAttribute("name", teacherSession.getAccount().getTeacher_name());
+			model.addAttribute("user_id", teacherSession.getAccount().getTeacher_id());
 			
 			session.setAttribute("teacherSession", teacherSession);
 			

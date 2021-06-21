@@ -9,6 +9,7 @@ import com.example.jpetstore.dao.TeacherAccountDao;
 import com.example.jpetstore.dao.UserAccountDao;
 import com.example.jpetstore.dao.mybatis.mapper.TeacherAccountMapper;
 import com.example.jpetstore.dao.mybatis.mapper.UserAccountMapper;
+import com.example.jpetstore.domain.Cart;
 import com.example.jpetstore.domain.PagingVO;
 import com.example.jpetstore.domain.TeacherAccount;
 import com.example.jpetstore.domain.UserAccount;
@@ -22,6 +23,13 @@ public class MybatisUserAccountDao implements UserAccountDao {
 
 	@Autowired
 	private UserAccountMapper userAccountMapper;
+
+	@Override
+	public void deleteUser(String user_id) throws DataAccessException {
+		// TODO Auto-generated method stub
+		userAccountMapper.deleteUser(user_id);
+	}
+	
 	
 	public int countUser() {
 		return userAccountMapper.countUser();

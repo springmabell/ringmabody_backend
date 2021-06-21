@@ -21,12 +21,21 @@ import java.util.List;
 import org.apache.ibatis.annotations.Mapper;
 
 import com.example.jpetstore.domain.Order;
+import com.example.jpetstore.domain.PagingVO;
 
 /**
  * @author Eduardo Macarron
  */
 @Mapper
 public interface OrderMapper {
+
+	// 게시물 총 갯수
+	public int countOrder();
+
+	// 페이징 처리 게시글 조회
+	public List<Order> selectOrder(PagingVO vo);
+	
+	
 	public void insertOrder(Order order);
 	public void updateParticipant(int class_id);
 

@@ -35,20 +35,6 @@ public class ListUsersController {
 	public void setPetStore(PetStoreFacade petStore) {
 		this.petStore = petStore;
 	}
-//
-//	@RequestMapping("/admin/listUsers.do")
-//	public String handleRequest(ModelMap model) throws Exception {
-//		List<UserAccount> userList = this.petStore.getAllUserAccount();
-//		int size_of_list = userList.size();
-//		
-//		System.out.println(size_of_list);
-//		
-//		model.put("userList", userList);
-//		model.put("size", size_of_list);
-//		
-//		
-//		return "thyme/admin_user_list";
-//	}
 	
 	@RequestMapping("/admin/listUsers.do")
 	public String boardList(PagingVO vo, Model model
@@ -77,6 +63,28 @@ public class ListUsersController {
 		model.addAttribute("viewAll", this.petStore.selectUser(vo));
 		return "thyme/admin_user_list";
 	}
+	
+	@RequestMapping("/admin/User/info.do")
+	public String infoList(Model model
+			, @RequestParam(value="user_id")String user_id) {
+		
+		UserAccount user = this.petStore.getUserAccount(user_id);
+		
+		model.addAttribute("user", user);
+		
+		return "thyme/admin_user_info_detail";
+	}
+	
+
+	@RequestMapping("/admin/User/delete")
+	public String deleteList(Model model
+			, @RequestParam(value="user_id")String user_id) {
+		
+		this.petStore.deleteUser(user_id);
+		
+		return "thyme/admin_user_list";
+	}
+
 
 
 }

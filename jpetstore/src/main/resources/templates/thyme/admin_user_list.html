@@ -43,21 +43,22 @@
                         <table>
 							<thead>
 	                            <tr>
-	                            <th class="jb-th-1">번호</th><th>이름</th><th>등록일</th>
+	                            <th class="jb-th-1">번호</th><th>이름</th><th>등록일</th><th></th>
 	                            </tr>
 	                        </thead>
 	                        <tbody>
 	                        	<tr th:each="list,iterStat : ${viewAll}">
-	                            	<td class="jb-td-1" th:text="${list.user_id}">1</td>
-	                            	<td th:text="${list.user_name}">김원희</td>
-	                            	<td th:text="${list.register_date}">2021-04-04</td>
+	                        		
+		                            	<td class="jb-td-1" th:text="${list.user_id}">1</td>
+		                            	<td th:text="${list.user_name}">김원희</td>
+		                            	<td th:text="${list.register_date}">2021-04-04</td>
+		                            	<td><a href="" th:href="@{/admin/User/info.do?user_id=} + ${list.user_id}">상세보기</a></td>
 	                            </tr>
 	                        </tbody>
 							
                         </table>
                     </div>
                 </form>
-                
                 
                 <div id="page-num" style="display: block; text-align: center;">	
                      <ul>
