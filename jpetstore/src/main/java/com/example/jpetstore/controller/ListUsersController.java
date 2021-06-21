@@ -39,6 +39,8 @@ public class ListUsersController {
 		List<UserAccount> userList = this.petStore.getAllUserAccount();
 		int size_of_list = userList.size();
 		
+		System.out.println(size_of_list);
+		
 		model.put("userList", userList);
 		model.put("size", size_of_list);
 		

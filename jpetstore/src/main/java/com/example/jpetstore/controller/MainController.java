@@ -36,6 +36,7 @@ public class MainController {
 		if(session.getAttribute("userSession") != null){
 			UserSession userSession1 = (UserSession)session.getAttribute("userSession");
 			model.addAttribute("name", userSession1.getAccount().getUser_name());
+			model.addAttribute("user_id", userSession1.getAccount().getUser_id());
 		} else if(session.getAttribute("teacherSession") != null){
 			TeacherSession teacherSession1 = (TeacherSession)session.getAttribute("teacherSession");
 			model.addAttribute("name", teacherSession1.getAccount().getTeacher_name());

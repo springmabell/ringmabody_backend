@@ -7,11 +7,15 @@
     <link rel="stylesheet" href="/style/all.min.css">
     <link rel="stylesheet" href="/style/my_info.css">
     <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+    <div th:replace="thyme/layout_admin :: style"></div>
 </head>
 <body>
 
 <div id="wrap">
 
+	<div th:replace="thyme/layout_admin :: header"></div>
+	
+<!-- 
     <div id="header">
         <div class="header_nav">
             <div class="header_nav_logo">
@@ -25,16 +29,16 @@
                     <a href="" th:href="@{/user/signoff.do}">로그아웃</a>
                 </div>
             </div>
-        </div><!--end header_nav-->
-    </div><!--end header-->
-
+        </div>end header_nav
+    </div>end header
+ -->
     <div id="container">
         <div class="content_wrap">
             <div class="menu">
                 <ul class="menu_list">
-                    <li><a href="" th:href="@{/} + ${user.user_id} + @{/mypage/info.do}">개인정보 관리</a></li>
-                    <li><a href="" th:href="@{/} + ${user.user_id} + @{/mypage/purchase.do}">결제한 내역</a></li>
-                    <li><a href="" th:href="@{/} + ${user.user_id} + @{/mypage/review.do}">작성한 리뷰</a></li>
+                    <li><a href="" th:href="@{/} + ${user_id} + @{/mypage/info.do}">개인정보 관리</a></li>
+                    <li><a href="" th:href="@{/} + ${user_id} + @{/mypage/purchase.do}">결제한 내역</a></li>
+                    <li><a href="" th:href="@{/} + ${user_id} + @{/mypage/review.do}">작성한 리뷰</a></li>
                 </ul>
             </div>
             <div class="content">
@@ -53,7 +57,7 @@
                             </li>
                             <li class="info_item">
                                 <div>아이디</div>
-                                <div th:text="${user.user_id}">mabell4</div>
+                                <div th:text="${user_id}">mabell4</div>
                             </li>
                             <li class="info_item pwd_item">
                                 <div>비밀번호</div>

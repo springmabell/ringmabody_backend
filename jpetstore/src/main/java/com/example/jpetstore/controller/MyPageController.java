@@ -2,6 +2,8 @@ package com.example.jpetstore.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -28,8 +30,14 @@ public class MyPageController {
 	}
 	
 	@RequestMapping(value="/info.do", method=RequestMethod.GET)
-	public String handleRequest(ModelMap model, @PathVariable String user_id) throws Exception {
+	public String handleRequest(ModelMap model, @PathVariable String user_id, HttpSession session) throws Exception {
+		System.out.println(user_id);
 		UserAccount user = this.petStore.getUserAccount(user_id);
+
+		UserSession userSession1 = (UserSession)session.getAttribute("userSession");
+		model.put("name", userSession1.getAccount().getUser_name());
+		
+		model.put("user_id", user_id);
 		model.put("user", user);
 		
 		return "thyme/my_info";
