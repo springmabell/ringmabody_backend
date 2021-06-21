@@ -89,13 +89,16 @@ public class OrderController {
 	@Transactional
 	@PostMapping("/order/orderClass")
 	public String orderClass(@Valid @ModelAttribute("newOrder") Order order, BindingResult result, @ModelAttribute("amount") String amount,
-			@ModelAttribute("orderList") List<Class> orderList, HttpServletRequest request, SessionStatus status) {
+			@ModelAttribute("orderList") List<Class> orderList, HttpServletRequest request, SessionStatus status, HttpSession session) {
 		//삽입 , 참여자 수 증가, 장바구니에서 삭제
 		if (result.hasErrors()) {
 			return "thyme/Order";
 		}
 		
-		order.setUser_id("user333");
+		UserSession userSession1 = (UserSession)session.getAttribute("userSession");
+		String user_id = userSession1.getAccount().getUser_id();
+
+		order.setUser_id(user_id);
 		
 		for(Class c : orderList) {
 			order.setClass_id(c.getClass_id());

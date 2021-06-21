@@ -65,9 +65,10 @@ public class CartController {
 	@PostMapping("/cart")
 	@ResponseBody
 	public HashMap<String, Integer> cartAdd(HttpServletRequest request,
-			@RequestParam(required = false) int class_id) {
+			@RequestParam(required = false) int class_id, HttpSession session) {
 
-		String user_id = "user333";
+		UserSession userSession1 = (UserSession)session.getAttribute("userSession");
+		String user_id = userSession1.getAccount().getUser_id();
 
 		Cart cart = new Cart(user_id, class_id);
 
@@ -84,17 +85,21 @@ public class CartController {
 	}
 	
 	@GetMapping("/class/cartlist")
-	public String viewCartList(Model model) {
-		List<CartCommand> cartList = classFacade.findCartList("user333");
+	public String viewCartList(Model model, HttpSession session) {
+		UserSession userSession1 = (UserSession)session.getAttribute("userSession");
+		String user_id = userSession1.getAccount().getUser_id();
+
+		List<CartCommand> cartList = classFacade.findCartList(user_id);
 		model.addAttribute("cartList", cartList);
 		return "thyme/cart";
 	}
 	
 	@DeleteMapping("/cart/deleteCart/{class_id}")
 	@ResponseBody
-	public String deleteCart(@PathVariable("class_id") int class_id) {
-		System.out.println("dele");
-		String user_id = "user333";
+	public String deleteCart(@PathVariable("class_id") int class_id, HttpSession session) {
+		UserSession userSession1 = (UserSession)session.getAttribute("userSession");
+		String user_id = userSession1.getAccount().getUser_id();
+
 		Cart cart = new Cart(user_id, class_id);
 
 		classFacade.deleteCart(cart); 

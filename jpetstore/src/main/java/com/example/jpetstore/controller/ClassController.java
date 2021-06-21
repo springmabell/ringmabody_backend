@@ -163,9 +163,18 @@ public class ClassController {
 
 	// viewList에서 이미지 클릭 시 그에 해당하는 detail view로 이동
 	@GetMapping("/viewClass/{class_id}")
-	public String viewClass(@PathVariable("class_id") int class_id, Model model) {
+	public String viewClass(@PathVariable("class_id") int class_id, Model model, HttpSession session) {
 		Class findClass = classFacade.findClass(class_id);
 		classFacade.plusHit(class_id);
+		TeacherSession teacherSession1 = (TeacherSession)session.getAttribute("teacherSession");
+		String userId;
+		String usertype;
+		if(teacherSession1 != null) {
+			userId = teacherSession1.getAccount().getTeacher_id();
+			usertype = teacherSession1.getAccount().getUser_type();
+			model.addAttribute("userId", userId);
+			model.addAttribute("usertype", usertype);
+		}
 		model.addAttribute("findClass", findClass);
 		return "thyme/ViewDetailClass";
 	}
@@ -186,7 +195,7 @@ public class ClassController {
 	// 클래스 폼 작성 post
 	@PostMapping("/writeClass")
 	public String insertClass(@Valid Class newClass, BindingResult result, SessionStatus status,
-			HttpServletRequest request) {
+			HttpServletRequest request, HttpSession session) {
 		if (result.hasErrors()) {
 			return "thyme/ClassForm";
 		}
@@ -196,7 +205,10 @@ public class ClassController {
 
 		newClass.setImg(savedName);
 
-		newClass.setTeacher_id("teacher001");
+		TeacherSession teacherSession1 = (TeacherSession)session.getAttribute("teacherSession");
+		String teacherId = teacherSession1.getAccount().getTeacher_id();
+		System.out.println(teacherId);
+		newClass.setTeacher_id(teacherId);
 		DateFormat format = new SimpleDateFormat("yyyy/MM/dd");
 		String edate = format.format(newClass.getEdate());
 
@@ -216,7 +228,6 @@ public class ClassController {
 		classFacade.writeClass(newClass);
 
 		schedulerFacade.test(new Date());
-		status.setComplete();
 
 		return "thyme/finish";
 	}

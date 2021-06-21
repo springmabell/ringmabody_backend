@@ -60,12 +60,12 @@
                
 
 				
-                <span th:unless="${findClass.state eq '마감'}">
+                <span th:unless="(${userId} == ${findClass.teacher_id}) or (${findClass.state eq '마감'}) or (${usertype} eq teacher)">
                 	  <a class="btn py-2 px-4" id="cart">
                  장바구니</a>
                 <input type="hidden" id="classId" th:value="${findClass.class_id}" />
                 </span>
-                <span th:if="${findClass.state eq '마감'}">
+                <span th:if="(${userId} == ${findClass.teacher_id}) or (${findClass.state eq '마감'}) or (${usertype} eq teacher)"> 
                 	<input class="btn" type="button" onclick="" value="장바구니" disabled />
                 </span>
 
@@ -91,7 +91,9 @@
     <br/><br/><br/>
 
     <div style="clear:left;" class="form-group" align="right">
+    	<span th:if="${userId} eq ${findClass.teacher_id}">
     	<a th:attr="onclick=|deleteClass(${findClass.class_id}, ${findClass.participant})|" class="btn py-2 px-4" onClick="del(3);">삭제</a>
+    	</span>
         <a class="btn py-2 px-4" onclick="list();">목록</a>
     </div>
 
