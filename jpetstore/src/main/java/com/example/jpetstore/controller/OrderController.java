@@ -1,6 +1,11 @@
 package com.example.jpetstore.controller;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -99,10 +104,21 @@ public class OrderController {
 		String user_id = userSession1.getAccount().getUser_id();
 
 		order.setUser_id(user_id);
+		order.setTotal_price(Integer.parseInt(amount));
+		DateFormat format = new SimpleDateFormat("yyyy/MM/dd");
+		String edate = format.format(order.getExpiration_date());
+
+		try {
+			Date eDate = format.parse(edate);
+			order.setExpiration_date(eDate);
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 		for(Class c : orderList) {
 			order.setClass_id(c.getClass_id());
-			/* orderFacade.insertOrder(order); */
+			orderFacade.insertOrder(order); 
 			orderFacade.updateParticipant(c.getClass_id());
 			Cart cart = new Cart(order.getUser_id(), c.getClass_id());
 			classFacade.deleteCart(cart);

@@ -4,6 +4,9 @@
 <mapper namespace="com.example.jpetstore.dao.mybatis.mapper.OrderMapper">
 
   <cache />
+    <sql id="BaseColumns">
+  		ORDER_ID, CLASS_ID, USER_ID, CARD_BANK, CARD_NUMBER, EXPIRATION_DATE, CVC, TOTAL_PRICE
+    </sql>
 	 <select id="getOrdersByUsername" resultType="Order">
 		SELECT ORDER1.ORDER_ID,
 	    	   ORDER1.CLASS_ID,
@@ -22,103 +25,14 @@
 		UPDATE CLASS SET PARTICIPANT = PARTICIPANT + 1
 		WHERE CLASS_ID = #{class_id}
 	</update>  
-<!-- 	
-  <select id="getOrder" resultType="Order">
-    select
-      BILLADDR1 AS billAddress1,
-      BILLADDR2 AS billAddress2,
-      BILLCITY,
-      BILLCOUNTRY,
-      BILLSTATE,
-      BILLTOFIRSTNAME,
-      BILLTOLASTNAME,
-      BILLZIP,
-      SHIPADDR1 AS shipAddress1,
-      SHIPADDR2 AS shipAddress2,
-      SHIPCITY,
-      SHIPCOUNTRY,
-      SHIPSTATE,
-      SHIPTOFIRSTNAME,
-      SHIPTOLASTNAME,
-      SHIPZIP,
-      CARDTYPE,
-      COURIER,
-      CREDITCARD,
-      EXPRDATE AS expiryDate,
-      LOCALE,
-      ORDERDATE,
-      ORDERS.ORDERID,
-      TOTALPRICE,
-      USERID AS username,
-      STATUS
-    FROM ORDERS, ORDERSTATUS
-    WHERE ORDERS.ORDERID = #{value}
-      AND ORDERS.ORDERID = ORDERSTATUS.ORDERID
-  </select>
 
-  <select id="getOrdersByUsername" resultType="Order">
-    SELECT
-      BILLADDR1 AS billAddress1,
-      BILLADDR2 AS billAddress2,
-      BILLCITY,
-      BILLCOUNTRY,
-      BILLSTATE,
-      BILLTOFIRSTNAME,
-      BILLTOLASTNAME,
-      BILLZIP,
-      SHIPADDR1 AS shipAddress1,
-      SHIPADDR2 AS shipAddress2,
-      SHIPCITY,
-      SHIPCOUNTRY,
-      SHIPSTATE,
-      SHIPTOFIRSTNAME,
-      SHIPTOLASTNAME,
-      SHIPZIP,
-      CARDTYPE,
-      COURIER,
-      CREDITCARD,
-      EXPRDATE AS expiryDate,
-      LOCALE,
-      ORDERDATE,
-      ORDERS.ORDERID,
-      TOTALPRICE,
-      USERID AS username,
-      STATUS
-    FROM ORDERS, ORDERSTATUS
-    WHERE ORDERS.USERID = #{value}
-      AND ORDERS.ORDERID = ORDERSTATUS.ORDERID
-    ORDER BY ORDERDATE
-  </select>
-
-  <insert id="insertOrder">
-    INSERT INTO ORDERS (ORDERID, USERID, ORDERDATE, SHIPADDR1, SHIPADDR2, SHIPCITY, SHIPSTATE,
-      SHIPZIP, SHIPCOUNTRY, BILLADDR1, BILLADDR2, BILLCITY, BILLSTATE, BILLZIP, BILLCOUNTRY,
-      COURIER, TOTALPRICE, BILLTOFIRSTNAME, BILLTOLASTNAME, SHIPTOFIRSTNAME, SHIPTOLASTNAME,
-      CREDITCARD, EXPRDATE, CARDTYPE, LOCALE)
-    VALUES(#{orderId}, #{username}, #{orderDate}, #{shipAddress1}, #{shipAddress2,jdbcType=VARCHAR}, #{shipCity},
-      #{shipState}, #{shipZip}, #{shipCountry}, #{billAddress1}, #{billAddress2,jdbcType=VARCHAR}, #{billCity},
-      #{billState}, #{billZip}, #{billCountry}, #{courier}, #{totalPrice}, #{billToFirstName}, #{billToLastName},
-      #{shipToFirstName}, #{shipToLastName}, #{creditCard}, #{expiryDate}, #{cardType}, #{locale})
-  </insert>
-
-  <insert id="insertOrderStatus">
-    INSERT INTO ORDERSTATUS (ORDERID, LINENUM, TIMESTAMP, STATUS)
-    VALUES (#{orderId,jdbcType=NUMERIC}, #{orderId,jdbcType=NUMERIC}, #{orderDate,jdbcType=TIMESTAMP}, #{status,jdbcType=VARCHAR})
-  </insert>
-  
-  <insert id="msSqlServerInsertOrder" useGeneratedKeys="true">
-  	insert into orders (userid, orderdate, shipaddr1, shipaddr2,
-	  	shipcity, shipstate, shipzip, shipcountry, billaddr1, billaddr2,
-	  	billcity, billstate, billzip, billcountry, courier, totalprice,
-	  	billtofirstname, billtolastname, shiptofirstname, shiptolastname,
-	  	creditcard, exprdate, cardtype, locale) values (#username#,
-	  	#orderDate#, #shipAddress1#, #shipAddress2:VARCHAR#, #shipCity#,
-	  	#shipState#, #shipZip#, #shipCountry#, #billAddress1#,
-	  	#billAddress2:VARCHAR#, #billCity#, #billState#, #billZip#,
-	  	#billCountry#, #courier#, #totalPrice#, #billToFirstName#,
-	  	#billToLastName#, #shipToFirstName#, #shipToLastName#,
-	  	#creditCard#, #expiryDate#, #cardType#, #locale#); 
-  	select @@identity as value
-  </insert> -->
-
+	<!-- order1 테이블에 삽입하기 -->
+	<insert id="insertOrder" parameterType="com.example.jpetstore.domain.Order">
+		<selectKey keyProperty="order_id" resultType="int" order="BEFORE">
+			SELECT ORDER_ID_SEQ.NEXTVAL AS order_id FROM DUAL
+		</selectKey>
+		INSERT INTO ORDER1 ( <include refid="BaseColumns" /> )
+		VALUES(#{order_id}, #{class_id}, #{user_id, jdbcType=VARCHAR},#{card_bank, jdbcType=VARCHAR},#{card_number, jdbcType=VARCHAR}, 
+		#{expiration_date, jdbcType=DATE}, #{cvc, jdbcType=INTEGER}, #{total_price})
+	</insert>
 </mapper>

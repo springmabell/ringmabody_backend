@@ -66,9 +66,9 @@
                         <div class="row">
                             <div class="col-md-6 mb-4 form-group">
                                 <label for="expireDate">유효기간</label>
-                                <input th:field="*{expiration_date}" class="form-control form-control-lg" style="width:80%;"
-                                                 placeholder="MM/YY"/>
-                                                 
+                                <input class="form-control form-control-lg" style="width:80%;"
+                                                 placeholder="yyyy/mm/dd" id="exdate"/>
+                                                 <input type="hidden" id="expiration_date" name="expiration_date" />
                             </div>
                         </div>
                 </div>
@@ -82,7 +82,7 @@
                 <div class="row">
                     <div class="col-12">
                     <a  class="btn" th:href="@{/class/viewList}"></a>
-                        <input type="submit" value="결제" class="btn" style="color: white;background-color: rgb(123, 227, 251);">
+                        <input type="submit" onclick="makeEdate();" value="결제" class="btn" style="color: white;background-color: rgb(123, 227, 251);">
                     </div>
                 </div>
                 </form>
@@ -90,5 +90,13 @@
         </div>
     </div>
 </div>
+<script type="text/javascript">
+function makeEdate(){ 
+	var e = $('#exdate').val().split("/")
+	var edate = new Date(e[0], e[1] -1 , e[2]);
+	alert(edate);
+ 	document.getElementById("expiration_date").setAttribute("value", edate);  
+}
+</script>
 </body>
 </html>

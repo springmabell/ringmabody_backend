@@ -20,7 +20,7 @@ public class Order implements Serializable {
 	 public Date order_date;
 	 public String card_bank;
 	 public String card_number;
-	 public String expiration_date;
+	 public Date expiration_date;
 	 public int cvc;
 	 public int total_price;
 
@@ -67,10 +67,11 @@ public class Order implements Serializable {
 	public void setCvc(int cvc) {
 		this.cvc = cvc;
 	}
-	public String getExpiration_date() {
+	
+	public Date getExpiration_date() {
 		return expiration_date;
 	}
-	public void setExpiration_date(String expiration_date) {
+	public void setExpiration_date(Date expiration_date) {
 		this.expiration_date = expiration_date;
 	}
 	public int getTotal_price() {
