@@ -13,4 +13,8 @@ public interface ReviewDao {
 	List<Review> getReviews(String username) throws DataAccessException;
 
 	Review getReviewDetail(int review_id);
+
+	void writeReview(Review newReview);
+
+	void updateReview(Review review);
 }

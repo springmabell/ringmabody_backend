@@ -57,11 +57,12 @@ a{
     line-height: 40px;
     color: #222222;
 }
-.menu_list li:nth-child(4) a {
+.menu_list li:nth-child(3) a {
     border: solid 1px rgb(123, 227, 251);
     background-color: rgb(123, 227, 251);
     color: white;
 }
+
 .menu_list a:hover {
     border: solid 1px deepskyblue;
 }

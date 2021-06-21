@@ -3,6 +3,8 @@ package com.example.jpetstore.domain;
 import java.io.Serializable;
 import java.util.Date;
 
+import org.springframework.web.multipart.MultipartFile;
+
 @SuppressWarnings("serial")
 public class Review implements Serializable{
 	/* Private Fields */
@@ -17,6 +19,17 @@ public class Review implements Serializable{
 	  private int review_rating;
 	  private String review_img;
 	  private int review_hit;
+	  private int order_id;
+	  
+	public int getOrder_id() {
+		return order_id;
+	}
+	public void setOrder_id(int order_id) {
+		this.order_id = order_id;
+	}
+	public MultipartFile report;
+	  public Date edate;
+
 	  
 	public int getReview_id() {
 		return review_id;
@@ -77,5 +90,18 @@ public class Review implements Serializable{
 	}
 	public void setReview_hit(int review_hit) {
 		this.review_hit = review_hit;
+	}
+	public MultipartFile getReport() {
+		return report;
+	}
+
+	public void setReport(MultipartFile report) {
+		this.report = report;
+	}
+	public Date getEdate() {
+		return edate;
+	}
+	public void setEdate(Date edate) {
+		this.edate = edate;
 	}
 }

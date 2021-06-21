@@ -77,6 +77,10 @@ public interface PetStoreFacade {
 
 	Review getReviewDetail(int review_id);
 	
+	public void writeReview(Review newReview);
+
+	void updateReview(Review review);
+	
 	List<Payment> getAllPayments();
 	
 	List<Order> getAllOrders();
