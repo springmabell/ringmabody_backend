@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.example.jpetstore.domain.Order;
 import com.example.jpetstore.domain.TeacherAccount;
 import com.example.jpetstore.service.PetStoreFacade;
 
@@ -28,22 +29,13 @@ public class ListOrdersController {
 	public void setPetStore(PetStoreFacade petStore) {
 		this.petStore = petStore;
 	}
-//
-//	@RequestMapping("/shop/listOrders.do")
-//	public ModelAndView handleRequest(
-//		@ModelAttribute("userSession") UserSession userSession
-//		) throws Exception {
-//		String username = userSession.getAccount().getUser_id();
-//		return new ModelAndView("ListOrders", "orderList", 
-//				petStore.getOrdersByUsername(username));
-//	}
 	
 	@RequestMapping("/admin/listOrders.do")
 	public String handleRequest(ModelMap model) throws Exception {
-		List<TeacherAccount> teacherList = this.petStore.getAllTeacherAccount();
-		int size_of_list = teacherList.size();
+		List<Order> orderList = this.petStore.getAllOrders();
+		int size_of_list = orderList.size();
 		
-		model.put("teacherList", teacherList);
+		model.put("orderList", orderList);
 		model.put("size", size_of_list);
 		
 		

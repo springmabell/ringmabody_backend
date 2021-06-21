@@ -5,6 +5,7 @@ import java.util.List;
 import com.example.jpetstore.domain.Category;
 import com.example.jpetstore.domain.Item;
 import com.example.jpetstore.domain.Order;
+import com.example.jpetstore.domain.Payment;
 import com.example.jpetstore.domain.Product;
 import com.example.jpetstore.domain.Review;
 import com.example.jpetstore.domain.TeacherAccount;
@@ -44,7 +45,7 @@ public interface PetStoreFacade {
 	List<Order> getOrdersByUsername(String username);
 	
 	
-	// 여기서부터 저희가 만든 것 
+	// 여기서부터 
 	
 	List<TeacherAccount> getAllTeacherAccount();
 	
@@ -74,5 +75,9 @@ public interface PetStoreFacade {
 	List<Review> getReviews(String username);
 
 	Review getReviewDetail(int review_id);
+	
+	List<Payment> getAllPayments();
+	
+	List<Order> getAllOrders();
 
 }

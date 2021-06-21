@@ -23,6 +23,12 @@ public class MybatisClassDao implements ClassDao{
 	@Autowired
 	private ClassMapper classMapper;
 	
+
+	public List<Class> getAllClasses() throws DataAccessException{
+		return classMapper.getAllClasses();
+	}
+
+	
 	public List<Class> viewClassList(String keyword) throws DataAccessException{
 		return classMapper.viewClassList(keyword);
 	}

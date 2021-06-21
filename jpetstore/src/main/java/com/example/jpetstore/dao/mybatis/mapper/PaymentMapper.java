@@ -20,23 +20,17 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
 
-import com.example.jpetstore.domain.Order;
+import com.example.jpetstore.domain.Payment;
+import com.example.jpetstore.domain.TeacherAccount;
+import com.example.jpetstore.domain.UserAccount;
 
 /**
  * @author Eduardo Macarron
+ *
  */
 @Mapper
-public interface OrderMapper {
-	public void insertOrder(Order order);
-	public void updateParticipant(int class_id);
+public interface PaymentMapper {
 
-	List<Order> getAllOrders();
-
-  List<Order> getOrdersByUsername(String username);
-
-  Order getOrder(int orderId);
+  List<Payment> getAllPayments();
   
-  void insertOrderStatus(Order order);
-
-  int msSqlServerInsertOrder(Order order);
 }

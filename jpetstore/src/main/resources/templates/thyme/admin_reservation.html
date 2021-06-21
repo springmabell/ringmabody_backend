@@ -37,24 +37,16 @@
                 <table>
                 <thead>
                     <tr>
-                    <th class="jb-th-1">ID</th><th>NAME</th><th>TITLE</th>
+                    <th class="jb-th-1">예약 ID</th><th>TITLE</th><th>고객</th><th>예약일</th><th>가격</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                    <td class="jb-td-1">A1001</td><td>김원희</td><td>기구필라테스 @ 내 몸의 균형 찾아가기</td>
-                    </tr>
-                    <tr>
-                    <td class="jb-td-1">A1002</td><td>김원희</td><td>기구필라테스 @ 내 몸의 균형 찾아가기</td>
-                    </tr>
-                    <tr>
-                    <td class="jb-td-1">A1003</td><td>김원희</td><td>기구필라테스 @ 내 몸의 균형 찾아가기</td>
-                    </tr>
-                    <tr>
-                    <td class="jb-td-1">A1004</td><td>김원희</td><td>기구필라테스 @ 내 몸의 균형 찾아가기</td>
-                    </tr>
-                    <tr>
-                    <td class="jb-td-1">A1005</td><td>김원희</td><td>기구필라테스 @ 내 몸의 균형 찾아가기</td>
+                	<tr th:each="order,iterStat : ${orderList}">
+                            	<td class="jb-td-1" th:text="${order.order_id}">1</td>
+                            	<td th:text="${order.class_id}">김원희</td>
+                            	<td th:text="${order.user_id}">2021-04-04</td>
+                            	<td th:text="${order.order_date}">2021-04-04</td>
+                            	<td><span th:text="${order.total_price}">100,000원</span>원</td>
                     </tr>
                 </tbody>
                 </table>

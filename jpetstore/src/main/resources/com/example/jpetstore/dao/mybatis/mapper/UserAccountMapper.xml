@@ -50,8 +50,9 @@
     	   USERACCOUNT.USER_TYPE,
     	   USERACCOUNT.REGISTER_DATE
     FROM USERACCOUNT
+    ORDER BY USERACCOUNT.USER_NAME
   </select>
-  
+ 
   
   <insert id="insertUserAccount" parameterType="UserAccount">
     INSERT INTO USERACCOUNT

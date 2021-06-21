@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.example.jpetstore.domain.Category;
+import com.example.jpetstore.domain.Payment;
 import com.example.jpetstore.domain.Product;
 import com.example.jpetstore.domain.TeacherAccount;
 import com.example.jpetstore.service.PetStoreFacade;
@@ -35,10 +36,10 @@ public class ListTeacherPaymentsController {
 
 	@RequestMapping("/admin/listTeacherPayments.do")
 	public String handleRequest(ModelMap model) throws Exception {
-		List<TeacherAccount> teacherList = this.petStore.getAllTeacherAccount();
-		int size_of_list = teacherList.size();
+		List<Payment> paymentList = this.petStore.getAllPayments();
+		int size_of_list = paymentList.size();
 		
-		model.put("teacherList", teacherList);
+		model.put("paymentList", paymentList);
 		model.put("size", size_of_list);
 		
 		

@@ -7,6 +7,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.example.jpetstore.dao.CategoryDao;
 import com.example.jpetstore.dao.ItemDao;
 import com.example.jpetstore.dao.OrderDao;
+import com.example.jpetstore.dao.PaymentDao;
 import com.example.jpetstore.dao.ProductDao;
 import com.example.jpetstore.dao.ReviewDao;
 import com.example.jpetstore.dao.TeacherAccountDao;
@@ -14,6 +15,7 @@ import com.example.jpetstore.dao.UserAccountDao;
 import com.example.jpetstore.domain.Category;
 import com.example.jpetstore.domain.Item;
 import com.example.jpetstore.domain.Order;
+import com.example.jpetstore.domain.Payment;
 import com.example.jpetstore.domain.Product;
 import com.example.jpetstore.domain.Review;
 import com.example.jpetstore.domain.TeacherAccount;
@@ -36,6 +38,9 @@ public class PetStoreImpl implements PetStoreFacade {
 	private UserAccountDao userAccountDao;
 	@Autowired
 	private ReviewDao reviewDao;
+	@Autowired
+	private PaymentDao paymentDao;
+	
 	
 
 	//-------------------------------------------------------------------------
@@ -159,5 +164,13 @@ public class PetStoreImpl implements PetStoreFacade {
 		// TODO Auto-generated method stub
 		return reviewDao.getReviewDetail(review_id);
 	}
-
+	
+	public List<Payment> getAllPayments(){
+		return paymentDao.getAllPayments();
+	}
+	
+	public List<Order> getAllOrders(){
+		return orderDao.getAllOrders();
+	}
+	
 }
