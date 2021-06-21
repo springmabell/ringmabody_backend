@@ -17,6 +17,7 @@ import com.example.jpetstore.domain.Category;
 import com.example.jpetstore.domain.PagingVO;
 import com.example.jpetstore.domain.Product;
 import com.example.jpetstore.domain.TeacherAccount;
+import com.example.jpetstore.domain.UserAccount;
 import com.example.jpetstore.service.PetStoreFacade;
 
 /**
@@ -64,6 +65,19 @@ public class ListTeachersController {
 		
 		return "thyme/admin_teacher_list";
 	}
+	
+
+	@RequestMapping("/admin/Teacher/info.do")
+	public String infoList(Model model
+			, @RequestParam(value="teacher_id")String teacher_id) {
+		
+		TeacherAccount teacher = this.petStore.getTeacherAccount(teacher_id);
+		
+		model.addAttribute("teacher", teacher);
+		
+		return "thyme/admin_teacher_info_detail";
+	}
+	
 
 
 }

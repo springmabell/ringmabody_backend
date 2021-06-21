@@ -44,7 +44,7 @@
                         <table>
 							<thead>
 	                            <tr>
-	                            <th class="jb-th-1">번호</th><th>이름</th><th>등록일</th>
+	                            <th class="jb-th-1">번호</th><th>이름</th><th>등록일</th><th></th>
 	                            </tr>
 	                        </thead>
 	                        <tbody>
@@ -52,6 +52,7 @@
 	                            	<td class="jb-td-1" th:text="${list.teacher_id}">1</td>
 	                            	<td th:text="${list.teacher_name}">김원희</td>
 	                            	<td th:text="${list.register_date}">2021-04-04</td>
+	                            	<td><a href="" th:href="@{/admin/Teacher/info.do?teacher_id=} + ${list.teacher_id}">상세보기</a></td>
 	                            </tr>
 	                        </tbody>
 							
