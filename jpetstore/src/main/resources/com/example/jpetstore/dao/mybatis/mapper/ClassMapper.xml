@@ -7,6 +7,21 @@
   		CLASS_ID, TEACHER_ID, CATEGORY_ID, TITLE, CONTENT, PRICE, EDATE, PARTICIPANT, IMG, PLACE, LOCAL, MINNUM, MAXNUM
   </sql>
   
+	
+	<!-- 페이징 처리 후 게시글 조회 -->
+	<select id="selectClass" resultType="Class">
+		SELECT * 
+			FROM (
+				SELECT ROWNUM RN, A.* 
+					FROM (
+							SELECT * 
+							FROM CLASS 
+							ORDER BY CLASS_ID DESC 
+							) A
+					)
+		WHERE RN BETWEEN #{start} AND #{end}
+	</select>
+  
   	<select id="getAllClasses" resultType="Class">
 	    SELECT CLASS.CLASS_ID,
 	    	   CLASS.TEACHER_ID,

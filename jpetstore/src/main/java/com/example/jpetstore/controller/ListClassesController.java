@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.support.PagedListHolder;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -14,6 +15,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.example.jpetstore.domain.Category;
 import com.example.jpetstore.domain.Class;
+import com.example.jpetstore.domain.PagingVO;
 import com.example.jpetstore.domain.Product;
 import com.example.jpetstore.domain.TeacherAccount;
 import com.example.jpetstore.domain.UserAccount;
@@ -40,18 +42,32 @@ public class ListClassesController {
 	}
 
 	@RequestMapping("/admin/listClasses.do")
-	public String handleRequest(ModelMap model) throws Exception {
+	public String handleRequest(PagingVO vo, Model model
+			, @RequestParam(value="nowPage", required=false)String nowPage
+			, @RequestParam(value="cntPerPage", required=false)String cntPerPage) throws Exception {
 		
 		List<Class> classList = this.classes.getAllClasses();
 		int size_of_list = classList.size();
 		
 
-		System.out.println("hi");
+		int total = classes.countClass();
 		
-		System.out.println(size_of_list);
+		if (nowPage == null && cntPerPage == null) {
+			nowPage = "1";
+			cntPerPage = "10";
+		} else if (nowPage == null) {
+			nowPage = "1";
+		} else if (cntPerPage == null) { 
+			cntPerPage = "10";
+		}
 		
-		model.put("classList", classList);
-		model.put("size", size_of_list);
+		vo = new PagingVO(total, Integer.parseInt(nowPage), Integer.parseInt(cntPerPage));
+		model.addAttribute("paging", vo);
+		model.addAttribute("viewAll", classes.selectClass(vo));
+		
+		
+		model.addAttribute("classList", classList);
+		model.addAttribute("size", size_of_list);
 		
 		
 		return "thyme/admin_bulletin";

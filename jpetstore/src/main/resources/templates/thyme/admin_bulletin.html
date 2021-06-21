@@ -37,7 +37,24 @@
                 </div>
                 <form>
                     <div class="info_wrap">
-                    
+                    	<table>
+							<thead>
+	                            <tr>
+	                            <th class="jb-th-1">ID</th><th>TITLE</th><th>강사</th><th>시작일</th><th>가격</th>
+	                            </tr>
+	                        </thead>
+	                        <tbody>
+	                        	<tr th:each="list,iterStat : ${viewAll}">
+	                            	<td class="jb-td-1" th:text="${list.class_id}">1</td>
+	                            	<td th:text="${list.title}">필라테스</td>
+	                            	<td th:text="${list.teacher_id}">teacher001</td>
+	                            	<td th:text="${list.sdate}">2021-04-04</td>
+	                            	<td><span th:text="${list.price}">100,000원</span>원</td>
+	                            </tr>
+	                        </tbody>
+							
+                        </table>
+                    <!-- 
                         <table>
                         <thead>
                             <tr>
@@ -54,10 +71,16 @@
                             </tr>
                             
                         </tbody>
-                        </table>
+                        </table> -->
                     </div>
                 </form>
                 <div id="page-num">
+                	<ul>
+	                     <li th:each="page: ${#numbers.sequence(paging.startPage, paging.endPage)}">
+	            			<a th:href="@{/admin/listClasses.do?nowPage=} + ${page}" th:text="${page}"></a>
+	            		</li>
+            		</ul>
+                <!-- 
                     <ul>  
                         <li><a href="#">1</a></li>  
                         <li><a href="#">2</a></li>  
@@ -69,7 +92,7 @@
                         <li><a href="#">8</a></li>  
                         <li><a href="#">9</a></li>  
                         <li><a href="#">10</a></li>  
-                    </ul>
+                    </ul> -->
                 </div>
             </div>
         </div>

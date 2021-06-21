@@ -16,6 +16,7 @@ import com.example.jpetstore.domain.Category;
 import com.example.jpetstore.domain.Class;
 import com.example.jpetstore.domain.Filtering;
 import com.example.jpetstore.domain.PagingVO;
+import com.example.jpetstore.domain.UserAccount;
 
 @Repository
 public class MybatisClassDao implements ClassDao{
@@ -117,5 +118,11 @@ public class MybatisClassDao implements ClassDao{
 		// TODO Auto-generated method stub
 		classMapper.deleteFinishedClassFromCart();
 	}
+	
+	@Override
+	public List<Class> selectClass(PagingVO vo){
+		return classMapper.selectClass(vo);
+	}
+	
 
 }

@@ -183,4 +183,14 @@ public class PetStoreImpl implements PetStoreFacade {
 	public List<UserAccount> selectUser(PagingVO vo) {
 		return userAccountDao.selectUser(vo);
 	}
+	
+	@Override
+	public int countTeacher() {
+		return teacherAccountDao.countTeacher();
+	}
+
+	@Override
+	public List<TeacherAccount> selectTeacher(PagingVO vo) {
+		return teacherAccountDao.selectTeacher(vo);
+	}
 }

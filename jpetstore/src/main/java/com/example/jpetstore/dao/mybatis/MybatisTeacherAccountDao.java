@@ -7,6 +7,7 @@ import org.springframework.stereotype.Repository;
 
 import com.example.jpetstore.dao.TeacherAccountDao;
 import com.example.jpetstore.dao.mybatis.mapper.TeacherAccountMapper;
+import com.example.jpetstore.domain.PagingVO;
 import com.example.jpetstore.domain.TeacherAccount;
 import com.example.jpetstore.domain.UserAccount;
 
@@ -19,6 +20,15 @@ public class MybatisTeacherAccountDao implements TeacherAccountDao {
 
 	@Autowired
 	private TeacherAccountMapper teacherAccountMapper;
+	
+
+	public int countTeacher() {
+		return teacherAccountMapper.countTeacher();
+	}
+	
+	public List<TeacherAccount> selectTeacher(PagingVO vo){
+		return teacherAccountMapper.selectTeacher(vo);
+	}
 	
 	public List<TeacherAccount> getAllTeacherAccount() throws DataAccessException {
 		

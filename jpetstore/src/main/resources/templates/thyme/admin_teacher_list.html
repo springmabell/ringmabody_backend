@@ -42,6 +42,22 @@
                 <form>
                     <div class="info_wrap">
                         <table>
+							<thead>
+	                            <tr>
+	                            <th class="jb-th-1">번호</th><th>이름</th><th>등록일</th>
+	                            </tr>
+	                        </thead>
+	                        <tbody>
+	                        	<tr th:each="list,iterStat : ${viewAll}">
+	                            	<td class="jb-td-1" th:text="${list.teacher_id}">1</td>
+	                            	<td th:text="${list.teacher_name}">김원희</td>
+	                            	<td th:text="${list.register_date}">2021-04-04</td>
+	                            </tr>
+	                        </tbody>
+							
+                        </table>
+                    
+                        <!-- <table>
                         <thead>
                             <tr>
                             <th class="jb-th-1">번호</th><th>이름</th><th>등록일</th><th></th>
@@ -55,11 +71,18 @@
                             	<td><a href="" th:href="@{/admin/listUsers.do}">상세보기</a></td>
                             </tr>
                         </tbody>
-                        </table>
+                        </table> -->
                     </div>
                 </form>
                 <div id="page-num">
-                    <ul>  
+                
+                	<ul>
+	                     <li th:each="page: ${#numbers.sequence(paging.startPage, paging.endPage)}">
+	            			<a th:href="@{/admin/listTeachers.do?nowPage=} + ${page}" th:text="${page}"></a>
+	            		</li>
+            		</ul>
+            		
+                    <!-- <ul>  
                         <li><a href="#">1</a></li>  
                         <li><a href="#">2</a></li>  
                         <li><a href="#">3</a></li>  
@@ -70,7 +93,7 @@
                         <li><a href="#">8</a></li>  
                         <li><a href="#">9</a></li>  
                         <li><a href="#">10</a></li>  
-                    </ul>
+                    </ul> -->
                 </div>
             </div>
         </div>
