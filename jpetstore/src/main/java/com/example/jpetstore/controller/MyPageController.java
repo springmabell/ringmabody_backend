@@ -93,6 +93,13 @@ public class MyPageController {
 		return "thyme/my_review_detail";
 	}
 	
+	@RequestMapping(value="/{review_id}/review.detail.do", method=RequestMethod.POST)
+	public String ReviewUpdateRequest(ModelMap model, @PathVariable int review_id) throws Exception {
+		
+		
+		return "redirect:/review.do";
+	}
+	
 	/*// 클래스 폼 작성 get
 	@RequestMapping(value="/{order_id}/review.write.do", method=RequestMethod.GET)
 	public String writeClass() {
