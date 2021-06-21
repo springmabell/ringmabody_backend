@@ -85,7 +85,7 @@
             <div class="header_nav_logo_right">
             	<div class="header_nav_login">
 	            	<div th:if="${session.userSession} or ${session.teacherSession}">
-	                	<a id="header_name" href="" ><span th:text="${name}">홍길동</span> 님 ▽</a>&nbsp&nbsp&nbsp&nbsp
+	                	<a id="header_name" href=""  th:href="@{/} + ${user_id} + @{/mypage/info.do}" ><span th:text="${name}">홍길동</span> 님 ▽</a>&nbsp&nbsp&nbsp&nbsp
 	                </div>
 	                <div th:if="${session.userSession} or ${session.teacherSession}">
 	                    <a href="" th:href="@{/user/signoff.do}" onClick="alert('로그아웃 되었습니다.')">로그아웃</a><br/>

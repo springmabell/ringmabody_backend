@@ -6,6 +6,7 @@
 	<title>SpringMaBell : 회원가입</title>
 	<link rel="stylesheet" href="/style/signup.agree.css">
 	<script type="text/javascript" src="/js/signup-agree.js"></script>
+	<script type="text/javascript" src="/js/jquery.js"></script>
 </head>
 <body>
     <!-- header -->
@@ -484,7 +485,7 @@
                             <!-- <span>tg-text=terms_button_cancel<a href="#" id="btnCancel" class="btn_type btn_default" role="button">취소</a></span> -->
                             <!-- <span>tg-text=terms_button_agree<a href="#" id="btnAgree" class="btn_type btn_primary" role="button">확인</a></span> -->
                             
-                            <span></span><input type="submit" id="btnAgree" class="btn_type btn_primary" role="button" value="확인"></span>
+                            <span></span><input type="submit" id="btnAgree" class="btn_type btn_primary" role="button" value="확인" onclick="agreeChk()"></span>
                         </div>
                     </form>
 
@@ -497,36 +498,38 @@
 
     <script type="text/javascript" src="/inc/common/js/jquery.min.js"></script>
     <script type="text/JavaScript">
+    
+	    $("#chk_all").click(function() {
+	    	if ($("#chk_all").prop("checked")){
+	    		$("#termsService").prop("checked", true);
+	    		$("#termsPrivacy").prop("checked", true);
+	    	} else {
+	    		$("#termsService").prop("checked", false);
+	    		$("#termsPrivacy").prop("checked", false);
+	    	}
+	    })
+	    
+	    
+	    
         $(document).ready(function() {
             checkSupportedBorwser();
-
+            /* 
+            $("#termsService").click(function() {
+    	    	console.log('pass1')
+    	    	if ($("#termsPrivacy").prop("checked")){
+    	    		$("#chk_all").prop("checked", true);
+    	    	}
+    	    }
+    	    
+    	    $("#termsPrivacy").click(function() {
+    	    	if ($("#termsService").prop("checked")){
+    	    		$("#chk_all").prop("checked", true);
+    	    	}
+    	    } */
+/* 
             $("#chk_all").prop("checked",false);
             setTerms();
-
-            $(".lang .sel").click(function() {
-                $(this).attr("aria-expanded", "true");
-                $(".lang .lang_select_wrap").show();
-            });
-            $(".lang .lang_select").click(function() {
-                $(".lang .lang_select_wrap").hide();
-            });
-
-            $("#btnLangKoKr").click(function() {
-                changeLang("ko_KR");
-            })
-
-            $("#btnLangEnUs").click(function() {
-                changeLang("en_US");
-            })
-
-            $("#btnLangHansCn").click(function() {
-                changeLang("zh-Hans_CN");
-            })
-
-            $("#btnLangHansTw").click(function() {
-                changeLang("zh-Hant_TW");
-            })
-
+ */
 
             $("#chk_all").click(function() {
                 location.hash = 'agreeBottom';
@@ -574,11 +577,19 @@
             })
 
         });
+	    
+	    function agreeChk(){
+	    	console.log($("#termsPrivacy").is(":checked"));
+	    	console.log($("#termsService").is(":checked"));
+	    	if (!$("#termsPrivacy").is(":checked") || !$("#termsService").is(":checked")){
+	    		alert('개인정보 수집 동의가 필요합니다.');
+	    	}
+	    }
 
         function changeLang(lang) {
             location.replace("/user2/V2Join?m=agree&lang=" + lang + "&agentType=");
         }
-
+        
         function setTerms() {
             if ($("#chk_all").is(":checked")) {
                 $("#termsService").prop("checked",true);

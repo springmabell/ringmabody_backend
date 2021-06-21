@@ -6,6 +6,8 @@
 	<title>SpringMaBell : 회원가입</title>
 	<link rel="stylesheet" href="/style/signup.agree.css">
 	<script type="text/javascript" src="/js/signup-agree.js"></script>
+	<script type="text/javascript" src="/js/jquery.js"></script>
+	
 </head>
 <body>
     <!-- header -->
@@ -34,7 +36,6 @@
                             <p class="terms_chk_all">
                                     <span class="input_chk">
                                         <input type="checkbox" id="chk_all" name="chk_all">
-                                        <!-- [D] ie7/8에서 checked일때 label에 클래스 on추가해주세요. -->
                                         <label for="chk_all"><span class="chk_all_txt">스프링링마벨 이용약관, 개인정보 수집 및 이용에 모두 동의합니다.<br class='m_br'></span></label>
                                     </span>
                             </p>
@@ -475,6 +476,7 @@
         <p class="article__text">이용자는 개인정보의 수집 및 이용 동의를 거부할 권리가 있습니다. 회원가입 시 수집하는 최소한의 개인정보, 즉, 필수 항목에 대한 수집 및 이용 동의를 거부하실 경우, 회원가입이 어려울 수 있습니다.</p>
     </div>                                </div>
                                 </li>
+                        </ul>
                                 
                         </div>
                         <!-- //약관동의 -->
@@ -484,7 +486,7 @@
                             <!-- <span>tg-text=terms_button_cancel<a href="#" id="btnCancel" class="btn_type btn_default" role="button">취소</a></span> -->
                             <!-- <span>tg-text=terms_button_agree<a href="#" id="btnAgree" class="btn_type btn_primary" role="button">확인</a></span> -->
                             
-                            <span></span><input type="submit" id="btnAgree" class="btn_type btn_primary" role="button" value="확인"></span>
+                            <span></span><input type="submit" id="btnAgree" class="btn_type btn_primary" role="button" value="확인" onclick="agreeChk()"></span>
                         </div>
                     </form>
 
@@ -497,41 +499,20 @@
 
     <script type="text/javascript" src="/inc/common/js/jquery.min.js"></script>
     <script type="text/JavaScript">
+    
+    	$("#chk_all").click(function() {
+	    	if ($("#chk_all").prop("checked")){
+	    		$("#termsService").prop("checked", true);
+	    		$("#termsPrivacy").prop("checked", true);
+	    	} else {
+	    		$("#termsService").prop("checked", false);
+	    		$("#termsPrivacy").prop("checked", false);
+	    	}
+	    })
+    	
         $(document).ready(function() {
             checkSupportedBorwser();
 
-            $("#chk_all").prop("checked",false);
-            setTerms();
-
-            $(".lang .sel").click(function() {
-                $(this).attr("aria-expanded", "true");
-                $(".lang .lang_select_wrap").show();
-            });
-            $(".lang .lang_select").click(function() {
-                $(".lang .lang_select_wrap").hide();
-            });
-
-            $("#btnLangKoKr").click(function() {
-                changeLang("ko_KR");
-            })
-
-            $("#btnLangEnUs").click(function() {
-                changeLang("en_US");
-            })
-
-            $("#btnLangHansCn").click(function() {
-                changeLang("zh-Hans_CN");
-            })
-
-            $("#btnLangHansTw").click(function() {
-                changeLang("zh-Hant_TW");
-            })
-
-
-            $("#chk_all").click(function() {
-                location.hash = 'agreeBottom';
-                setTerms();
-            })
 
             $("#termsService").click(function() {
                 viewTerms();
@@ -549,31 +530,25 @@
                 viewTerms();
             })
 
-            $("#btnCancel").click(function(event) {
-                clickcr(this, 'tos.disagree', '', '', event);
-                submitDisagree();
-                return false;
-            })
-
             $("#btnAgree").click(function(event) {
                 clickcr(this, 'tos.agree', '', '', event);
                 submitAgree();
                 return false;
             })
-
-            $("#termForChild").click(function() {
-                var agent = "PC";
-                var url = "/user2/V2Join?m=kidGuide";
-
-                if(agent == "M") {
-                    location.href = url;
-                } else {
-                    window.open(url, "_blank");
-                }
-                return false;
-            })
-
         });
+    	
+
+	    function agreeChk(){
+	    	console.log($("#termsPrivacy").is(":checked"));
+	    	console.log($("#termsService").is(":checked"));
+	    	if (!$("#termsPrivacy").is(":checked") || !$("#termsService").is(":checked")){
+	    		alert('개인정보 수집 동의가 필요합니다.');
+	    	}
+	    }
+    	
+    	function checkAll(){
+    		document.getElementById('termsService').checked = true;
+    	}
 
         function changeLang(lang) {
             location.replace("/user2/V2Join?m=agree&lang=" + lang + "&agentType=");
