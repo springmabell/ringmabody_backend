@@ -96,7 +96,7 @@ public class Order implements Serializable {
 
   /* Public Methods */
 
-  public void initOrder(Account account, Cart cart) {
+//  public void initOrder(Account account, Cart cart) {
 		/*
 		 * username = account.getUsername(); orderDate = new Date();
 		 * 
@@ -119,8 +119,9 @@ public class Order implements Serializable {
 		 * 
 		 * Iterator<CartItem> i = cart.getAllCartItems(); while (i.hasNext()) { CartItem
 		 * cartItem = (CartItem) i.next(); addLineItem(cartItem); }
-		 */  }
-
+		 */  
+//}
+  
   public void addLineItem(CartItem cartItem) {
     LineItem lineItem = new LineItem(lineItems.size() + 1, cartItem);
     addLineItem(lineItem);

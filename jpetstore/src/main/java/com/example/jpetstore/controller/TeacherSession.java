@@ -3,7 +3,6 @@ package com.example.jpetstore.controller;
 import java.io.Serializable;
 import org.springframework.beans.support.PagedListHolder;
 
-import com.example.jpetstore.domain.Account;
 import com.example.jpetstore.domain.Product;
 import com.example.jpetstore.domain.TeacherAccount;
 import com.example.jpetstore.domain.UserAccount;
