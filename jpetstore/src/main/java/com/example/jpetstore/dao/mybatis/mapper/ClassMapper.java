@@ -15,6 +15,8 @@ import com.example.jpetstore.domain.PagingVO;
 
 @Mapper
 public interface ClassMapper {
+	
+	public List<Class> getAllClasses();
 	public List<Class> viewClassList(String keyword);
 	public List<Category> getCategoryList();
 	public void closeEvent(Date today);

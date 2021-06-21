@@ -7,6 +7,28 @@
   		CLASS_ID, TEACHER_ID, CATEGORY_ID, TITLE, CONTENT, PRICE, EDATE, PARTICIPANT, IMG, PLACE, LOCAL, MINNUM, MAXNUM
   </sql>
   
+  	<select id="getAllClasses" resultType="Class">
+	    SELECT CLASS.CLASS_ID,
+	    	   CLASS.TEACHER_ID,
+	    	   CLASS.CATEGORY_ID,
+	    	   CLASS.TITLE,
+	    	   CLASS.CONTENT,
+	    	   CLASS.HIT,
+	    	   CLASS.PRICE,
+	    	   CLASS.CARTADDED,
+	    	   CLASS.SDATE,
+	    	   CLASS.EDATE,
+	    	   CLASS.STATE,
+	    	   CLASS.PARTICIPANT,
+	    	   CLASS.IMG,
+	    	   CLASS.PLACE,
+	    	   CLASS.LOCAL,
+	    	   CLASS.MINNUM,
+	    	   CLASS.MAXNUM
+	    FROM CLASS
+	  </select>
+ 
+  
   	<!-- class모든 컬럼과 category의 name 필드 join해서 가져오기 -->
 	<select id="viewClassList" parameterType="String" resultType="com.example.jpetstore.domain.Class">
 		SELECT ROWNUM AS NUM, C.* FROM 

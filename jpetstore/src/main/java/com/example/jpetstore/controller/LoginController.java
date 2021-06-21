@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.example.jpetstore.domain.Account;
 import com.example.jpetstore.domain.Class;
 import com.example.jpetstore.domain.Product;
 import com.example.jpetstore.domain.UserAccount;
@@ -69,7 +68,6 @@ public class LoginController {
 		UserAccount account = petStore.getUserAccount(username, password);
 		
 		if (account == null) {
-			System.out.println("account null하대요 ");
 			return new ModelAndView("Error", "message", 
 					"Invalid username or password.  Signon failed.");
 		}

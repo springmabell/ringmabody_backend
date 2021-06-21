@@ -30,6 +30,8 @@ public interface OrderMapper {
 	public void insertOrder(Order order);
 	public void updateParticipant(int class_id);
 
+	List<Order> getAllOrders();
+
   List<Order> getOrdersByUsername(String username);
 
   Order getOrder(int orderId);

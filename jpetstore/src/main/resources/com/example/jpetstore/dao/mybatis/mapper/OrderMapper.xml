@@ -7,6 +7,22 @@
     <sql id="BaseColumns">
   		ORDER_ID, CLASS_ID, USER_ID, CARD_BANK, CARD_NUMBER, EXPIRATION_DATE, CVC, TOTAL_PRICE
     </sql>
+    
+    
+    
+    <select id="getAllOrders" resultType="Order">
+		SELECT ORDER1.ORDER_ID,
+	    	   ORDER1.CLASS_ID,
+	    	   ORDER1.USER_ID,
+	    	   ORDER1.ORDER_DATE,
+	    	   ORDER1.CARD_BANK,
+	    	   ORDER1.CARD_NUMBER,
+	    	   ORDER1.EXPIRATION_DATE,
+	    	   ORDER1.CVC,
+	    	   ORDER1.TOTAL_PRICE
+	   	FROM ORDER1
+	 </select>
+	 
 	 <select id="getOrdersByUsername" resultType="Order">
 		SELECT ORDER1.ORDER_ID,
 	    	   ORDER1.CLASS_ID,

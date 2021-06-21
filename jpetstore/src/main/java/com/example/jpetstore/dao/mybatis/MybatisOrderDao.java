@@ -11,6 +11,7 @@ import com.example.jpetstore.dao.mybatis.mapper.LineItemMapper;
 import com.example.jpetstore.dao.mybatis.mapper.OrderMapper;
 import com.example.jpetstore.domain.LineItem;
 import com.example.jpetstore.domain.Order;
+import com.example.jpetstore.domain.Payment;
 
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Repository;
@@ -25,6 +26,13 @@ public class MybatisOrderDao implements OrderDao {
 	@Autowired
 	private SequenceDao sequenceDao;
 
+	
+	@Override
+	public List<Order> getAllOrders() throws DataAccessException {
+		
+		return orderMapper.getAllOrders();
+	}
+	
 	@Override
 	public void insertOrder(Order order) throws DataAccessException {
 		// TODO Auto-generated method stub

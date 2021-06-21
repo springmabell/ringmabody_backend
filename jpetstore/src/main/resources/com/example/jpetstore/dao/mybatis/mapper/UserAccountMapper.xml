@@ -4,6 +4,25 @@
 <mapper namespace="com.example.jpetstore.dao.mybatis.mapper.UserAccountMapper">
   <cache />
   
+	  <!-- 총 게시글 갯수 출력 -->
+	<select id="countUser" resultType="int">
+		SELECT COUNT(*) FROM USERACCOUNT
+	</select>
+	
+	<!-- 페이징 처리 후 게시글 조회 -->
+	<select id="selectUser" resultType="UserAccount">
+		SELECT * 
+			FROM (
+				SELECT ROWNUM RN, A.* 
+					FROM (
+							SELECT * 
+							FROM USERACCOUNT 
+							ORDER BY USER_ID DESC 
+							) A
+					)
+		WHERE RN BETWEEN #{start} AND #{end}
+	</select>
+  
   <select id="getUserAccountByUsername" resultType="UserAccount">
     SELECT USERACCOUNT.USER_ID,
     	   USERACCOUNT.USER_PWD,
@@ -50,8 +69,9 @@
     	   USERACCOUNT.USER_TYPE,
     	   USERACCOUNT.REGISTER_DATE
     FROM USERACCOUNT
+    ORDER BY USERACCOUNT.USER_NAME
   </select>
-  
+ 
   
   <insert id="insertUserAccount" parameterType="UserAccount">
     INSERT INTO USERACCOUNT

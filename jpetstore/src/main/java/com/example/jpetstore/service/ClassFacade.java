@@ -11,6 +11,8 @@ import com.example.jpetstore.domain.Filtering;
 import com.example.jpetstore.domain.PagingVO;
 
 public interface ClassFacade {
+
+	public List<Class> getAllClasses();
 	public List<Class> viewClassList(String keyword);
 	public List<Category> getCategoryList();
 	public void writeClass(Class newClass);

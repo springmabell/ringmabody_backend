@@ -23,6 +23,10 @@ public class ClassImpl implements ClassFacade{
 	@Autowired
 	private ClassDao classDao;
 	
+	public List<Class> getAllClasses(){
+		return classDao.getAllClasses();
+	}
+	
 	public List<Class> viewClassList(String keyword) {
 		return classDao.viewClassList(keyword);
 	}

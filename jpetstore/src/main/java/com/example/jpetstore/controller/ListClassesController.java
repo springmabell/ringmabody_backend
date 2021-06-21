@@ -13,9 +13,11 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.example.jpetstore.domain.Category;
+import com.example.jpetstore.domain.Class;
 import com.example.jpetstore.domain.Product;
 import com.example.jpetstore.domain.TeacherAccount;
 import com.example.jpetstore.domain.UserAccount;
+import com.example.jpetstore.service.ClassFacade;
 import com.example.jpetstore.service.PetStoreFacade;
 
 /**
@@ -28,6 +30,9 @@ import com.example.jpetstore.service.PetStoreFacade;
 public class ListClassesController {
 
 	private PetStoreFacade petStore;
+	
+	@Autowired
+	private ClassFacade classes;
 
 	@Autowired
 	public void setPetStore(PetStoreFacade petStore) {
@@ -36,10 +41,16 @@ public class ListClassesController {
 
 	@RequestMapping("/admin/listClasses.do")
 	public String handleRequest(ModelMap model) throws Exception {
-		List<UserAccount> userList = this.petStore.getAllUserAccount();
-		int size_of_list = userList.size();
 		
-		model.put("userList", userList);
+		List<Class> classList = this.classes.getAllClasses();
+		int size_of_list = classList.size();
+		
+
+		System.out.println("hi");
+		
+		System.out.println(size_of_list);
+		
+		model.put("classList", classList);
 		model.put("size", size_of_list);
 		
 		

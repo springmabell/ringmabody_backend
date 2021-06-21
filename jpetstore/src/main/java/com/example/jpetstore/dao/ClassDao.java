@@ -15,6 +15,7 @@ import com.example.jpetstore.domain.PagingVO;
 
 public interface ClassDao {
 	
+	public List<Class> getAllClasses() throws DataAccessException;
 	public List<Class> viewClassList(String keyword) throws DataAccessException;
 	public List<Category> getCategoryList() throws DataAccessException;
 	public void closeEvent(Date today);

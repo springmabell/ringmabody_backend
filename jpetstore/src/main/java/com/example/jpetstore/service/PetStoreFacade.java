@@ -2,10 +2,11 @@ package com.example.jpetstore.service;
 
 import java.util.List;
 
-import com.example.jpetstore.domain.Account;
 import com.example.jpetstore.domain.Category;
 import com.example.jpetstore.domain.Item;
 import com.example.jpetstore.domain.Order;
+import com.example.jpetstore.domain.PagingVO;
+import com.example.jpetstore.domain.Payment;
 import com.example.jpetstore.domain.Product;
 import com.example.jpetstore.domain.Review;
 import com.example.jpetstore.domain.TeacherAccount;
@@ -18,17 +19,6 @@ import com.example.jpetstore.domain.UserAccount;
  * @since 30.11.2003
  */
 public interface PetStoreFacade {
-
-	Account getAccount(String username);
-
-	Account getAccount(String username, String password);
-
-	void insertAccount(Account account);
-
-	void updateAccount(Account account);
-
-	List<String> getUsernameList();
-
 
 	List<Category> getCategoryList();
 
@@ -56,7 +46,7 @@ public interface PetStoreFacade {
 	List<Order> getOrdersByUsername(String username);
 	
 	
-	// 여기서부터 저희가 만든 것 
+	// 여기서부터 
 	
 	List<TeacherAccount> getAllTeacherAccount();
 	
@@ -86,5 +76,17 @@ public interface PetStoreFacade {
 	List<Review> getReviews(String username);
 
 	Review getReviewDetail(int review_id);
+	
+	List<Payment> getAllPayments();
+	
+	List<Order> getAllOrders();
+	
+
+	// 게시물 총 갯수
+	public int countUser();
+
+	// 페이징 처리 게시글 조회
+	public List<UserAccount> selectUser(PagingVO vo);
+
 
 }

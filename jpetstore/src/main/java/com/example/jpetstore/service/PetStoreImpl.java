@@ -4,18 +4,19 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import com.example.jpetstore.dao.AccountDao;
 import com.example.jpetstore.dao.CategoryDao;
 import com.example.jpetstore.dao.ItemDao;
 import com.example.jpetstore.dao.OrderDao;
+import com.example.jpetstore.dao.PaymentDao;
 import com.example.jpetstore.dao.ProductDao;
 import com.example.jpetstore.dao.ReviewDao;
 import com.example.jpetstore.dao.TeacherAccountDao;
 import com.example.jpetstore.dao.UserAccountDao;
-import com.example.jpetstore.domain.Account;
 import com.example.jpetstore.domain.Category;
 import com.example.jpetstore.domain.Item;
 import com.example.jpetstore.domain.Order;
+import com.example.jpetstore.domain.PagingVO;
+import com.example.jpetstore.domain.Payment;
 import com.example.jpetstore.domain.Product;
 import com.example.jpetstore.domain.Review;
 import com.example.jpetstore.domain.TeacherAccount;
@@ -24,8 +25,6 @@ import com.example.jpetstore.domain.UserAccount;
 @Service
 @Transactional
 public class PetStoreImpl implements PetStoreFacade { 
-	@Autowired
-	private AccountDao accountDao;
 	@Autowired
 	private CategoryDao categoryDao;
 	@Autowired
@@ -40,31 +39,14 @@ public class PetStoreImpl implements PetStoreFacade {
 	private UserAccountDao userAccountDao;
 	@Autowired
 	private ReviewDao reviewDao;
+	@Autowired
+	private PaymentDao paymentDao;
+	
 	
 
 	//-------------------------------------------------------------------------
 	// Operation methods, implementing the PetStoreFacade interface
 	//-------------------------------------------------------------------------
-
-	public Account getAccount(String username) {
-		return accountDao.getAccount(username);
-	}
-
-	public Account getAccount(String username, String password) {
-		return accountDao.getAccount(username, password);
-	}
-
-	public void insertAccount(Account account) {
-		accountDao.insertAccount(account);
-	}
-
-	public void updateAccount(Account account) {
-		accountDao.updateAccount(account);
-	}
-
-	public List<String> getUsernameList() {
-		return accountDao.getUsernameList();
-	}
 
 	public List<Category> getCategoryList() {
 		return categoryDao.getCategoryList();
@@ -183,5 +165,22 @@ public class PetStoreImpl implements PetStoreFacade {
 		// TODO Auto-generated method stub
 		return reviewDao.getReviewDetail(review_id);
 	}
+	
+	public List<Payment> getAllPayments(){
+		return paymentDao.getAllPayments();
+	}
+	
+	public List<Order> getAllOrders(){
+		return orderDao.getAllOrders();
+	}
+	
+	@Override
+	public int countUser() {
+		return userAccountDao.countUser();
+	}
 
+	@Override
+	public List<UserAccount> selectUser(PagingVO vo) {
+		return userAccountDao.selectUser(vo);
+	}
 }

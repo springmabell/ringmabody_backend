@@ -20,31 +20,17 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
 
-import com.example.jpetstore.domain.Account;
+import com.example.jpetstore.domain.Payment;
+import com.example.jpetstore.domain.TeacherAccount;
+import com.example.jpetstore.domain.UserAccount;
 
 /**
  * @author Eduardo Macarron
  *
  */
 @Mapper
-public interface AccountMapper {
+public interface PaymentMapper {
 
-  Account getAccountByUsername(String username);
-
-  Account getAccountByUsernameAndPassword(String username, String password);
-
-  List<String> getUsernameList();
+  List<Payment> getAllPayments();
   
-  void insertAccount(Account account);
-  
-  void insertProfile(Account account);
-  
-  void insertSignon(Account account);
-
-  void updateAccount(Account account);
-
-  void updateProfile(Account account);
-
-  void updateSignon(Account account);
-
 }

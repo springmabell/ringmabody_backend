@@ -5,8 +5,11 @@ import java.util.List;
 import org.springframework.dao.DataAccessException;
 
 import com.example.jpetstore.domain.Order;
+import com.example.jpetstore.domain.Payment;
 
 public interface OrderDao {
+	
+	List<Order> getAllOrders() throws DataAccessException;
 
   List<Order> getOrdersByUsername(String username) throws DataAccessException;
 
@@ -14,4 +17,6 @@ public interface OrderDao {
 
 	public void insertOrder(Order order) throws DataAccessException;
 	public void updateParticipant(int class_id) throws DataAccessException;
+	
+	
 }

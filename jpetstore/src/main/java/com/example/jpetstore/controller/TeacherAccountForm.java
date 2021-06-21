@@ -2,7 +2,6 @@ package com.example.jpetstore.controller;
 
 import java.io.Serializable;
 
-import com.example.jpetstore.domain.Account;
 import com.example.jpetstore.domain.TeacherAccount;
 import com.example.jpetstore.domain.UserAccount;
 

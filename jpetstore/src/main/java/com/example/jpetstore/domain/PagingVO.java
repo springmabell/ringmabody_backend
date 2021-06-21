@@ -11,6 +11,14 @@ public class PagingVO implements Serializable {
 	
 	public PagingVO() {
 	}
+	public PagingVO(int total, int nowPage, int cntPerPage) {
+		setNowPage(nowPage);
+		setCntPerPage(cntPerPage);
+		setTotal(total);
+		calcLastPage(getTotal(), getCntPerPage());
+		calcStartEndPage(getNowPage(), cntPage);
+		calcStartEnd(getNowPage(), getCntPerPage());
+	}
 	public PagingVO(int total, int nowPage, int cntPerPage, String keyword) {
 		setNowPage(nowPage);
 		setCntPerPage(cntPerPage);
