@@ -66,14 +66,11 @@
       USER_ID = #{user_id},
       USER_PWD = #{user_pwd},
       USER_NAME = #{user_name},
-      USER_IMG = #{user_img},
       EMAIL = #{email},
       PHONE = #{phone},
       GENDER = #{gender},
-      BIRTHDATE = #{birthdate},
       ADDRESS = #{address},
-      USER_TYPE = #{user_type},
-      REGISTER_DATE = #{register_date}
+      USER_TYPE = #{user_type}
     WHERE USER_ID = #{user_id}
   </update>
 

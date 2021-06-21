@@ -33,10 +33,14 @@ public class MainController {
 		model.addAttribute("endingSoonList", endingSoonList);
 		model.addAttribute("bestClassList", bestClassList);
 		
+
+		System.out.println("main");
+		
 		if(session.getAttribute("userSession") != null){
 			UserSession userSession1 = (UserSession)session.getAttribute("userSession");
 			model.addAttribute("user_id", userSession1.getAccount().getUser_id());
 			model.addAttribute("name", userSession1.getAccount().getUser_name());
+			System.out.println(userSession1.getAccount().getUser_id() + "main");
 			
 		} else if(session.getAttribute("teacherSession") != null){
 			TeacherSession teacherSession1 = (TeacherSession)session.getAttribute("teacherSession");

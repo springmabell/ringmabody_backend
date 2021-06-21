@@ -79,6 +79,7 @@ public class LoginController {
 			
 			model.addAttribute("userSession", userSession);
 			model.addAttribute("name", userSession.getAccount().getUser_name());
+			model.addAttribute("user_id", userSession.getAccount().getUser_id());
 			
 			session.setAttribute("userSession", userSession);
 			System.out.println(userSession.getAccount().getUser_name());
