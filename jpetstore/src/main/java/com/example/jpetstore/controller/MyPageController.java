@@ -19,7 +19,7 @@ import com.example.jpetstore.service.PetStoreFacade;
 
 @Controller
 @SessionAttributes("userSession")
-@RequestMapping(value="/{user_id}/mypage/")
+@RequestMapping(value="/mypage/")
 public class MyPageController {
 	
 	private PetStoreFacade petStore;
@@ -30,15 +30,16 @@ public class MyPageController {
 	}
 	
 	@RequestMapping(value="/info.do", method=RequestMethod.GET)
-	public String handleRequest(ModelMap model, @PathVariable String user_id, HttpSession session) throws Exception {
-		System.out.println(user_id);
-		UserAccount user = this.petStore.getUserAccount(user_id);
+	public String handleRequest(ModelMap model, HttpSession session) throws Exception {
 
 		UserSession userSession1 = (UserSession)session.getAttribute("userSession");
+		
+		System.out.println(userSession1.getAccount().getUser_id());
+
+		model.put("user_id", userSession1.getAccount().getUser_id());
+		model.put("user", userSession1.getAccount());
 		model.put("name", userSession1.getAccount().getUser_name());
 		
-		model.put("user_id", user_id);
-		model.put("user", user);
 		
 		return "thyme/my_info";
 	}

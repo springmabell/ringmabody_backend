@@ -67,17 +67,22 @@ public class LoginController {
 		
 		
 		UserAccount account = petStore.getUserAccount(username, password);
+		
 		if (account == null) {
+			System.out.println("account null하대요 ");
 			return new ModelAndView("Error", "message", 
 					"Invalid username or password.  Signon failed.");
 		}
+		
 		else {
 			UserSession userSession = new UserSession(account);
 			
 			model.addAttribute("userSession", userSession);
 			model.addAttribute("name", userSession.getAccount().getUser_name());
+			model.addAttribute("user_id", userSession.getAccount().getUser_id());
 			
 			session.setAttribute("userSession", userSession);
+			System.out.println(userSession.getAccount().getUser_name());
 			
 
 			List<Class> endingSoonList = mainFacade.endingSoon();
