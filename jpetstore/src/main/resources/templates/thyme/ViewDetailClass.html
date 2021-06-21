@@ -79,7 +79,7 @@
     <br/><br/>
     <div>
         <h5>수업 소개</h5><br/>
-        <p th:text="|${findClass.content}|">dddddddddddddddddddddd4dddddddddddddddddddddddddddddddddddddddddddd</p><br/><br/>
+        <p th:text="|${findClass.content}|">dddddddddddddddddddddddddddddddddddddddddddddddddddddddddd</p><br/><br/>
         <h5>강사 정보</h5><br/>
         <div>
            <!--  <img src="teacher1.jpg" class="rounded-circle" style="width:200px;height:200px;float:left;margin-right:20px;"> -->
@@ -94,6 +94,7 @@
     	<span th:if="${userId} eq ${findClass.teacher_id}">
     	<a th:attr="onclick=|deleteClass(${findClass.class_id}, ${findClass.participant})|" class="btn py-2 px-4" onClick="del(3);">삭제</a>
     	</span>
+    	<!--  -->
         <a class="btn py-2 px-4" onclick="list();">목록</a>
     </div>
 

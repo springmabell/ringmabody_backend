@@ -94,7 +94,6 @@
 function makeEdate(){ 
 	var e = $('#exdate').val().split("/")
 	var edate = new Date(e[0], e[1] -1 , e[2]);
-	alert(edate);
  	document.getElementById("expiration_date").setAttribute("value", edate);  
 }
 </script>
