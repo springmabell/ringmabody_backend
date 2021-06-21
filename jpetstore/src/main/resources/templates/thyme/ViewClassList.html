@@ -172,7 +172,7 @@
 	                </div>
 	            </div>
 	        </div>
-	        <div th:if="${usertype}">
+	        <div th:if="${usertype} eq teacher">
 	        	<a class="btn" href="#" th:href="@{/class/writeClass}" style="float:right;color:white;background-color: rgb(123, 227, 251);border:none;">클래스 등록</a>
 	    	</div> 
 	    	<br/><br/>

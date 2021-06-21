@@ -12,6 +12,7 @@ import java.util.List;
 import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 import org.slf4j.Logger;
@@ -46,6 +47,19 @@ public class CartController {
 
 	@Autowired
 	private ClassFacade classFacade;
+
+	@ModelAttribute("name")
+	public String returnName(HttpSession session, Model model) {
+		String name="";
+		if(session.getAttribute("userSession") != null){
+			UserSession userSession1 = (UserSession)session.getAttribute("userSession");
+			name = userSession1.getAccount().getUser_name();
+		} else if(session.getAttribute("teacherSession") != null){
+			TeacherSession teacherSession1 = (TeacherSession)session.getAttribute("teacherSession");
+			name = teacherSession1.getAccount().getTeacher_name();
+		}
+		return name;
+	}
 
 	//장바구니
 	@PostMapping("/cart")

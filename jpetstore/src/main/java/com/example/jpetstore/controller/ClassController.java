@@ -68,6 +68,19 @@ public class ClassController {
 		return newClass;
 	}
 
+	@ModelAttribute("name")
+	public String returnName(HttpSession session, Model model) {
+		String name="";
+		if(session.getAttribute("userSession") != null){
+			UserSession userSession1 = (UserSession)session.getAttribute("userSession");
+			name = userSession1.getAccount().getUser_name();
+		} else if(session.getAttribute("teacherSession") != null){
+			TeacherSession teacherSession1 = (TeacherSession)session.getAttribute("teacherSession");
+			name = teacherSession1.getAccount().getTeacher_name();
+		}
+		return name;
+	}
+	
 	@ModelAttribute("categoryList")
 	public List<Category> getCategoryList() {
 		List<Category> categoryList = classFacade.getCategoryList();
@@ -98,7 +111,7 @@ public class ClassController {
 	// 클래스 게시판 목록
 	@GetMapping("/viewList")
 	public String viewClassList(Model model, @RequestParam(required = false) String keyword,
-		 HttpServletResponse response) {
+		 HttpServletResponse response, HttpSession session) {
 
 		int total = classFacade.countClass();
 		/* int cntPerPage = 9; */
@@ -135,8 +148,14 @@ public class ClassController {
 				c.setDate(-1);
 			}
 		}
-
-		/* model.addAttribute("paging", vo); */
+		
+		TeacherSession teacherSession1 = (TeacherSession)session.getAttribute("teacherSession");
+		String usertype;
+		if(teacherSession1 != null) {
+			usertype = teacherSession1.getAccount().getUser_type();
+			model.addAttribute("usertype", usertype);
+		}
+		
 		model.addAttribute("classList", classList);
 
 		return "thyme/ViewClassList";
