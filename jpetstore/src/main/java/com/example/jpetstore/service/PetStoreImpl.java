@@ -167,4 +167,10 @@ public class PetStoreImpl implements PetStoreFacade {
 		reviewDao.writeReview(newReview);
 	}
 
+	@Override
+	public void updateReview(Review review) {
+		// TODO Auto-generated method stub
+		reviewDao.updateReview(review);
+	}
+
 }

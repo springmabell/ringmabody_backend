@@ -15,4 +15,6 @@ public interface ReviewDao {
 	Review getReviewDetail(int review_id);
 
 	void writeReview(Review newReview);
+
+	void updateReview(Review review);
 }

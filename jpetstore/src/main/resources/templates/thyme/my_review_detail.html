@@ -25,14 +25,14 @@
                 </ul>
             </div>
             <div class="content">
-                <form action="">
+                <form th:object="${review}" th:action="@{/mypage/} + ${review.review_id} + @{/review.detail.do}" method="POST">
                     <div class="post_wrap">
                         <section>
                             <!--게시글 시작-->
                             <div class="inner">
                                 <div class="review_box">
                                     <span class="review_title">제목</span>
-                                    <input class="review_title_input" type="text" th:value="${review.review_title}">
+                                    <input class="review_title_input" type="text" th:value="${review.review_title}" th:field="*{review_title}">
                                 </div>
                                 <hr>
                                 <div class="review_rate_box">
@@ -57,7 +57,7 @@
                                 <hr>
                                 <div class="review_content_box">
                                     <span class="review_content">내용</span>
-                                    <textarea class="review_content_input" rows="10" cols="70" th:text="${review.review_content}">리뷰내용테스트입니다</textarea>
+                                    <textarea class="review_content_input" rows="10" cols="70" th:text="${review.review_content}" th:field="*{review_content}">리뷰내용테스트입니다</textarea>
                                 </div>
                                 <div class="review_button_box">
                                     <input type="reset" class="review_button" value="취소" th:href="@{/mypage/review.do}">

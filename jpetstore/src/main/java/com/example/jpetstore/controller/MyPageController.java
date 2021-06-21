@@ -94,8 +94,9 @@ public class MyPageController {
 	}
 	
 	@RequestMapping(value="/{review_id}/review.detail.do", method=RequestMethod.POST)
-	public String ReviewUpdateRequest(ModelMap model, @PathVariable int review_id) throws Exception {
+	public String ReviewUpdateRequest(Review review, @PathVariable int review_id) throws Exception {
 		
+		petStore.updateReview(review);
 		
 		return "redirect:/review.do";
 	}

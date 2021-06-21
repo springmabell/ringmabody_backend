@@ -42,4 +42,11 @@ public class MybatisReviewDao implements ReviewDao{
 		reviewMapper.writeReview(newReview);
 	}
 
+
+	@Override
+	public void updateReview(Review review) {
+		// TODO Auto-generated method stub
+		reviewMapper.updateReview(review);
+	}
+
 }

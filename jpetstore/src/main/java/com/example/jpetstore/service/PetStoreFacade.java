@@ -78,4 +78,6 @@ public interface PetStoreFacade {
 	
 	public void writeReview(Review newReview);
 
+	void updateReview(Review review);
+
 }

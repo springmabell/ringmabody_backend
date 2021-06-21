@@ -16,4 +16,6 @@ public interface ReviewMapper {
 	Review getReviewDetail(int review_id);
 
 	void writeReview(Review newReview);
+
+	void updateReview(Review review);
 }

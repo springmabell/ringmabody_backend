@@ -51,16 +51,11 @@
 	    WHERE REVIEW.REVIEW_ID = #{review_id}
 	 </select>
 	 
-	 <!-- 리뷰 작성 -->
-	 <insert id="writeReview" parameterType="com.example.jpetstore.domain.Review">
-		<selectKey keyProperty="review_id" resultType="int" order="BEFORE">
-			SELECT REVIEW_ID_SEQ.NEXTVAL AS review_id FROM DUAL
-		</selectKey>
-		INSERT INTO REVIEW
-		VALUES(#{review_id}, #{class_id}, systimestamp, #{user_id, jdbcType=VARCHAR}, 
-		#{review_title, jdbcType=VARCHAR}, #{review_content, jdbcType=VARCHAR},
-		0,  #{review_rating}, #{review_img, jdbcType=VARCHAR}, 0,
-		#{order_id} )
-	</insert>
+	 <!-- 리뷰 수정 -->
+	 <select id="updateReview" resultType="Review">
+	 	update review
+		set review_title=#{review_title}, review_content=#{review_content}
+		where review_id=#{review_id};
+	 </select>
  
  </mapper>

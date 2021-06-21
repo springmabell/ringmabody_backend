@@ -62,6 +62,7 @@ a{
     background-color: rgb(123, 227, 251);
     color: white;
 }
+
 .menu_list a:hover {
     border: solid 1px deepskyblue;
 }
