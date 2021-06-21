@@ -1,12 +1,16 @@
 package com.example.jpetstore.controller;
 
+
 import java.util.List;
 
+
 import javax.servlet.http.HttpSession;
+
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -23,6 +27,12 @@ import com.example.jpetstore.service.PetStoreFacade;
 public class MyPageController {
 	
 	private PetStoreFacade petStore;
+	
+	@ModelAttribute("newReview")
+	public Review newReview() {
+		Review newReview = new Review();
+		return newReview;
+	}
 	
 	@Autowired
 	public void setPetStore(PetStoreFacade petStore) {
@@ -45,9 +55,13 @@ public class MyPageController {
 	}
 	
 	@RequestMapping(value="/review.do", method=RequestMethod.GET)
-	public String ReviewRequest(ModelMap model, @PathVariable String user_id) throws Exception {
-		UserAccount user = this.petStore.getUserAccount(user_id);
-		List<Review> review = this.petStore.getReviews(user_id);
+	public String ReviewRequest(ModelMap model, HttpSession session) throws Exception {
+		
+		UserSession userSession1 = (UserSession)session.getAttribute("userSession");
+		
+		
+		UserAccount user = this.petStore.getUserAccount(userSession1.getAccount().getUser_id());
+		List<Review> review = this.petStore.getReviews(userSession1.getAccount().getUser_id());
 		int size_of_list = review.size();
 		
 		model.put("user", user);
@@ -58,34 +72,30 @@ public class MyPageController {
 	}
 	
 	@RequestMapping(value="/{review_id}/review.detail.do", method=RequestMethod.GET)
-	public String ReviewDetailRequest(ModelMap model, @PathVariable String user_id, @PathVariable int review_id) throws Exception {
-		UserAccount user = this.petStore.getUserAccount(user_id);
+	public String ReviewDetailRequest(ModelMap model, @PathVariable int review_id) throws Exception {
 		Review review = this.petStore.getReviewDetail(review_id);
 		
-		model.put("user", user);
 		model.put("review", review);
 		
 		return "thyme/my_review_detail";
 	}
 	
-	@RequestMapping(value="/review.write.do", method=RequestMethod.GET)
-	public String ReviewWriteRequest(ModelMap model, @PathVariable String user_id) throws Exception {
-		UserAccount user = this.petStore.getUserAccount(user_id);
+	@RequestMapping(value="/{review_id}/review.detail.do", method=RequestMethod.POST)
+	public String ReviewUpdateRequest(Review review, @PathVariable int review_id) throws Exception {
 		
-		model.put("user", user);
+		petStore.updateReview(review);
 		
-		return "thyme/my_review_write";
+		return "redirect:/review.do";
 	}
 	
 	@RequestMapping(value="/purchase.do", method=RequestMethod.GET)
-	public String PurchaseRequest(ModelMap model, @PathVariable String user_id) throws Exception {
-		UserAccount user = this.petStore.getUserAccount(user_id);
-		List<Order> orders = this.petStore.getOrdersByUsername(user_id);
-//		Order order = this.petStore.getOrderByUsername(user_id);
-//		Class class_ = this.petStore.getClassId(order);
+	public String PurchaseRequest(ModelMap model, HttpSession session) throws Exception {
+		
+		UserSession userSession1 = (UserSession)session.getAttribute("userSession");
+		
+		List<Order> orders = this.petStore.getOrdersByUsername(userSession1.getAccount().getUser_id());
 		int size_of_list = orders.size();
 		
-		model.put("user", user);
 		model.put("order", orders);
 		model.put("size", size_of_list);
 		
