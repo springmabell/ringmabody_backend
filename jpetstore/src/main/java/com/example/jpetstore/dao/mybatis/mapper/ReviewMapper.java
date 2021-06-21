@@ -14,4 +14,8 @@ public interface ReviewMapper {
 	List<Review> getReviewsByUsername(String username);
 
 	Review getReviewDetail(int review_id);
+
+	void writeReview(Review newReview);
+
+	void updateReview(Review review);
 }

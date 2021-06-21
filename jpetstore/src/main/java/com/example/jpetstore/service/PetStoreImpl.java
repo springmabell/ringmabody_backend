@@ -165,6 +165,18 @@ public class PetStoreImpl implements PetStoreFacade {
 		// TODO Auto-generated method stub
 		return reviewDao.getReviewDetail(review_id);
 	}
+
+	@Override
+	public void writeReview(Review newReview) {
+		// TODO Auto-generated method stub
+		reviewDao.writeReview(newReview);
+	}
+
+	@Override
+	public void updateReview(Review review) {
+		// TODO Auto-generated method stub
+		reviewDao.updateReview(review);
+	}
 	
 	public List<Payment> getAllPayments(){
 		return paymentDao.getAllPayments();

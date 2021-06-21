@@ -14,10 +14,16 @@
 	    	   REVIEW.REVIEW_LIKE,
 	    	   REVIEW.REVIEW_RATING,
 	    	   REVIEW.REVIEW_IMG,
-	    	   REVIEW.REVIEW_HIT
+	    	   REVIEW.REVIEW_HIT,
+	    	   REVIEW.ORDER_ID
 	   	FROM REVIEW
 	    WHERE REVIEW.USER_ID = #{username}
 	 </select>
+	 
+	 <insert id="insertReview" parameterType="Review">
+	 	insert into review
+		values (102, 33, systimestamp,'user002', #{review_title}, #{review_content}, 0, 5, 'img1.jpg', 0)
+	 </insert>
 	 
 	 <select id="getAllReviews" resultType="Review">
 	    SELECT REVIEW.REVIEW_ID,
@@ -29,7 +35,8 @@
 	    	   REVIEW.REVIEW_LIKE,
 	    	   REVIEW.REVIEW_RATING,
 	    	   REVIEW.REVIEW_IMG,
-	    	   REVIEW.REVIEW_HIT
+	    	   REVIEW.REVIEW_HIT,
+	    	   REVIEW.ORDER_ID
 	    FROM REVIEW
   	</select>
   	
@@ -43,9 +50,17 @@
 	    	   REVIEW.REVIEW_LIKE,
 	    	   REVIEW.REVIEW_RATING,
 	    	   REVIEW.REVIEW_IMG,
-	    	   REVIEW.REVIEW_HIT
+	    	   REVIEW.REVIEW_HIT,
+	    	   REVIEW.ORDER_ID
 	   	FROM REVIEW
 	    WHERE REVIEW.REVIEW_ID = #{review_id}
+	 </select>
+	 
+	 
+	 <select id="updateReview" resultType="Review">
+	 	update review
+		set review_title=#{review_title}, review_content=#{review_content} 
+		where review_id=#{review_id}
 	 </select>
  
  </mapper>
