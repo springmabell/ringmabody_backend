@@ -22,7 +22,7 @@
                 <div class="header_nav_login">
                     <a href=""><span th:text="${user.user_name}">김프링</span>&nbsp;회원님</a>
       				<span>&nbsp;&nbsp;|&nbsp;&nbsp;</span>
-                    <a href="">로그아웃</a>
+                    <a href="" th:href="@{/user/signoff.do}">로그아웃</a>
                 </div>
             </div>
         </div><!--end header_nav-->
@@ -34,7 +34,6 @@
                 <ul class="menu_list">
                     <li><a href="" th:href="@{/} + ${user.user_id} + @{/mypage/info.do}">개인정보 관리</a></li>
                     <li><a href="" th:href="@{/} + ${user.user_id} + @{/mypage/purchase.do}">결제한 내역</a></li>
-                    <li><a href="">스크랩</a></li>
                     <li><a href="" th:href="@{/} + ${user.user_id} + @{/mypage/review.do}">작성한 리뷰</a></li>
                 </ul>
             </div>

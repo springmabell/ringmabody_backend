@@ -41,16 +41,11 @@ import org.springframework.ui.Model;
 @Controller
 @SessionAttributes({"userSession","teacherSession"})
 public class TeacherLoginController { 
-	
-
-	private static final Logger LOGGER = LoggerFactory.getLogger(ClassController.class);
 
 	private PetStoreFacade petStore;
 
 	@Autowired
 	private MainFacade mainFacade;
-	@Autowired
-	private ClassFacade classFacade;
 
 	@Autowired
 	private SchedulerFacade schedulerFacade; // 스케줄러 서비스 인터페이스
@@ -61,22 +56,6 @@ public class TeacherLoginController {
 		return newClass;
 	}
 
-	@ModelAttribute("categoryList")
-	public List<Category> getCategoryList() {
-		List<Category> categoryList = classFacade.getCategoryList();
-		return categoryList;
-	}
-
-	@ModelAttribute("localList")
-	public String[] getLocalList() {
-		return new String[] { "서울", "경기", "강원", "충남", "충북", "전남", "전북", "경남", "경북", "부산", "대구", "인천", "광주", "세종", "대전",
-				"울산", "제주" };
-	}
-
-	@ModelAttribute("filtering")
-	public Filtering formBacking(HttpServletRequest request) throws Exception {
-		return new Filtering();
-	}
 	
 	@Autowired
 	public void setPetStore(PetStoreFacade petStore) {
@@ -106,7 +85,6 @@ public class TeacherLoginController {
 			@RequestParam("teacher_pwd") String teacher_pwd,
 			@RequestParam(value="forwardAction", required=false) String forwardAction,
 			HttpSession session,
-			@RequestParam(required = false) String keyword,
 			Model model) throws Exception {
 		
 		
@@ -136,38 +114,11 @@ public class TeacherLoginController {
 			model.addAttribute("bestClassList", bestClassList);
 			model.addAttribute("usertype", "teacher");
 			
-
-			/* ViewClassList */
-			Filtering filtering = new Filtering();
-			List<String> checkedCategory = new ArrayList<String>();
-			String checkedLocal = "dd";
-			// value1 will be checked by default.
-			checkedCategory.add("value1");
-			filtering.setCheckedLocal(checkedLocal);
-			filtering.setCheckedCategory(checkedCategory);
-			model.addAttribute("filtering", filtering);
-			
-			List<Class> classList = classFacade.viewClassList(keyword);
-			Date today = new Date();
-			long t = today.getTime();
-			for (Class c : classList) {
-				long e = c.getEdate().getTime();
-				long cal = e - t;
-				long calcDate = cal / (24 * 60 * 60 * 1000);
-				if (calcDate > 0) {
-					c.setDate(calcDate + 1);
-				} else if (calcDate == 0) {
-					c.setDate(0);
-				} else {
-					c.setDate(-1);
-				}
-			}
-			/* */
 			
 			if (forwardAction != null) 
 				return new ModelAndView("redirect:" + forwardAction);
 			else 
-				return new ModelAndView("thyme/ViewClassList");
+				return new ModelAndView("thyme/main");
 		}
 	}
 	

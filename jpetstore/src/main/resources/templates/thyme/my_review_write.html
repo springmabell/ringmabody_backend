@@ -1,11 +1,11 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>작성한 리뷰</title>
+    <title>리뷰 작성</title>
     <link rel="stylesheet" href="/style/reset.css">
-    <link rel="stylesheet" href="/style/css/all.min.css">
-    <link rel="stylesheet" href="/style/css/my_review_write.css">
+    <link rel="stylesheet" href="/style/all.min.css">
+    <link rel="stylesheet" href="/style/my_review_write.css">
     <script src="https://kit.fontawesome.com/a076d05399.js"></script>
 </head>
 <body>
@@ -20,8 +20,9 @@
             </div>
             <div class="header_nav_logo_right">
                 <div class="header_nav_login">
-                    <a href="">김프링 회원님</a>
-                    <i class="fas fa-chevron-down"></i>
+                    <a href=""><span th:text="${user.user_name}">김프링</span>&nbsp;회원님</a>
+      				<span>&nbsp;&nbsp;|&nbsp;&nbsp;</span>
+                    <a href="" th:href="@{/user/signoff.do}">로그아웃</a>
                 </div>
             </div>
         </div><!--end header_nav-->
@@ -31,10 +32,9 @@
         <div class="content_wrap">
             <div class="menu">
                 <ul class="menu_list">
-                    <li><a href="my_info.html">개인정보 관리</a></li>
-                    <li><a href="my_purchase.html">결제한 내역</a></li>
-                    <li><a href="my_scrap.html">스크랩</a></li>
-                    <li><a href="my_review.html">작성한 리뷰</a></li>
+                    <li><a href="" th:href="@{/} + ${user.user_id} + @{/mypage/info.do}">개인정보 관리</a></li>
+                    <li><a href="" th:href="@{/} + ${user.user_id} + @{/mypage/purchase.do}">결제한 내역</a></li>
+                    <li><a href="" th:href="@{/} + ${user.user_id} + @{/mypage/review.do}">작성한 리뷰</a></li>
                 </ul>
             </div>
             <div class="content">

@@ -4,7 +4,20 @@
 <mapper namespace="com.example.jpetstore.dao.mybatis.mapper.OrderMapper">
 
   <cache />
-
+	 <select id="getOrdersByUsername" resultType="Order">
+		SELECT ORDER1.ORDER_ID,
+	    	   ORDER1.CLASS_ID,
+	    	   ORDER1.USER_ID,
+	    	   ORDER1.ORDER_DATE,
+	    	   ORDER1.CARD_BANK,
+	    	   ORDER1.CARD_NUMBER,
+	    	   ORDER1.EXPIRATION_DATE,
+	    	   ORDER1.CVC,
+	    	   ORDER1.TOTAL_PRICE
+	   	FROM ORDER1
+	    WHERE ORDER1.USER_ID = #{username}
+	 </select>
+	
 	<update id="updateParticipant" parameterType="int">
 		UPDATE CLASS SET PARTICIPANT = PARTICIPANT + 1
 		WHERE CLASS_ID = #{class_id}

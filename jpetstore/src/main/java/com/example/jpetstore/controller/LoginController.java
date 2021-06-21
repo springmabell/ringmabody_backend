@@ -1,5 +1,7 @@
 package com.example.jpetstore.controller;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -12,8 +14,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.example.jpetstore.domain.Account;
+import com.example.jpetstore.domain.Class;
 import com.example.jpetstore.domain.Product;
 import com.example.jpetstore.domain.UserAccount;
+import com.example.jpetstore.service.MainFacade;
 import com.example.jpetstore.service.PetStoreFacade;
 
 import org.springframework.web.bind.annotation.SessionAttributes;
@@ -29,6 +33,10 @@ import org.springframework.ui.Model;
 public class LoginController { 
 
 	private PetStoreFacade petStore;
+	
+	@Autowired
+	private MainFacade mainFacade;
+	
 	@Autowired
 	public void setPetStore(PetStoreFacade petStore) {
 		this.petStore = petStore;
@@ -71,10 +79,16 @@ public class LoginController {
 			
 			session.setAttribute("userSession", userSession);
 			
+
+			List<Class> endingSoonList = mainFacade.endingSoon();
+			List<Class> bestClassList = mainFacade.bestClass();
+			model.addAttribute("endingSoonList", endingSoonList);
+			model.addAttribute("bestClassList", bestClassList);
+			
 			if (forwardAction != null) 
 				return new ModelAndView("redirect:" + forwardAction);
 			else 
-				return new ModelAndView("thyme/ViewClassList");
+				return new ModelAndView("thyme/main");
 		}
 	}
 }

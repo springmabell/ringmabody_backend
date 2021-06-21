@@ -28,15 +28,15 @@ public class ListOrdersController {
 	public void setPetStore(PetStoreFacade petStore) {
 		this.petStore = petStore;
 	}
-
-	@RequestMapping("/shop/listOrders.do")
-	public ModelAndView handleRequest(
-		@ModelAttribute("userSession") UserSession userSession
-		) throws Exception {
-		String username = userSession.getAccount().getUser_id();
-		return new ModelAndView("ListOrders", "orderList", 
-				petStore.getOrdersByUsername(username));
-	}
+//
+//	@RequestMapping("/shop/listOrders.do")
+//	public ModelAndView handleRequest(
+//		@ModelAttribute("userSession") UserSession userSession
+//		) throws Exception {
+//		String username = userSession.getAccount().getUser_id();
+//		return new ModelAndView("ListOrders", "orderList", 
+//				petStore.getOrdersByUsername(username));
+//	}
 	
 	@RequestMapping("/admin/listOrders.do")
 	public String handleRequest(ModelMap model) throws Exception {
