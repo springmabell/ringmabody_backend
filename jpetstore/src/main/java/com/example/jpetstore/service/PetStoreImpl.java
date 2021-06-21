@@ -201,7 +201,6 @@ public class PetStoreImpl implements PetStoreFacade {
 		// TODO Auto-generated method stub
 		reviewDao.deleteReview(review_id);
 	}
-
 	@Override
 	public int countTeacher() {
 		return teacherAccountDao.countTeacher();

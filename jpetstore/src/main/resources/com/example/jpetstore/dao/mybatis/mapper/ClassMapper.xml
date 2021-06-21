@@ -184,8 +184,8 @@
 		
 	<delete id="deleteFinishedClassFromCart">
 		DELETE FROM CARTITEM
-		WHERE class_id in(
-        select class_id from class
-        where state = '마감')
+			WHERE class_id in(
+	        select class_id from class
+	        where state = '마감')
 	</delete>
 </mapper>
